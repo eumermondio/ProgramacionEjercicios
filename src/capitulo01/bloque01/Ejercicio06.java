@@ -6,17 +6,17 @@ public class Ejercicio06 {
 
 	public static void main(String[] args) {
 
-		String var1 = JOptionPane.showInputDialog("Introduzca el actual valor del euríbor: ");
-		float euribor = Float.parseFloat(var1);
+//		String var1 = JOptionPane.showInputDialog("Introduzca el actual valor del euríbor: ");
+		float euribor = 0.1f; //Float.parseFloat(var1);
 		
-		String var2 = JOptionPane.showInputDialog("Introduzca el diferencial: ");
-		float diferencial = Float.parseFloat(var2);
+//		String var2 = JOptionPane.showInputDialog("Introduzca el diferencial: ");
+		float diferencial = 1.0f; //Float.parseFloat(var2);
 		
-		String var3 = JOptionPane.showInputDialog("Introduzca el capital: ");
-		float capital = Float.parseFloat(var3);
+//		String var3 = JOptionPane.showInputDialog("Introduzca el capital: ");
+		float capital = 150000f; //Float.parseFloat(var3);
 		
-		String var4 = JOptionPane.showInputDialog("Introduzca el número de plazos mensuales: ");
-		int plazosMensuales = Integer.parseInt(var4);
+//		String var4 = JOptionPane.showInputDialog("Introduzca el número de plazos mensuales: ");
+		int plazosMensuales = 120; //Integer.parseInt(var4);
 		
 		//Cálculo del interés anual
 		
@@ -25,18 +25,14 @@ public class Ejercicio06 {
 		
 		//Cálculo del interés mensual
 		
-		float var5 = interesAnual / 12;
-		float interesMensual = var5 / 100;
+		float var5 = interesAnual / 12.0f;
+		float interesMensual = var5 / 100.0f;
 		System.out.println("El interés mensual del banco será de: " + interesMensual);
 		
 		//Cálculo de la cuota mensual
 		
-		float parte1 = (interesMensual * (1 + interesMensual));
-		double parte2 = Math.pow(parte1, plazosMensuales);
-		double parte4 = 1 + interesMensual;
-		double parte5 = Math.pow(parte4, plazosMensuales);
-		double parte6 = parte5 - 1;
-		double cuotaMensual = (parte2 / parte6) * capital;
+		float parte1 = (float) Math.pow(1 + interesMensual, (double) plazosMensuales);
+		double cuotaMensual = capital * (interesMensual * parte1) / (parte1 - 1);
 		System.out.println("La cuota mensual es de: " + cuotaMensual);
 		
 		
