@@ -6,17 +6,17 @@ public class Ejercicio06 {
 
 	public static void main(String[] args) {
 
-//		String var1 = JOptionPane.showInputDialog("Introduzca el actual valor del euríbor: ");
-		float euribor = 0.1f; //Float.parseFloat(var1);
+		String var1 = JOptionPane.showInputDialog("Introduzca el actual valor del euríbor: ");
+		float euribor = Float.parseFloat(var1);
 		
-//		String var2 = JOptionPane.showInputDialog("Introduzca el diferencial: ");
-		float diferencial = 1.0f; //Float.parseFloat(var2);
+		String var2 = JOptionPane.showInputDialog("Introduzca el diferencial: ");
+		float diferencial = Float.parseFloat(var2);
 		
-//		String var3 = JOptionPane.showInputDialog("Introduzca el capital: ");
-		float capital = 150000f; //Float.parseFloat(var3);
+		String var3 = JOptionPane.showInputDialog("Introduzca el capital: ");
+		float capital = Float.parseFloat(var3);
 		
-//		String var4 = JOptionPane.showInputDialog("Introduzca el número de plazos mensuales: ");
-		int plazosMensuales = 120; //Integer.parseInt(var4);
+		String var4 = JOptionPane.showInputDialog("Introduzca el número de plazos mensuales: ");
+		int plazosMensuales = Integer.parseInt(var4);
 		
 		//Cálculo del interés anual
 		
