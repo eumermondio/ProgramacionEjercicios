@@ -136,17 +136,50 @@ public class Ejercicio01 {
 			}
 
 		}
+		
+		String var5 = JOptionPane.showInputDialog("Introduzca el primer número: ");
+		float b = Float.parseFloat(var5);
+		System.out.println("El número introducido fue: " + b);
 
-		float sumaNegativo = aSumax1 + aSumay1 + aSumaz1 + aSumaa1;
+		float aSumab1 = 0;
+		float aSumab2 = 0;
+		float aSumab3 = 0;
+		float aSumab4 = 0;
+
+		if (b <= -0.1) {
+			System.out.println("La clasificación del número es: Negativo");
+			aSumab1 = b;
+		} else {
+			if (b >= 0 && b <= 25) {
+				System.out.println("La clasificación del número es: Bajo");
+				aSumab2 = b;
+
+			} else {
+				if (b >= 26 && b <= 250) {
+					System.out.println("La clasificación del número es: Medio");
+					aSumab3 = b;
+
+				} else {
+					if (b >= 251) {
+						System.out.println("La clasificación del número es: Alto");
+						aSumab4 = b;
+
+					}
+				}
+			}
+
+		}
+
+		float sumaNegativo = aSumax1 + aSumay1 + aSumaz1 + aSumaa1 + aSumab1;
 		System.out.println("La suma de todos los números de la categoría Negativo es: " + sumaNegativo);
 
-		float sumaBajo = aSumax2 + aSumay2 + aSumaz2 + aSumaa2;
+		float sumaBajo = aSumax2 + aSumay2 + aSumaz2 + aSumaa2 + aSumab2;
 		System.out.println("La suma de todos los números de la categoría Bajo es: " + sumaBajo);
 
-		float sumaMedio = aSumax3 + aSumay3 + aSumaz3 + aSumaa3;
+		float sumaMedio = aSumax3 + aSumay3 + aSumaz3 + aSumaa3 + aSumab3;
 		System.out.println("La suma de todos los números de la categoría Medio es: " + sumaMedio);
 
-		float sumaAlto = aSumax4 + aSumay4 + aSumaz4 + aSumaa4;
+		float sumaAlto = aSumax4 + aSumay4 + aSumaz4 + aSumaa4 + aSumab4;
 		System.out.println("La suma de todos los números de la categoría Alto es: " + sumaAlto);
 
 	}
