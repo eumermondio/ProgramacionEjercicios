@@ -5,6 +5,11 @@ import javax.swing.JOptionPane;
 public class Ejercicio03 {
 
 	public static void main(String[] args) {
+		repetir();
+		salir();
+	}
+
+	public static String repetir() {
 
 		System.out.println("--------Calculadora Avanzada-------");
 		System.out.println("0.-Salir");
@@ -23,14 +28,14 @@ public class Ejercicio03 {
 
 		switch (opcion) {
 		case 0:
-			break;
+			return salir();
 		case 1:
 			str = JOptionPane.showInputDialog("Opción seleccionada: Cálculo de la hipotenusa\nIntroduzca el valor de un cateto");
 			x = Integer.parseInt(str);
 			str = JOptionPane.showInputDialog("Introduzca el valor de otro cateto");
 			y = Integer.parseInt(str);
 			resultado = (float) (Math.pow(x, 2.0f) + Math.pow(y, 2.0f));
-			System.out.println("El resultado de la hipotenusa es: " + (Math.pow(resultado, 1/2.0f)));
+			System.out.println("El resultado de la hipotenusa es: " + (Math.pow(resultado, 1 / 2.0f)));
 			break;
 		case 2:
 			str = JOptionPane.showInputDialog("Opción seleccionada: Cálculo de la superficie\nDígame la longitud del radio");
@@ -43,11 +48,34 @@ public class Ejercicio03 {
 			x = Integer.parseInt(str);
 			resultado = (2 * pi) * x;
 			System.out.println("El resultado de el perímetro es de: " + resultado);
+			break;
+		case 4:
+			str = JOptionPane.showInputDialog("Opción seleccionada: Cálculo del área del rectángulo\nDígame la base");
+			x = Integer.parseInt(str);
+			str = JOptionPane.showInputDialog("Dígame la altura");
+			y = Integer.parseInt(str);
+			resultado = x * y;
+			System.out.println("El resultado del área es de: " + resultado);
+			break;
+		case 5:
+			str = JOptionPane.showInputDialog("Opción seleccionada: Cálculo del área del triángulo\nDígame la base");
+			x = Integer.parseInt(str);
+			str = JOptionPane.showInputDialog("Dígame la altura");
+			y = Integer.parseInt(str);
+			resultado = ((x * y) / 2);
+			System.out.println("El resultado del área es de: " + resultado);
+			break;
+		default:
+			System.out.println("Opción incorrecta");
+			return repetir();
 
 		}
-
+		return repetir();
 	}
 
+	public static String salir() {
+		return null;
+		
+
+	}
 }
-
-
