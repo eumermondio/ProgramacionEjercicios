@@ -19,10 +19,7 @@ public class Ejercicio03 {
 			if (num > 0) {
 				contadorPositivos++;
 			}
-			if (num == 0) {
-				System.out.println("No vale el 0");
-				break;
-			}
+
 		}
 		System.out.println("Cantidad de números negativos introducidos: " + "" + contadorNegativos
 				+ "\nCantidad de números positivos " + "introducidos: " + contadorPositivos);
