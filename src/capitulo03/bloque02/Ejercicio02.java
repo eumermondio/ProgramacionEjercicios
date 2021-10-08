@@ -13,6 +13,10 @@ public class Ejercicio02 {
 		for (int i = 0; i < repes; i++) {
 			System.out.println("Dime el numero " + num2++);
 			num1 = sc.nextInt();
+			if (i == 0) {
+				mayor = num1;
+				menor = num1;
+			}
 			if (num1 > mayor) {
 				mayor = num1;
 			}
