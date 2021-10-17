@@ -8,31 +8,30 @@ public class Ejercicio02 {
 
 		int limiteInf = 0, limiteSup = 0;
 		Scanner sc = new Scanner(System.in);
-
-		System.out.println("Dime el límite inferior");
+		System.out.println("Limite inferior");
 		limiteInf = sc.nextInt();
-		System.out.println("Dime el límite superior");
+		
+		System.out.println("Limite superior");
 		limiteSup = sc.nextInt();
 
-		for (int numero = 2; numero < limiteInf; numero++) {
+		while (limiteInf < limiteSup) {
 
 			boolean numeroEsPrimo = true;
-			if (limiteSup >= limiteInf) {
-				for (int i = 2; i < (numero / 2 + 1); i++) {
-					if (numero % i == 0) {
-						numeroEsPrimo = false;
-						break;
-					}
+			int i = 2;
+			while (i < limiteInf) {
+				if (limiteInf % i == 0) {
+					numeroEsPrimo = false;
+					break;
 				}
+				i++;
 			}
 
 			if (numeroEsPrimo == true) {
-				System.out.println("el número " + numero + " es primo");
+				System.out.println("el número " + limiteInf + " es primo");
 			}
+			limiteInf++;
 
 		}
+
 	}
-
 }
-
-// PREGUNTAR EN CLASE
