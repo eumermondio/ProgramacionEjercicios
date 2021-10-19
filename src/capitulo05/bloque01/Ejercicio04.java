@@ -6,7 +6,7 @@ public class Ejercicio04 {
 
 	public static void main(String[] args) {
 
-		int array[] = new int[150], num;
+		int array[] = new int[150], num, pos = 0;
 		Scanner sc = new Scanner(System.in);
 		boolean seEncuentra = false;
 
@@ -20,11 +20,12 @@ public class Ejercicio04 {
 		for (int i = 0; i < array.length; i++) {
 			if (array[i] == num) {
 				seEncuentra = true;
+				pos = i;
 				break;
 			}
 		}
 		if (seEncuentra == true) {
-			System.out.println("Se encontró el " + num + " en el array");
+			System.out.println("Se encontró el " + num + " en la posición: " + pos + " del array");
 		} else {
 			System.out.println("No se encontró el " + num + " en el array");
 		}
