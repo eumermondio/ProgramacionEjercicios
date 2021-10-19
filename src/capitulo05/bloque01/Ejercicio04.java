@@ -21,12 +21,10 @@ public class Ejercicio04 {
 			if (array[i] == num) {
 				seEncuentra = true;
 				pos = i;
-				break;
+				System.out.println("Se encontró el " + num + " en la posición: " + pos + " del array");
 			}
 		}
-		if (seEncuentra == true) {
-			System.out.println("Se encontró el " + num + " en la posición: " + pos + " del array");
-		} else {
+		if (seEncuentra == false) {
 			System.out.println("No se encontró el " + num + " en el array");
 		}
 
