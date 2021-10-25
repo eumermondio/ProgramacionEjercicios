@@ -5,43 +5,35 @@ import java.util.Scanner;
 public class Ejercicio05 {
 
 	public static void main(String[] args) {
-
-		int array[] = new int[5], posi;
+		int array[] = new int[5];
+		int i = 0, aux = 0, num;
 		Scanner sc = new Scanner(System.in);
-		int i = 0, j = 0;
 
 		for (; i < array.length; i++) {
 			array[i] = (int) Math.round(Math.random() * 100);
 			System.out.print(array[i] + " ");
 		}
 
-		i = 0;
+		System.out.println("\nMover derecha cuanto?");
+		num = sc.nextInt();
+		while (num > 0) {
+			aux = array[array.length - 1];
 
-		System.out.println("\nMover derecha");
+			for (int j = array.length - 1; j >= 0; j--) {
 
-		System.out.println("Dime las posis a mover");
-		posi = sc.nextInt();
-		while (0 < posi) {
-
-			for (; j < array.length; j++) {
-
-				if (j == 0) {
-					System.out.print(array[4] + " ");
+				if ((j - 1) >= 0) {
+					array[j] = array[j - 1];
 				}
-				System.out.print(array[j] + " ");
-				array[j] = array[i];
-
-				if (j == 3) {
-					break;
-				}
-				i++;
 
 			}
-			i = 0;
-			j = 0;
-			posi--;
+			array[0] = aux;
+
+			num--;
+			sc.close();
+
 		}
-
+		for (int j = 0; j < array.length; j++) {
+			System.out.print(array[j] + " ");
+		}
 	}
-
 }
