@@ -6,13 +6,13 @@ public class Ejercicio01 {
 
 		int array[] = new int[150], aux = 0;
 		boolean hayIntercambio = true;
-		for (int i = 0; i < array.length; i++) {
-			array[i] = (int) Math.round(Math.random() * 100);
+		for (int i = 0; i < array.length; i++) { //Inicializar array
+			array[i] = (int) Math.round(Math.random() * 1000);
 			System.out.print(array[i] + " ");
 		}
 
 		System.out.println("");
-		while (hayIntercambio) {
+		while (hayIntercambio) { //Proceso de ordenación
 			hayIntercambio = false;
 			for (int j = 0; j < array.length - 1; j++) {
 				if (array[j] > array[j + 1]) {
@@ -25,7 +25,7 @@ public class Ejercicio01 {
 
 		}
 
-		for (int i = 0; i < array.length; i++) {
+		for (int i = 0; i < array.length; i++) { //Visualizar array ordenado
 			System.out.print(array[i] + " ");
 		}
 
