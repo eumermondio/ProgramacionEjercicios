@@ -6,20 +6,20 @@ public class CerraduraConFuerzaBruta {
 
 	public static void main(String[] args) {
 
-		int cerradura[] = new int[700000];
+		int cerradura[] = new int[700];
 		int llave[] = new int[cerradura.length];
 		int cont = 0;
 		boolean estaAbierto = false;
 		System.out.println("Cerradura");
 		for (int i = 0; i < cerradura.length; i++) {
-			cerradura[i] = (int) Math.round(Math.random() * 100);
+			cerradura[i] = (int) Math.round(Math.random() * 5000);
 
 		}
 		long millisDesde1970 = new Date().getTime();
 		do {
 
 			for (int i = 0; i < llave.length; i++) {
-				llave[i] = (int) Math.round(Math.random() * 100);
+				llave[i] = (int) Math.round(Math.random() * 5000);
 				if (llave[i] == cerradura[i]) {
 					cont++;
 				} else {
