@@ -6,8 +6,8 @@ public class Ejercicio04 {
 
 	public static void main(String[] args) {
 
-		int matrix[][] = new int[][] { { 1, 1, 1, 1, 1 }, { 0, 5, 1, 1, 1 }, { 0, 0, 9, 1, 1 }, { 0, 0, 0, 4, 3 },
-				{ 0, 0, 0, 0, 7 } };
+		int matrix[][] = new int[][] { { 0, 1, 1, 1, 1 }, { 1, 0, 1, 1, 1 }, { 1, 5, 0, 1, 1 }, { 1, 5, 5, 0, 3 },
+				{ 1, 3, 3, 2, 0 } };
 		boolean esPositivo = true;
 		// inicializarMatrizMenosCienACien(matrix);
 		RecursosMatrices.mostrarMatriz(matrix);
@@ -19,7 +19,8 @@ public class Ejercicio04 {
 			System.out.println("Matriz negativa");
 		}
 		// comprobarMatrizDiagonal(matrix);
-		comprobarMatrizTriangular(matrix);
+		// comprobarMatrizTriangularSuperior(matrix);
+		System.out.println("La matriz dispersa: " + comprobarMatrizDispersa(matrix));
 
 	}
 
@@ -70,8 +71,11 @@ public class Ejercicio04 {
 
 	}
 
-	public static void comprobarMatrizTriangular(int matrix[][]) {
+	public static void comprobarMatrizTriangularSuperior(int matrix[][]) {
 		boolean esTriangular = true;
+
+		// Recorro la matriz de la esquina superior izquierda a la inferior derecha
+
 		for (int i = 0; i < matrix.length; i++) {
 			for (int j = i; j < matrix[i].length; j++) {
 				if (matrix[i][j] == 0) {
@@ -80,9 +84,11 @@ public class Ejercicio04 {
 			}
 		}
 
+		// Recorro la matriz de la esquina superior izquierda a la inferior derecha
+
 		for (int i = matrix.length - 1; i >= 0; i--) {
-			for (int j = i; j >= 0; j--) {
-				if (matrix[i][j] == 0) {
+			for (int j = i - 1; j >= 0; j--) {
+				if (matrix[i][j] != 0) {
 					esTriangular = false;
 				}
 			}
@@ -91,8 +97,33 @@ public class Ejercicio04 {
 		if (esTriangular) {
 			System.out.println("La matriz es triangular");
 		} else {
-			System.out.println("La matriz no es triangular");
+			System.out.println("La matriz no es triangular 🤢");
 		}
+	}
+
+	public static boolean comprobarMatrizDispersa(int matrix[][]) {
+
+		boolean esDispersa = true;
+		int cont = 0;
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				if (matrix[i][j] == 0) {
+					break;
+				}
+				if (matrix[i][j] != 0) {
+					cont++;
+				}
+
+				if (cont == matrix[i].length) {
+					esDispersa = false;
+					return esDispersa;
+
+				}
+
+			}
+			cont = 0;
+		}
+		return esDispersa;
 	}
 
 }
