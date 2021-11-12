@@ -1,15 +1,17 @@
 package capitulo05.bloque05;
 
+import java.util.Iterator;
+
 import pruebasVarias.*;
 
 public class Ejercicio04 {
 
 	public static void main(String[] args) {
 
-		int matrix[][] = new int[][] { { 0, 1, 1, 1, 1 }, { 1, 0, 1, 1, 1 }, { 1, 5, 0, 1, 1 }, { 1, 5, 5, 0, 3 },
-				{ 1, 3, 3, 2, 0 } };
+		int matrix[][] = new int[3][2]; // { { 0, 1, 1, 1, 2 }, { 1, 0, 1, 1, 1 }, { 1, 1, 0, 1, 1 }, { 1, 1, 1, 0, 1 },
+		// { 2, 1, 1, 1, 0 } };
 		boolean esPositivo = true;
-		// inicializarMatrizMenosCienACien(matrix);
+		inicializarMatrizMenosCienACien(matrix);
 		RecursosMatrices.mostrarMatriz(matrix);
 		esPositivo = comprobarMatrizPositiva(matrix);
 		if (esPositivo) {
@@ -21,6 +23,10 @@ public class Ejercicio04 {
 		// comprobarMatrizDiagonal(matrix);
 		// comprobarMatrizTriangularSuperior(matrix);
 		System.out.println("La matriz dispersa: " + comprobarMatrizDispersa(matrix));
+		// construirArrayConMatrizCuadrada(matrix);
+		System.out.println("La matriz es simetrica: " + comprobarMatrizSimetrica(matrix));
+		// realizarMatrizOpuesta(matrix);
+		realizarMatrizTraspuesta(matrix);
 
 	}
 
@@ -126,4 +132,68 @@ public class Ejercicio04 {
 		return esDispersa;
 	}
 
+	public static void construirArrayConMatrizCuadrada(int matrix[][]) {
+
+		int array[] = new int[(int) Math.pow(matrix.length, 2)];
+		int k = 0;
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				array[k] = matrix[i][j];
+				k++;
+			}
+		}
+
+		for (int i = 0; i < array.length; i++) {
+			System.out.print(array[i] + " ");
+		}
+	}
+
+	public static boolean comprobarMatrizSimetrica(int matrix[][]) {
+		int k = 0;
+		boolean esSimetrica = true;
+
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[i].length; j++) {
+				if ((i != j) && (matrix[i][j] != matrix[j][i])) {
+					esSimetrica = false;
+					return esSimetrica;
+				}
+			}
+		}
+		return esSimetrica;
+	}
+
+	public static void realizarMatrizOpuesta(int matrix[][]) {
+
+		for (int i = 0; i < matrix.length; i++) {
+			System.out.println("");
+			for (int j = 0; j < matrix[i].length; j++) {
+				matrix[i][j] = (~matrix[i][j] + 1);
+				System.out.print(matrix[i][j] + " ");
+			}
+
+		}
+
+	}
+
+	public static int[][] realizarMatrizTraspuesta(int matrix[][]) {
+
+		int matriz[][] = new int[matrix[0].length][matrix.length];
+		int aux = 0, aux2 = 0;
+
+		for (int i = 0; i < matriz.length; i++) {
+			for (int j = 0; j < matriz[i].length - 1; j++) {
+				matriz[j][i] = matrix[i][j];
+			}
+		}
+// Mostrar matriz
+		for (int i = 0; i < matriz.length; i++) {
+			System.out.println("");
+			for (int j = 0; j < matriz[i].length; j++) {
+				System.out.print(matriz[i][j] + " ");
+			}
+		}
+
+		return matriz;
+	}
 }
