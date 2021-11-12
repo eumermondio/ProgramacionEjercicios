@@ -1,6 +1,7 @@
 package capitulo05.bloque05;
 
 import java.util.Iterator;
+import java.util.Scanner;
 
 import pruebasVarias.*;
 
@@ -26,7 +27,8 @@ public class Ejercicio04 {
 		// construirArrayConMatrizCuadrada(matrix);
 		System.out.println("La matriz es simetrica: " + comprobarMatrizSimetrica(matrix));
 		// realizarMatrizOpuesta(matrix);
-		realizarMatrizTraspuesta(matrix);
+		// realizarMatrizTraspuesta(matrix);
+		quitarFilaMatriz(matrix);
 
 	}
 
@@ -179,19 +181,15 @@ public class Ejercicio04 {
 	public static int[][] realizarMatrizTraspuesta(int matrix[][]) {
 
 		int matriz[][] = new int[matrix[0].length][matrix.length];
-		int aux = matrix[2][1];
-		int aux2 = matrix[2][0];
+		int aux = matrix[matrix.length - 1][matrix[0].length - 1];
+		int aux2 = matrix[matrix.length - 1][0];
 
 		for (int i = 0; i < matriz.length; i++) {
 			for (int j = 0; j < matriz[i].length - 1; j++) {
-				if (i < matriz.length && j < matriz[i].length) {
-					//aux = matrix[i][j];
-				}
 
 				matriz[j][i] = matrix[i][j];
 			}
 
-			
 		}
 		matriz[matrix[0].length - 1][matrix.length - 1] = aux;
 		matriz[matrix[0].length - 2][matrix.length - 1] = aux2;
@@ -204,5 +202,32 @@ public class Ejercicio04 {
 		}
 
 		return matriz;
+	}
+
+	public static void quitarFilaMatriz(int matrix[][]) {
+
+		int eliminarFila = 0;
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Fila a eliminar: ");
+		eliminarFila = sc.nextInt();
+		int matriz[][] = new int[matrix.length][matrix[0].length];
+
+		for (int i = 0; i < matriz.length; i++) {
+			for (int j = 0; j < matriz[i].length; j++) {
+				if (i == eliminarFila) {
+					break;
+				}
+				matriz[i][j] = matrix[i][j];
+			}
+		}
+
+		for (int i = 0; i < matriz.length; i++) {
+			System.out.println("");
+			for (int j = 0; j < matriz[i].length; j++) {
+				System.out.print(matriz[i][j] + " ");
+			}
+		}
+
 	}
 }
