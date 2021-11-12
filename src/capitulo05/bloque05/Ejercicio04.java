@@ -179,13 +179,22 @@ public class Ejercicio04 {
 	public static int[][] realizarMatrizTraspuesta(int matrix[][]) {
 
 		int matriz[][] = new int[matrix[0].length][matrix.length];
-		int aux = 0, aux2 = 0;
+		int aux = matrix[2][1];
+		int aux2 = matrix[2][0];
 
 		for (int i = 0; i < matriz.length; i++) {
 			for (int j = 0; j < matriz[i].length - 1; j++) {
+				if (i < matriz.length && j < matriz[i].length) {
+					//aux = matrix[i][j];
+				}
+
 				matriz[j][i] = matrix[i][j];
 			}
+
+			
 		}
+		matriz[matrix[0].length - 1][matrix.length - 1] = aux;
+		matriz[matrix[0].length - 2][matrix.length - 1] = aux2;
 // Mostrar matriz
 		for (int i = 0; i < matriz.length; i++) {
 			System.out.println("");
