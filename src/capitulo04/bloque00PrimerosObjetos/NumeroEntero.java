@@ -1,4 +1,4 @@
-package capitulo04.bloque01PrimerosObjetos;
+package capitulo04.bloque00PrimerosObjetos;
 
 import pruebasVarias.RecursosArrays;
 

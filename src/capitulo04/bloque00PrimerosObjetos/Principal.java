@@ -1,4 +1,4 @@
-package capitulo04.bloque01PrimerosObjetos;
+package capitulo04.bloque00PrimerosObjetos;
 
 public class Principal {
 
@@ -6,6 +6,9 @@ public class Principal {
 
 		ArrayEnteros array = new ArrayEnteros();
 		System.out.println(array.toString());
+		System.out.println(array.SumaArrayEnteros());
+		System.out.println(array.mediaArrayEnteros());
+
 
 	}
 

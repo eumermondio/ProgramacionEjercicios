@@ -1,4 +1,4 @@
-package capitulo04.bloque01PrimerosObjetos;
+package capitulo04.bloque00PrimerosObjetos;
 
 import java.util.Arrays;
 
@@ -13,6 +13,18 @@ public class ArrayEnteros {
 		for (int i = 0; i < array.length; i++) {
 			array[i] = new NumeroEntero();
 		}
+	}
+
+	public int SumaArrayEnteros() {
+		int suma = 0;
+		for (int i = 0; i < array.length; i++) {
+			suma += this.array[i].getValor();
+		}
+		return suma;
+	}
+
+	public float mediaArrayEnteros() {
+		return SumaArrayEnteros() / (float) array.length;
 	}
 
 	/**
