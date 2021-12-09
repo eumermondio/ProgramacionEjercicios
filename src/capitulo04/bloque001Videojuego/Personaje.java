@@ -24,7 +24,7 @@ public class Personaje {
 	 * 
 	 */
 	public Personaje() {
-		this.vida = 100;
+		this.vida = (int) Math.round(Math.random() * (100 - 90) + 90);
 		this.potencia = (int) Math.round(Math.random() * (30 - 20) + 20);
 		this.precision = (int) Math.round(Math.random() * (70 - 50) + 50);
 	}
