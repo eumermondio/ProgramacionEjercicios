@@ -1,7 +1,5 @@
 package capitulo04.bloque01;
 
-import java.util.Scanner;
-
 public class Persona {
 	private String nombre;
 	private String apll;
@@ -76,5 +74,5 @@ public class Persona {
 		return "Persona [nombre=" + nombre + ", apll=" + apll + ", dni=" + dni + ", direccion=" + direccion + ", tlf="
 				+ tlf + "]";
 	}
-
+	
 }
