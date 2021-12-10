@@ -6,7 +6,7 @@ public class Principal {
 
 	public static void main(String[] args) {
 		int opcion = 0;
-		ArrayPersonas arrayI12[] = new ArrayPersonas[3];
+		ArrayPersonas i12 = new ArrayPersonas();
 		Scanner sc = new Scanner(System.in);
 		do {
 			System.out.println("0- Salir");
@@ -19,7 +19,7 @@ public class Principal {
 				break;
 			case 1:
 				System.out.println("Introducir datos");
-
+				// Seguir aqui
 				break;
 			case 2:
 				System.out.println("Mostrar datos");
