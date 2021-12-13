@@ -10,8 +10,7 @@ public class Persona {
 	/**
 	 * 
 	 */
-	public Persona() {
-
+	public Persona() {	
 	}
 
 	/**
@@ -74,5 +73,5 @@ public class Persona {
 		return "Persona [nombre=" + nombre + ", apll=" + apll + ", dni=" + dni + ", direccion=" + direccion + ", tlf="
 				+ tlf + "]";
 	}
-	
+
 }
