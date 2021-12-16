@@ -6,4 +6,9 @@ public class Humano extends Personaje {
 		super();
 	}
 
+	@Override
+	public String toString() {
+		return "Humano";
+	}
+
 }
