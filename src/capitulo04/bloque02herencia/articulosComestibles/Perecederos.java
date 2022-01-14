@@ -12,6 +12,22 @@ public class Perecederos extends Articulos {
 		this.fecha_cad = s;
 	}
 
+	
+	
+	/**
+	 * @return the fecha_cad
+	 */
+	public String getFecha_cad() {
+		return fecha_cad;
+	}
+
+	/**
+	 * @param fecha_cad the fecha_cad to set
+	 */
+	public void setFecha_cad(String fecha_cad) {
+		this.fecha_cad = fecha_cad;
+	}
+
 	@Override
 	public String toString() {
 		return "Perecederos [fecha_cad=" + fecha_cad + ", getCod()=" + getCod() + ", getNombre()=" + getNombre()

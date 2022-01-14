@@ -59,13 +59,7 @@ public class Tienda {
 				System.out.println(i12 + " --> " + "Vacío");
 				i12++;
 			} else {
-				a.toString();
-				if (a instanceof NoPerecederos) {
-					System.out.println(((NoPerecederos) a).toString());
-				}
-				if (a instanceof Perecederos) {
-					System.out.println(((Perecederos) a).toString());
-				}
+					System.out.println(a.toString());
 			}
 		}
 	}
