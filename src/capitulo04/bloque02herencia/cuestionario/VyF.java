@@ -1,7 +1,7 @@
 package capitulo04.bloque02herencia.cuestionario;
 
 public class VyF extends Pregunta {
-	protected byte respuestaCorrecta;
+	protected String respuestaCorrecta;
 
 	/**
 	 * 
@@ -13,15 +13,28 @@ public class VyF extends Pregunta {
 	/**
 	 * @param respuestaCorrecta
 	 */
-	public VyF(byte respuestaCorrecta) {
+	public VyF(String respuestaCorrecta) {
 		super();
+		this.respuestaCorrecta = respuestaCorrecta;
+	}
+
+	/**
+	 * @return the respuestaCorrecta
+	 */
+	public String getRespuestaCorrecta() {
+		return respuestaCorrecta;
+	}
+
+	/**
+	 * @param respuestaCorrecta the respuestaCorrecta to set
+	 */
+	public void setRespuestaCorrecta(String respuestaCorrecta) {
 		this.respuestaCorrecta = respuestaCorrecta;
 	}
 
 	@Override
 	public String toString() {
-		return "VyF [getPregunta()=" + getPregunta() + ", getRespuesta()="
-				+ getRespuesta();
+		return "VyF [getPregunta()=" + getPregunta() + ", getRespuesta()=" + getRespuesta();
 	}
 
 }
