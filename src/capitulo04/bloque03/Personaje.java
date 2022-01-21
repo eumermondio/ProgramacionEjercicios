@@ -3,7 +3,7 @@ package capitulo04.bloque03;
 public class Personaje {
 	protected int vida;
 	protected String nombre;
-	protected boolean vivo;
+	protected boolean vivo = true;
 
 	/**
 	 * 
