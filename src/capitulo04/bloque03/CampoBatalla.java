@@ -11,6 +11,7 @@ public class CampoBatalla {
 	 * 
 	 */
 	public CampoBatalla() {
+		this.nombre = "Campo 1";
 		// Inicializar los personajes
 		for (int i = 0; i < arrayH.length; i++) {
 			arrayH[i] = new Humano();
@@ -84,6 +85,10 @@ public class CampoBatalla {
 				+ Arrays.toString(arrayH) + "]";
 	}
 
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		CampoBatalla campo = new CampoBatalla();
 	}
