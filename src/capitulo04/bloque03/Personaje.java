@@ -9,7 +9,6 @@ public class Personaje {
 	 * 
 	 */
 	public Personaje() {
-		char rnd = 'a';
 		this.vida = (int) Math.round(Math.random() * (100 - 50) + 50);
 		this.nombre += (char) Math.round(Math.random() * (122 - 97) + 97);
 	}
