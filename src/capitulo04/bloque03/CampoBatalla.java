@@ -6,6 +6,8 @@ public class CampoBatalla {
 	private String nombre;
 	private Malvado arrayM[] = new Malvado[20];
 	private Humano arrayH[] = new Humano[20];
+	private byte disparosMalvados = 0;
+	private byte disparosHumanos = 0;
 
 	// Instancia estática
 	private static CampoBatalla instance = null;
@@ -42,8 +44,11 @@ public class CampoBatalla {
 	 */
 	public void batalla() {
 		boolean algunVivo = true;
+		byte mayor = 0, indiceMasDificil = 0;
 		Humano primerHumanoVivo = null;
 		Malvado primerMaloVivo = null;
+		byte arrayStatsMalvados[] = new byte[20];
+		byte arrayStatsHumanos[] = new byte[20];
 
 		do {
 			primerHumanoVivo = (Humano) instance.getPrimerPersonajeVivo(arrayH);
@@ -62,16 +67,44 @@ public class CampoBatalla {
 //			System.out.println(primerMaloVivo.toString());
 //			System.out.println("");
 
-			instance.dispara(primerHumanoVivo, primerMaloVivo);
+			instance.dispara(primerHumanoVivo, primerMaloVivo, arrayStatsMalvados, arrayStatsHumanos);
 
 			if (instance.getPrimerPersonajeVivo(arrayH) == null) {
 				algunVivo = false;
 				System.out.println("Ganan los malvados");
+				// System.out.println("Disparos necesarios para matar los humanos: " +
+				// disparosMalvados);
 			}
 			if (instance.getPrimerPersonajeVivo(arrayM) == null) {
 				algunVivo = false;
 				System.out.println("Ganan los humanos");
+				// System.out.println("Disparos necesarios para matar los malvados: " +
+				// disparosHumanos);
 			}
+			// Ver el mas dificil de matar
+			for (byte i = 0; i < arrayStatsHumanos.length; i++) {
+				mayor = arrayStatsHumanos[0];
+				if (mayor < arrayStatsHumanos[i]) {
+					mayor = arrayStatsHumanos[i];
+					indiceMasDificil = i;
+				}
+			}
+
+			System.out.println("Humano más dificil de matar: " + arrayH[indiceMasDificil].toString() + " con " + mayor
+					+ " disparos necesarios para morir");
+			mayor = 0;
+			indiceMasDificil = 0;
+
+			for (byte i = 0; i < arrayStatsMalvados.length; i++) {
+				mayor = arrayStatsMalvados[0];
+				if (mayor < arrayStatsMalvados[i]) {
+					mayor = arrayStatsMalvados[i];
+					indiceMasDificil = i;
+				}
+			}
+
+			System.out.println("Malvado más dificil de matar: " + arrayM[indiceMasDificil].toString() + " con " + mayor
+					+ " disparos necesarios para morir");
 
 		} while (algunVivo);
 	}
@@ -81,18 +114,35 @@ public class CampoBatalla {
 	 * @param h
 	 * @param m
 	 */
-	public void dispara(Humano h, Malvado m) {
+	public void dispara(Humano h, Malvado m, byte arrayStatsMalvados[], byte arrayStatsHumanos[]) {
 		byte damage = 0;
+		int i = 0, j = 0;
 		damage = (byte) Math.round(Math.random() * (25 - 5) + 5);
 		m.setVida(m.getVida() - damage);
+		disparosMalvados = contadorDisparos(disparosMalvados);
 		if (m.getVida() <= 0) {
 			m.setVivo(false);
+			System.out.println(m.toString() + " Disparos para morir: " + disparosMalvados);
+			arrayStatsMalvados[i] = disparosMalvados;
+			disparosMalvados = 0;
+			i++;
 		}
 		damage = (byte) Math.round(Math.random() * (25 - 5) + 5);
 		h.setVida(h.getVida() - damage);
+		disparosHumanos = contadorDisparos(disparosHumanos);
 		if (h.getVida() <= 0) {
 			h.setVivo(false);
+			System.out.println(h.toString() + " Disparos para morir: " + disparosHumanos);
+			arrayStatsHumanos[i] = disparosHumanos;
+			disparosHumanos = 0;
+			j++;
 		}
+	}
+
+	private byte contadorDisparos(byte c) {
+		c++;
+		return c;
+
 	}
 
 	/**
