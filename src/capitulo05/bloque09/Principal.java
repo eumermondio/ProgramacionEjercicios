@@ -51,9 +51,14 @@ public class Principal {
 	 * 
 	 */
 	private static void actualizarArticulo() {
-
-		
-		
+		String cod;
+		System.out.println("Código del artículo a actualizar");
+		cod = sc.next();
+		Articulo a = hm.get(cod);
+		System.out.println("Nuevo número de estante: ");
+		a.setNumEst(sc.nextInt());
+		System.out.println("Nuevo número de stock: ");
+		a.setStock(sc.nextInt());
 	}
 
 	/**
