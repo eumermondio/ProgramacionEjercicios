@@ -3,57 +3,170 @@ package capitulo07.Ejercicio01;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.Scanner;
+
+import javax.xml.crypto.Data;
 
 public class Principal {
 	static Scanner sc = new Scanner(System.in);
 
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		conexion();
 		int opcion = 0;
 		do {
-			System.out.println("0.-Salir");
-			System.out.println("1.-Salir");
-			System.out.println("2.-Salir");
-			System.out.println("3.-Salir");
-			System.out.println("4.-Salir");
+			System.out.println("\n0.-Salir");
+			System.out.println("1.-Listado de fabricantes");
+			System.out.println("2.-Crear un fabricante");
+			System.out.println("3.-Modificar un fabricante");
+			System.out.println("4.-Eliminar un fabricante");
+			opcion = sc.nextInt();
+			switch (opcion) {
+			case 0:
+				break;
+			case 1:
+				listarFabricantes();
+				break;
+			case 2:
+				crearFabricantes();
+				break;
+			case 3:
+				actualizarFabricantes();
+				break;
+			case 4:
+				borrarFabricantes();
+				break;
+			default:
+				System.out.println("Opcion no valida");
+				break;
+			}
 
 		} while (opcion != 0);
 	}
 
-	public static void conexion() {
+	/**
+	 * 
+	 */
+	private static void borrarFabricantes() {
+		System.out.println("\n");
+		int id = 0;
+		long time = 0, time2 = 0;
+		int rowAffected;
 		try {
-			// A través de la siguiente línea comprobamos si tenemos acceso al driver MySQL,
-			// si no fuera así
-			// no podemos trabajar con esa BBDD.
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = ConnectionManager.getConexion();
+			Statement s = con.createStatement();
+			System.out.println("Dame el id del fabricante a eliminar: ");
+			id = sc.nextInt();
+			Date d = new Date();
+			time = d.getTime();
+			rowAffected = s.executeUpdate("delete from fabricante where id = " + id + ";");
+			Date dd = new Date();
+			time2 = dd.getTime();
+			System.out.println(Math.abs(time - time2) / 1000f + " time taken in seconds\n");
+			System.out.println(rowAffected + " fila/s afectada/s");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-			// Necesitamos obtener un acceso a la BBDD, eso se materializa en un objeto de
-			// tipo Connection, al cual
-			// le tenemos que pasar los parámetros de conexión.
-			Connection conexion = (Connection) DriverManager.getConnection(
-					"jdbc:mysql://localhost/tutorialjavacoches?serverTimezone=UTC", "java", "Abcdefgh.1");
+	}
 
-			// Para poder ejecutar una consulta necesitamos utilizar un objeto de tipo
-			// Statement
-			Statement s = (Statement) conexion.createStatement();
+	/**
+	 * 
+	 */
+	private static void actualizarFabricantes() {
+		System.out.println("\n");
+		int id = 0;
+		long time = 0, time2 = 0;
+		int rowAffected;
+		String newNombre = "";
+		try {
+			Connection con = ConnectionManager.getConexion();
+			Statement s = con.createStatement();
+			System.out.println("Dame el id del fabricante a modificar: ");
+			id = sc.nextInt();
+			System.out.println("Dame el nuevo nombre del fabricante: ");
+			newNombre = sc.next();
+			Date d = new Date();
+			time = d.getTime();
+			rowAffected = s.executeUpdate(
+					"update fabricante set nombre = " + "'" + newNombre + "'" + " where id = " + id + ";");
+			Date dd = new Date();
+			time2 = dd.getTime();
+			System.out.println(Math.abs(time - time2) / 1000f + " time taken in seconds\n");
+			System.out.println(rowAffected + " fila/s afectada/s");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-			// La ejecución de la consulta se realiza a través del objeto Statement y se
-			// recibe en forma de objeto
-			// de tipo ResultSet, que puede ser navegado para descubrir todos los registros
-			// obtenidos por la consulta
+	}
 
-			// Cierre de los elementos
-			s.close();
-			conexion.close();
-		} catch (ClassNotFoundException ex) {
-			System.out.println("Imposible acceder al driver Mysql");
-			ex.printStackTrace();
-		} catch (SQLException ex) {
-			System.out.println("Error en la ejecución SQL: " + ex.getMessage());
-			ex.printStackTrace();
+	/**
+	 * 
+	 */
+	private static void crearFabricantes() {
+		System.out.println("\n");
+		int id = 0;
+		long time = 0, time2 = 0;
+		int rowAffected;
+		String cif = "", nombre = "";
+		Connection con;
+		System.out.println("Dime el id: ");
+		id = sc.nextInt();
+		System.out.println("Dime el cif: ");
+		cif = sc.next();
+		System.out.println("Dime el nombre: ");
+		nombre = sc.next();
+		try {
+			con = ConnectionManager.getConexion();
+			Statement s = con.createStatement();
+			Date d = new Date();
+			time = d.getTime();
+			rowAffected = s.executeUpdate(
+					"insert into fabricante values(" + id + "," + "'" + cif + "'" + "," + "'" + nombre + "'" + ");");
+			Date dd = new Date();
+			time2 = dd.getTime();
+			System.out.println(Math.abs(time - time2) / 1000f + " time taken in seconds");
+			System.out.println(rowAffected + " fila/s afectada/s");
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * 
+	 */
+	private static void listarFabricantes() {
+		long time = 0, time2 = 0;
+		try {
+			System.out.println("\n");
+			Connection con = ConnectionManager.getConexion();
+			Statement s = con.createStatement();
+			Date d = new Date();
+			time = d.getTime();
+			ResultSet rs = s.executeQuery("select * from fabricante");
+			Date dd = new Date();
+			time2 = dd.getTime();
+			System.out.println(Math.abs(time - time2) / 1000f + " time taken in seconds");
+			ResultSetMetaData rsmd = rs.getMetaData();
+			System.out.println("\n-------------------------------------------------------------");
+			for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+				System.out.print(rsmd.getColumnLabel(i) + "\t");
+			}
+			System.out.println("\n-------------------------------------------------------------");
+			while (rs.next()) {
+				System.out.println(rs.getInt(1) + "\t" + rs.getString(2) + "\t" + rs.getString(3));
+			}
+			System.out.println("\n");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 }
