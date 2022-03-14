@@ -85,6 +85,7 @@ public class Principal {
 		long time = 0, time2 = 0;
 		int rowAffected;
 		String newNombre = "";
+		String newCif = "";
 		try {
 			Connection con = ConnectionManager.getConexion();
 			Statement s = con.createStatement();
@@ -92,10 +93,12 @@ public class Principal {
 			id = sc.nextInt();
 			System.out.println("Dame el nuevo nombre del fabricante: ");
 			newNombre = sc.next();
+			System.out.println("Dame el nuevo cif del fabricante: ");
+			newCif = sc.next();
 			Date d = new Date();
 			time = d.getTime();
-			rowAffected = s.executeUpdate(
-					"update fabricante set nombre = " + "'" + newNombre + "'" + " where id = " + id + ";");
+			rowAffected = s.executeUpdate("update fabricante set nombre = " + "'" + newNombre + "'" + "," + "cif = "
+					+ "'" + newCif + "'" + " where id = " + id + ";");
 			Date dd = new Date();
 			time2 = dd.getTime();
 			System.out.println(Math.abs(time - time2) / 1000f + " time taken in seconds\n");
