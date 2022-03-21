@@ -1,4 +1,4 @@
-package capitulo07.Ejercicio02;
+package capitulo07.EjercicioCRUDCompleto;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 import javax.xml.crypto.Data;
 
-public class Principal {
+public class GestionFabricante extends SupertipoGestion {
 	static Scanner sc = new Scanner(System.in);
 
 	/**
@@ -22,25 +22,25 @@ public class Principal {
 		int opcion = 0;
 		do {
 			System.out.println("\n0.-Salir");
-			System.out.println("1.-Listado de coche");
-			System.out.println("2.-Crear un coche");
-			System.out.println("3.-Modificar un coche");
-			System.out.println("4.-Eliminar un coche");
+			System.out.println("1.-Listado de fabricantes");
+			System.out.println("2.-Crear un fabricante");
+			System.out.println("3.-Modificar un fabricante");
+			System.out.println("4.-Eliminar un fabricante");
 			opcion = sc.nextInt();
 			switch (opcion) {
 			case 0:
 				break;
 			case 1:
-				listarCoches();
+				listarFabricantes();
 				break;
 			case 2:
-				crearCoches();
+				crearFabricantes();
 				break;
 			case 3:
-				actualizarCoches();
+				actualizarFabricantes();
 				break;
 			case 4:
-				borrarCoches();
+				borrarFabricantes();
 				break;
 			default:
 				System.out.println("Opcion no valida");
@@ -53,7 +53,7 @@ public class Principal {
 	/**
 	 * 
 	 */
-	private static void borrarCoches() {
+	public static void borrarFabricantes() {
 		System.out.println("\n");
 		int id = 0;
 		long time = 0, time2 = 0;
@@ -61,11 +61,11 @@ public class Principal {
 		try {
 			Connection con = ConnectionManager.getConexion();
 			Statement s = con.createStatement();
-			System.out.println("Dame el id del coche a eliminar: ");
+			System.out.println("Dame el id del fabricante a eliminar: ");
 			id = sc.nextInt();
 			Date d = new Date();
 			time = d.getTime();
-			rowAffected = s.executeUpdate("delete from coche where id = " + id + ";");
+			rowAffected = s.executeUpdate("delete from fabricante where id = " + id + ";");
 			Date dd = new Date();
 			time2 = dd.getTime();
 			System.out.println(Math.abs(time - time2) / 1000f + " time taken in seconds\n");
@@ -79,7 +79,7 @@ public class Principal {
 	/**
 	 * 
 	 */
-	private static void actualizarCoches() {
+	public static void actualizarFabricantes() {
 		System.out.println("\n");
 		int id = 0;
 		long time = 0, time2 = 0;
@@ -112,39 +112,26 @@ public class Principal {
 	/**
 	 * 
 	 */
-	private static void crearCoches() {
+	public static void crearFabricantes() {
 		System.out.println("\n");
-		int id = 0, idFab = 0;
+		int id = 0;
 		long time = 0, time2 = 0;
 		int rowAffected;
-		String color = "", bastidor = "", modelo = "";
+		String cif = "", nombre = "";
 		Connection con;
-		System.out.println("Dime el modelo: ");
-		modelo = sc.next();
-		System.out.println("Dime el bastidor: ");
-		bastidor = sc.next();
-		System.out.println("Dime el color: ");
-		color = sc.next();
+		System.out.println("Dime el id: ");
+		id = sc.nextInt();
+		System.out.println("Dime el cif: ");
+		cif = sc.next();
+		System.out.println("Dime el nombre: ");
+		nombre = sc.next();
 		try {
 			con = ConnectionManager.getConexion();
 			Statement s = con.createStatement();
-			Statement s2 = con.createStatement();
 			Date d = new Date();
 			time = d.getTime();
-			ResultSet rs = s.executeQuery("select max(id) from coche");
-			rs.next();
-			id = rs.getInt(1);
-
-			ResultSet rs2 = s2.executeQuery("select * from fabricante");
-
-			while (rs2.next()) {
-				System.out.println(rs2.getInt(1) + "\t" + rs2.getString(2) + "\t" + rs2.getString(3));
-			}
-
-			System.out.println("Dime el id del fabricante: ");
-			idFab = sc.nextInt();
-			rowAffected = s.executeUpdate("insert into coche values(" + (id + 1) + "," + idFab + "," + "'"
-					+ bastidor + "'" + "," + "'" + modelo + "'" + "," + "'" + color + "'" + ");");
+			rowAffected = s.executeUpdate(
+					"insert into fabricante values(" + id + "," + "'" + cif + "'" + "," + "'" + nombre + "'" + ");");
 			Date dd = new Date();
 			time2 = dd.getTime();
 			System.out.println(Math.abs(time - time2) / 1000f + " time taken in seconds");
@@ -157,7 +144,7 @@ public class Principal {
 	/**
 	 * 
 	 */
-	private static void listarCoches() {
+	public static void listarFabricantes() {
 		long time = 0, time2 = 0;
 		try {
 			System.out.println("\n");
@@ -165,7 +152,7 @@ public class Principal {
 			Statement s = con.createStatement();
 			Date d = new Date();
 			time = d.getTime();
-			ResultSet rs = s.executeQuery("select * from coche");
+			ResultSet rs = s.executeQuery("select * from fabricante");
 			Date dd = new Date();
 			time2 = dd.getTime();
 			System.out.println(Math.abs(time - time2) / 1000f + " time taken in seconds");
@@ -176,8 +163,7 @@ public class Principal {
 			}
 			System.out.println("\n-------------------------------------------------------------");
 			while (rs.next()) {
-				System.out.println(rs.getInt(1) + "\t" + rs.getString(2) + "\t" + rs.getString(3) + "\t"
-						+ rs.getString(4) + "\t" + rs.getString(5));
+				System.out.println(rs.getInt(1) + "\t" + rs.getString(2) + "\t" + rs.getString(3));
 			}
 			System.out.println("\n");
 		} catch (SQLException e) {
