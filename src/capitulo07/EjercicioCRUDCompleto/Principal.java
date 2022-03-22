@@ -8,7 +8,7 @@ public class Principal {
 	public static void main(String[] args) {
 		int opcion = 0;
 		do {
-			System.out.println("\n0.-Salir");
+			System.out.println("\n0.-Salir del programa");
 			System.out.println("1.-Gestión de fabricantes");
 			System.out.println("2.-Gestión de coches");
 			System.out.println("3.-Gestión de clientes");
@@ -25,7 +25,7 @@ public class Principal {
 				menuCoches();
 				break;
 			case 3:
-
+				menuCliente();
 				break;
 			case 4:
 				menuConcesionario();
@@ -48,7 +48,7 @@ public class Principal {
 	public static void menuFabricante() {
 		int opcion = 0;
 		do {
-			System.out.println("\n0.-Salir");
+			System.out.println("\n0.-Volver al menú principal");
 			System.out.println("1.-Listado de fabricantes");
 			System.out.println("2.-Crear un fabricante");
 			System.out.println("3.-Modificar un fabricante");
@@ -83,7 +83,7 @@ public class Principal {
 	public static void menuConcesionario() {
 		int opcion = 0;
 		do {
-			System.out.println("\n0.-Salir");
+			System.out.println("\n0.-Volver al menú principal");
 			System.out.println("1.-Listado de concesionarios");
 			System.out.println("2.-Crear un concesionario");
 			System.out.println("3.-Modificar un concesionario");
@@ -115,10 +115,41 @@ public class Principal {
 	/**
 	 * 
 	 */
+	public static void menuCliente() {
+		int opcion = 0;
+		do {
+			System.out.println("\n0.-Volver al menú principal");
+			System.out.println("1.-Listado de clientes");
+			System.out.println("2.-Crear un cliente");
+			System.out.println("3.-Modificar un cliente");
+			System.out.println("4.-Eliminar un cliente");
+			opcion = sc.nextInt();
+			switch (opcion) {
+			case 0:
+				break;
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			case 4:
+				break;
+			default:
+				System.out.println("Opcion no valida");
+				break;
+			}
+
+		} while (opcion != 0);
+	}
+
+	/**
+	 * 
+	 */
 	public static void menuCoches() {
 		int opcion = 0;
 		do {
-			System.out.println("\n0.-Salir");
+			System.out.println("\n0.-Volver al menú principal");
 			System.out.println("1.-Listado de coche");
 			System.out.println("2.-Crear un coche");
 			System.out.println("3.-Modificar un coche");
