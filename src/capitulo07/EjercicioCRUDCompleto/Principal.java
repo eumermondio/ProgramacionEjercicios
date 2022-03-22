@@ -28,7 +28,7 @@ public class Principal {
 
 				break;
 			case 4:
-
+				menuConcesionario();
 				break;
 			case 5:
 
@@ -68,6 +68,41 @@ public class Principal {
 				break;
 			case 4:
 				GestionFabricante.borrarFabricantes();
+				break;
+			default:
+				System.out.println("Opcion no valida");
+				break;
+			}
+
+		} while (opcion != 0);
+	}
+
+	/**
+	 * 
+	 */
+	public static void menuConcesionario() {
+		int opcion = 0;
+		do {
+			System.out.println("\n0.-Salir");
+			System.out.println("1.-Listado de concesionarios");
+			System.out.println("2.-Crear un concesionario");
+			System.out.println("3.-Modificar un concesionario");
+			System.out.println("4.-Eliminar un concesionario");
+			opcion = sc.nextInt();
+			switch (opcion) {
+			case 0:
+				break;
+			case 1:
+				GestionConcesionario.listarConcesionario();
+				break;
+			case 2:
+				GestionConcesionario.crearConcesionario();
+				break;
+			case 3:
+				GestionConcesionario.actualizarConcesionario();
+				break;
+			case 4:
+				GestionConcesionario.borrarConcesionario();
 				break;
 			default:
 				System.out.println("Opcion no valida");
