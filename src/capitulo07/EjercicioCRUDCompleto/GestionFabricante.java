@@ -16,42 +16,6 @@ public class GestionFabricante extends SupertipoGestion {
 
 	/**
 	 * 
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		int opcion = 0;
-		do {
-			System.out.println("\n0.-Salir");
-			System.out.println("1.-Listado de fabricantes");
-			System.out.println("2.-Crear un fabricante");
-			System.out.println("3.-Modificar un fabricante");
-			System.out.println("4.-Eliminar un fabricante");
-			opcion = sc.nextInt();
-			switch (opcion) {
-			case 0:
-				break;
-			case 1:
-				listarFabricantes();
-				break;
-			case 2:
-				crearFabricantes();
-				break;
-			case 3:
-				actualizarFabricantes();
-				break;
-			case 4:
-				borrarFabricantes();
-				break;
-			default:
-				System.out.println("Opcion no valida");
-				break;
-			}
-
-		} while (opcion != 0);
-	}
-
-	/**
-	 * 
 	 */
 	public static void borrarFabricantes() {
 		System.out.println("\n");

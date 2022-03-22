@@ -11,7 +11,9 @@ import java.util.Scanner;
 
 import javax.xml.crypto.Data;
 
-public class Principal {
+import capitulo07.EjercicioCRUDCompleto.SupertipoGestion;
+
+public class GestionCoche extends SupertipoGestion{
 	static Scanner sc = new Scanner(System.in);
 
 	/**
