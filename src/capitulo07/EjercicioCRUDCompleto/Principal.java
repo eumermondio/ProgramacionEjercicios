@@ -128,12 +128,16 @@ public class Principal {
 			case 0:
 				break;
 			case 1:
+				GestionCliente.listarClientes();
 				break;
 			case 2:
+				GestionCliente.crearClientes();
 				break;
 			case 3:
+				GestionCliente.actualizarClientes();
 				break;
 			case 4:
+				GestionCliente.borrarClientes();
 				break;
 			default:
 				System.out.println("Opcion no valida");
