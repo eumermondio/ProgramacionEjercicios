@@ -80,6 +80,41 @@ public class Principal {
 	/**
 	 * 
 	 */
+	public static void menuVentas() {
+		int opcion = 0;
+		do {
+			System.out.println("\n0.-Volver al menú principal");
+			System.out.println("1.-Listado de ventas");
+			System.out.println("2.-Crear una venta");
+			System.out.println("3.-Modificar una venta");
+			System.out.println("4.-Eliminar una venta");
+			opcion = sc.nextInt();
+			switch (opcion) {
+			case 0:
+				break;
+			case 1:
+				GestionVenta.listarVentas();
+				break;
+			case 2:
+				GestionVenta.crearVentas();
+				break;
+			case 3:
+				GestionVenta.actualizarVentas();
+				break;
+			case 4:
+				GestionVenta.borrarVentas();
+				break;
+			default:
+				System.out.println("Opcion no valida");
+				break;
+			}
+
+		} while (opcion != 0);
+	}
+
+	/**
+	 * 
+	 */
 	public static void menuConcesionario() {
 		int opcion = 0;
 		do {
