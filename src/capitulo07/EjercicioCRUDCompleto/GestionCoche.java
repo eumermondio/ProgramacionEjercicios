@@ -114,13 +114,13 @@ public class GestionCoche {
 			rs.next();
 			id = rs.getInt(1);
 
-			ResultSet rs2 = s2.executeQuery("select * from coche");
+			ResultSet rs2 = s2.executeQuery("select * from fabricante");
 
 			while (rs2.next()) {
 				System.out.println(rs2.getInt(1) + "\t" + rs2.getString(2) + "\t" + rs2.getString(3));
 			}
 
-			System.out.println("Dime el id del coche: ");
+			System.out.println("Dime el id del fabricante: ");
 			idFab = sc.nextInt();
 			rowAffected = s.executeUpdate("insert into coche values(" + (id + 1) + "," + idFab + "," + "'" + bastidor
 					+ "'" + "," + "'" + modelo + "'" + "," + "'" + color + "'" + ");");

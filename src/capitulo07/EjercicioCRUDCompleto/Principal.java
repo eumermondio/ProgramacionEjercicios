@@ -31,7 +31,7 @@ public class Principal {
 				menuConcesionario();
 				break;
 			case 5:
-
+				menuVentas();
 				break;
 			default:
 				System.out.println("Opcion no valida");
