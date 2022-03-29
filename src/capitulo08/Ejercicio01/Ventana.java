@@ -21,6 +21,8 @@ import java.util.Date;
 import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
@@ -28,13 +30,13 @@ import java.awt.FlowLayout;
 public class Ventana {
 
 	private JFrame frame;
-	private JTextField jtfId;
+	private static JTextField jtfId;
 	private JLabel lblGestionDeFabricantes;
 	private JLabel lblNewLabel;
 	private JLabel lblCif;
 	private JLabel lblNombre;
-	private JTextField jtfCif;
-	private JTextField jtfNombre;
+	private static JTextField jtfCif;
+	private static JTextField jtfNombre;
 	private JPanel panel;
 	private JButton button;
 	private JButton button_1;
@@ -200,9 +202,28 @@ public class Ventana {
 		panel.add(btnNuevo);
 
 		btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actualizarFabricantes();
+			}
+		});
 		panel.add(btnGuardar);
 
+		listarPrimerFabricante();
+
 		btnBorrar = new JButton("Borrar");
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Dialogo dialog = new Dialogo();
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+			}
+
+		});
 		panel.add(btnBorrar);
 	}
 
@@ -219,6 +240,23 @@ public class Ventana {
 				jtfCif.setText(rs.getString(2));
 				jtfNombre.setText(rs.getString(3));
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * 
+	 */
+	public void actualizarFabricantes() {
+		int id = 0;
+		int rowAffected;
+		try {
+			Connection con = ConnectionManager.getConexion();
+			Statement s = con.createStatement();
+			rowAffected = s.executeUpdate("update fabricante set nombre = " + "'" + jtfNombre.getText() + "'" + ","
+					+ "cif = " + "'" + jtfCif.getText() + "'" + " where id = " + jtfId.getText() + ";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -286,6 +324,25 @@ public class Ventana {
 
 	}
 
+	public static void borrarFabricante() {
+		String id = "";
+		int rowAffected;
+		try {
+			Connection con = ConnectionManager.getConexion();
+			Statement s = con.createStatement();
+			id = jtfId.getText();
+			rowAffected = s.executeUpdate("delete from fabricante where id = " + id + ";");
+			ResultSet rs = s.executeQuery("select * from fabricante order by id limit 1");
+			if (rs.next()) {
+				jtfId.setText(rs.getString(1));
+				jtfCif.setText(rs.getString(2));
+				jtfNombre.setText(rs.getString(3));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	/**
 	 * 
 	 */
@@ -307,6 +364,7 @@ public class Ventana {
 			Statement s2 = con.createStatement();
 			rowAffected = s.executeUpdate(
 					"insert into fabricante values(" + id + "," + "'" + cif + "'" + "," + "'" + nombre + "'" + ");");
+			listarUltimoFabricante();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
