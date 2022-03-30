@@ -447,7 +447,7 @@ public class Ventana {
 			}
 			rowAffected = s.executeUpdate("delete from fabricante where id = " + id + ";");
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "No se pudo borrar el registro", "Gestion de fabricantes", 0);
 		}
 	}
 
