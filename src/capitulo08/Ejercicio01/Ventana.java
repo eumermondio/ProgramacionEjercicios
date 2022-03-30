@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
@@ -20,6 +22,8 @@ import java.util.Date;
 
 import javax.swing.JPanel;
 import java.awt.Color;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 
@@ -29,7 +33,7 @@ import java.awt.FlowLayout;
 
 public class Ventana {
 
-	private JFrame frame;
+	private JFrame frmVentasDeCoches;
 	private static JTextField jtfId;
 	private JLabel lblGestionDeFabricantes;
 	private JLabel lblNewLabel;
@@ -54,7 +58,7 @@ public class Ventana {
 			public void run() {
 				try {
 					Ventana window = new Ventana();
-					window.frame.setVisible(true);
+					window.frmVentasDeCoches.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -73,15 +77,16 @@ public class Ventana {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 499, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmVentasDeCoches = new JFrame();
+		frmVentasDeCoches.setTitle("Cristian");
+		frmVentasDeCoches.setBounds(100, 100, 499, 300);
+		frmVentasDeCoches.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		frame.getContentPane().setLayout(gridBagLayout);
+		frmVentasDeCoches.getContentPane().setLayout(gridBagLayout);
 
 		lblGestionDeFabricantes = new JLabel("GESTION DE FABRICANTES");
 		GridBagConstraints gbc_lblGestionDeFabricantes = new GridBagConstraints();
@@ -89,7 +94,7 @@ public class Ventana {
 		gbc_lblGestionDeFabricantes.insets = new Insets(0, 0, 5, 5);
 		gbc_lblGestionDeFabricantes.gridx = 0;
 		gbc_lblGestionDeFabricantes.gridy = 0;
-		frame.getContentPane().add(lblGestionDeFabricantes, gbc_lblGestionDeFabricantes);
+		frmVentasDeCoches.getContentPane().add(lblGestionDeFabricantes, gbc_lblGestionDeFabricantes);
 
 		JLabel lblId = new JLabel("Id:");
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
@@ -97,7 +102,7 @@ public class Ventana {
 		gbc_lblId.anchor = GridBagConstraints.EAST;
 		gbc_lblId.gridx = 0;
 		gbc_lblId.gridy = 1;
-		frame.getContentPane().add(lblId, gbc_lblId);
+		frmVentasDeCoches.getContentPane().add(lblId, gbc_lblId);
 
 		jtfId = new JTextField();
 		jtfId.setEnabled(false);
@@ -106,7 +111,7 @@ public class Ventana {
 		gbc_jtfId.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfId.gridx = 1;
 		gbc_jtfId.gridy = 1;
-		frame.getContentPane().add(jtfId, gbc_jtfId);
+		frmVentasDeCoches.getContentPane().add(jtfId, gbc_jtfId);
 		jtfId.setColumns(10);
 
 		lblNewLabel = new JLabel("      ");
@@ -114,7 +119,7 @@ public class Ventana {
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel.gridx = 2;
 		gbc_lblNewLabel.gridy = 0;
-		frame.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+		frmVentasDeCoches.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 
 		lblCif = new JLabel("Cif:");
 		GridBagConstraints gbc_lblCif = new GridBagConstraints();
@@ -122,7 +127,7 @@ public class Ventana {
 		gbc_lblCif.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCif.gridx = 0;
 		gbc_lblCif.gridy = 2;
-		frame.getContentPane().add(lblCif, gbc_lblCif);
+		frmVentasDeCoches.getContentPane().add(lblCif, gbc_lblCif);
 
 		jtfCif = new JTextField();
 		GridBagConstraints gbc_jtfCif = new GridBagConstraints();
@@ -130,7 +135,7 @@ public class Ventana {
 		gbc_jtfCif.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfCif.gridx = 1;
 		gbc_jtfCif.gridy = 2;
-		frame.getContentPane().add(jtfCif, gbc_jtfCif);
+		frmVentasDeCoches.getContentPane().add(jtfCif, gbc_jtfCif);
 		jtfCif.setColumns(10);
 
 		lblNombre = new JLabel("Nombre:");
@@ -139,7 +144,7 @@ public class Ventana {
 		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNombre.gridx = 0;
 		gbc_lblNombre.gridy = 3;
-		frame.getContentPane().add(lblNombre, gbc_lblNombre);
+		frmVentasDeCoches.getContentPane().add(lblNombre, gbc_lblNombre);
 
 		jtfNombre = new JTextField();
 		GridBagConstraints gbc_jtfNombre = new GridBagConstraints();
@@ -147,7 +152,7 @@ public class Ventana {
 		gbc_jtfNombre.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfNombre.gridx = 1;
 		gbc_jtfNombre.gridy = 3;
-		frame.getContentPane().add(jtfNombre, gbc_jtfNombre);
+		frmVentasDeCoches.getContentPane().add(jtfNombre, gbc_jtfNombre);
 		jtfNombre.setColumns(10);
 
 		panel = new JPanel();
@@ -158,9 +163,10 @@ public class Ventana {
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 4;
-		frame.getContentPane().add(panel, gbc_panel);
+		frmVentasDeCoches.getContentPane().add(panel, gbc_panel);
 
 		button_1 = new JButton("<");
+		button_1.setToolTipText("Cargar anterior fabricante");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listarAnteriorFabricante();
@@ -169,6 +175,7 @@ public class Ventana {
 		});
 
 		button = new JButton("<<");
+		button.setToolTipText("Cargar primer fabricante");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listarPrimerFabricante();
@@ -180,6 +187,7 @@ public class Ventana {
 		panel.add(button_1);
 
 		button_2 = new JButton(">");
+		button_2.setToolTipText("Cargar siguiente fabricante");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listarSiguienteFabricante();
@@ -189,6 +197,7 @@ public class Ventana {
 		panel.add(button_2);
 
 		button_3 = new JButton(">>");
+		button_3.setToolTipText("Cargar último fabricante");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listarUltimoFabricante();
@@ -198,17 +207,19 @@ public class Ventana {
 		panel.add(button_3);
 
 		btnNuevo = new JButton("Nuevo");
+		btnNuevo.setToolTipText("Crear nuevo fabricante");
 		btnNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				nuevoFabricante();
 			}
 		});
 		panel.add(btnNuevo);
-
 		btnGuardar = new JButton("Guardar");
+		btnGuardar.setToolTipText("Guardar nuevo fabricante o actualizar fabricante");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actualizarFabricantes();
+				listarUltimoFabricante();
 			}
 		});
 		listarPrimerFabricante();
@@ -216,6 +227,7 @@ public class Ventana {
 		panel.add(btnGuardar);
 
 		btnBorrar = new JButton("Borrar");
+		btnBorrar.setToolTipText("Eliminar fabricante");
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -304,12 +316,27 @@ public class Ventana {
 			if (jtfId.getText().equalsIgnoreCase("0")) {
 				rowAffected = s.executeUpdate("insert into fabricante values(" + id + "," + "'" + jtfCif.getText() + "'"
 						+ "," + "'" + jtfNombre.getText() + "'" + ");");
+				if (rowAffected >= 1) {
+					ImageIcon icono = new ImageIcon("./src/capitulo08/Ejercicio01/res/check.png");
+					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de fabricantes",
+							JOptionPane.INFORMATION_MESSAGE, icono);
+				} else {
+					JOptionPane.showMessageDialog(null, "Actualización o inserción incorrecta",
+							"Gestion de fabricantes", 2);
+				}
 			} else {
 				// si entra en este else quiere decir k voy a actualizar
 				rowAffected = s.executeUpdate("update fabricante set nombre = " + "'" + jtfNombre.getText() + "'" + ","
 						+ "cif = " + "'" + jtfCif.getText() + "'" + " where id = " + jtfId.getText() + ";");
+				if (rowAffected >= 1) {
+					ImageIcon icono = new ImageIcon("./src/capitulo08/Ejercicio01/res/check.png");
+					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de fabricantes",
+							JOptionPane.INFORMATION_MESSAGE, icono);
+				} else {
+					JOptionPane.showMessageDialog(null, "Actualización o inserción incorrecta",
+							"Gestion de fabricantes", 2);
+				}
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
