@@ -164,6 +164,7 @@ public class Ventana {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listarAnteriorFabricante();
+				comprobarEstadoBotones();
 			}
 		});
 
@@ -171,6 +172,7 @@ public class Ventana {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listarPrimerFabricante();
+				comprobarEstadoBotones();
 			}
 		});
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -181,6 +183,7 @@ public class Ventana {
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listarSiguienteFabricante();
+				comprobarEstadoBotones();
 			}
 		});
 		panel.add(button_2);
@@ -189,6 +192,7 @@ public class Ventana {
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listarUltimoFabricante();
+				comprobarEstadoBotones();
 			}
 		});
 		panel.add(button_3);
@@ -207,9 +211,9 @@ public class Ventana {
 				actualizarFabricantes();
 			}
 		});
-		panel.add(btnGuardar);
-
 		listarPrimerFabricante();
+		comprobarEstadoBotones();
+		panel.add(btnGuardar);
 
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.addActionListener(new ActionListener() {
@@ -249,18 +253,66 @@ public class Ventana {
 	/**
 	 * 
 	 */
-	public void actualizarFabricantes() {
-		int id = 0;
-		int rowAffected;
+	public void comprobarEstadoBotones() {
 		try {
 			Connection con = ConnectionManager.getConexion();
 			Statement s = con.createStatement();
-			rowAffected = s.executeUpdate("update fabricante set nombre = " + "'" + jtfNombre.getText() + "'" + ","
-					+ "cif = " + "'" + jtfCif.getText() + "'" + " where id = " + jtfId.getText() + ";");
+			ResultSet rs = s.executeQuery("select id from fabricante order by id limit 1");
+			// Menor id
+			if (rs.next()) {
+				if (jtfId.getText().equalsIgnoreCase(rs.getString(1))) {
+					button.setEnabled(false);
+					button_1.setEnabled(false);
+				} else {
+					button.setEnabled(true);
+					button_1.setEnabled(true);
+				}
+			}
+			ResultSet rs2 = s.executeQuery("select id from fabricante order by id desc limit 1");
+			// Mayor id
+			if (rs2.next()) {
+				if (jtfId.getText().equalsIgnoreCase(rs2.getString(1))) {
+					button_2.setEnabled(false);
+					button_3.setEnabled(false);
+				} else {
+					button_2.setEnabled(true);
+					button_3.setEnabled(true);
+				}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
+	}
+
+	/**
+	 * 
+	 */
+	public void actualizarFabricantes() {
+		int rowAffected;
+		int id = 0;
+		try {
+			Connection con = ConnectionManager.getConexion();
+			Statement s = con.createStatement();
+			// ResultSet rs = s.executeQuery("select id from fabricante order by id limit
+			// 1");
+			ResultSet rs = s.executeQuery("select max(id) from fabricante;");
+			if (rs.next()) {
+				id = (rs.getInt(1) + 1);
+			}
+			// si entra en este if quiere decir k voy a insertar
+			if (jtfId.getText().equalsIgnoreCase("0")) {
+				rowAffected = s.executeUpdate("insert into fabricante values(" + id + "," + "'" + jtfCif.getText() + "'"
+						+ "," + "'" + jtfNombre.getText() + "'" + ");");
+			} else {
+				// si entra en este else quiere decir k voy a actualizar
+				rowAffected = s.executeUpdate("update fabricante set nombre = " + "'" + jtfNombre.getText() + "'" + ","
+						+ "cif = " + "'" + jtfCif.getText() + "'" + " where id = " + jtfId.getText() + ";");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -331,13 +383,42 @@ public class Ventana {
 			Connection con = ConnectionManager.getConexion();
 			Statement s = con.createStatement();
 			id = jtfId.getText();
-			rowAffected = s.executeUpdate("delete from fabricante where id = " + id + ";");
-			ResultSet rs = s.executeQuery("select * from fabricante order by id limit 1");
+
+			ResultSet rs = s.executeQuery("select id from fabricante order by id limit 1");
+			// Menor id
 			if (rs.next()) {
-				jtfId.setText(rs.getString(1));
-				jtfCif.setText(rs.getString(2));
-				jtfNombre.setText(rs.getString(3));
+				if (jtfId.getText().equalsIgnoreCase(rs.getString(1))) {
+					ResultSet rs3 = s
+							.executeQuery("select * from fabricante where id > " + id + " order by id asc limit 1");
+					if (rs3.next()) {
+						jtfId.setText(rs3.getString(1));
+						jtfCif.setText(rs3.getString(2));
+						jtfNombre.setText(rs3.getString(3));
+					}
+				}
+			} else {
+				jtfId.setText("0");
+				jtfCif.setText("");
+				jtfNombre.setText("");
 			}
+			ResultSet rs2 = s.executeQuery("select id from fabricante order by id desc limit 1");
+			// Mayor id
+			if (rs2.next()) {
+				if (jtfId.getText().equalsIgnoreCase(rs2.getString(1))) {
+					ResultSet rs4 = s
+							.executeQuery("select * from fabricante where id < " + id + " order by id desc limit 1");
+					if (rs4.next()) {
+						jtfId.setText(rs4.getString(1));
+						jtfCif.setText(rs4.getString(2));
+						jtfNombre.setText(rs4.getString(3));
+					}
+				}
+			} else {
+				jtfId.setText("0");
+				jtfCif.setText("");
+				jtfNombre.setText("");
+			}
+			rowAffected = s.executeUpdate("delete from fabricante where id = " + id + ";");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -347,27 +428,9 @@ public class Ventana {
 	 * 
 	 */
 	public void nuevoFabricante() {
-		int id = 0;
-		int rowAffected;
-		String cif = "", nombre = "";
-
-		cif = jtfCif.getText();
-		nombre = jtfNombre.getText();
-		try {
-			Connection con = ConnectionManager.getConexion();
-			Statement s;
-			s = con.createStatement();
-			ResultSet rs = s.executeQuery("select max(id) from fabricante;");
-			if (rs.next()) {
-				id = (rs.getInt(1) + 1);
-			}
-			Statement s2 = con.createStatement();
-			rowAffected = s.executeUpdate(
-					"insert into fabricante values(" + id + "," + "'" + cif + "'" + "," + "'" + nombre + "'" + ");");
-			listarUltimoFabricante();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		jtfId.setText("0");
+		jtfCif.setText("");
+		jtfNombre.setText("");
 
 	}
 }
