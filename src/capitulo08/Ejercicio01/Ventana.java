@@ -18,7 +18,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -30,6 +32,9 @@ import javax.swing.JDialog;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
+import javax.swing.JSlider;
+import javax.swing.JTree;
+import javax.swing.JSeparator;
 
 public class Ventana {
 
