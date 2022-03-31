@@ -77,7 +77,7 @@ public class Dialogo extends JDialog {
 					JButton okButton = new JButton("OK");
 					okButton.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							Ventana.borrarFabricante();
+							GestionFabricante.borrarFabricante();
 							dispose();
 						}
 					});

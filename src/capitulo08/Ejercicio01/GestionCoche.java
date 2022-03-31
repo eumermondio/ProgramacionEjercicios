@@ -1,8 +1,5 @@
 package capitulo08.Ejercicio01;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -15,12 +12,9 @@ import capitulo07.EjercicioCRUDCompleto.ConnectionManager;
 import java.awt.Insets;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -32,18 +26,15 @@ import javax.swing.JDialog;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
-import javax.swing.JSlider;
-import javax.swing.JTree;
-import javax.swing.JSeparator;
+import javax.swing.JProgressBar;
 
-public class Ventana {
+public class GestionCoche extends JPanel {
 
-	private JFrame frmVentasDeCoches;
 	private static JTextField jtfId;
 	private JLabel lblGestionDeFabricantes;
 	private JLabel lblNewLabel;
-	private JLabel lblCif;
-	private JLabel lblNombre;
+	private JLabel lblFabricante;
+	private JLabel lblBastidor;
 	private static JTextField jtfCif;
 	private static JTextField jtfNombre;
 	private JPanel panel;
@@ -55,51 +46,36 @@ public class Ventana {
 	private JButton btnGuardar;
 	private JButton btnBorrar;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Ventana window = new Ventana();
-					window.frmVentasDeCoches.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	// Variable que actúa como Singleton
+	private static GestionCoche instance = null;
+	private JLabel lblModelo;
+	private JTextField jtfModelo;
+	private JLabel lblColor;
+	private JTextField jtfColor;
+
+	// Método que devuelve el singleton
+	public static GestionCoche getInstance() {
+		if (instance == null) {
+			instance = new GestionCoche();
+		}
+		return instance;
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public Ventana() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmVentasDeCoches = new JFrame();
-		frmVentasDeCoches.setTitle("Cristian");
-		frmVentasDeCoches.setBounds(100, 100, 499, 300);
-		frmVentasDeCoches.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public GestionCoche() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
-		frmVentasDeCoches.getContentPane().setLayout(gridBagLayout);
+		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		this.setLayout(gridBagLayout);
 
-		lblGestionDeFabricantes = new JLabel("GESTION DE FABRICANTES");
+		lblGestionDeFabricantes = new JLabel("GESTION DE COCHES");
 		GridBagConstraints gbc_lblGestionDeFabricantes = new GridBagConstraints();
 		gbc_lblGestionDeFabricantes.gridwidth = 2;
 		gbc_lblGestionDeFabricantes.insets = new Insets(0, 0, 5, 5);
 		gbc_lblGestionDeFabricantes.gridx = 0;
 		gbc_lblGestionDeFabricantes.gridy = 0;
-		frmVentasDeCoches.getContentPane().add(lblGestionDeFabricantes, gbc_lblGestionDeFabricantes);
+		this.add(lblGestionDeFabricantes, gbc_lblGestionDeFabricantes);
 
 		JLabel lblId = new JLabel("Id:");
 		GridBagConstraints gbc_lblId = new GridBagConstraints();
@@ -107,7 +83,7 @@ public class Ventana {
 		gbc_lblId.anchor = GridBagConstraints.EAST;
 		gbc_lblId.gridx = 0;
 		gbc_lblId.gridy = 1;
-		frmVentasDeCoches.getContentPane().add(lblId, gbc_lblId);
+		this.add(lblId, gbc_lblId);
 
 		jtfId = new JTextField();
 		jtfId.setEnabled(false);
@@ -116,59 +92,93 @@ public class Ventana {
 		gbc_jtfId.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfId.gridx = 1;
 		gbc_jtfId.gridy = 1;
-		frmVentasDeCoches.getContentPane().add(jtfId, gbc_jtfId);
+		this.add(jtfId, gbc_jtfId);
 		jtfId.setColumns(10);
 
 		lblNewLabel = new JLabel("      ");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel.gridx = 2;
+		gbc_lblNewLabel.gridx = 4;
 		gbc_lblNewLabel.gridy = 0;
-		frmVentasDeCoches.getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+		this.add(lblNewLabel, gbc_lblNewLabel);
 
-		lblCif = new JLabel("Cif:");
-		GridBagConstraints gbc_lblCif = new GridBagConstraints();
-		gbc_lblCif.anchor = GridBagConstraints.EAST;
-		gbc_lblCif.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCif.gridx = 0;
-		gbc_lblCif.gridy = 2;
-		frmVentasDeCoches.getContentPane().add(lblCif, gbc_lblCif);
+		lblFabricante = new JLabel("Fabricante:");
+		GridBagConstraints gbc_lblFabricante = new GridBagConstraints();
+		gbc_lblFabricante.anchor = GridBagConstraints.EAST;
+		gbc_lblFabricante.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFabricante.gridx = 0;
+		gbc_lblFabricante.gridy = 2;
+		this.add(lblFabricante, gbc_lblFabricante);
 
 		jtfCif = new JTextField();
 		GridBagConstraints gbc_jtfCif = new GridBagConstraints();
-		gbc_jtfCif.insets = new Insets(0, 0, 5, 5);
+		gbc_jtfCif.insets = new Insets(5, 0, 5, 5);
 		gbc_jtfCif.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfCif.gridx = 1;
 		gbc_jtfCif.gridy = 2;
-		frmVentasDeCoches.getContentPane().add(jtfCif, gbc_jtfCif);
+		this.add(jtfCif, gbc_jtfCif);
 		jtfCif.setColumns(10);
 
-		lblNombre = new JLabel("Nombre:");
-		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
-		gbc_lblNombre.anchor = GridBagConstraints.EAST;
-		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNombre.gridx = 0;
-		gbc_lblNombre.gridy = 3;
-		frmVentasDeCoches.getContentPane().add(lblNombre, gbc_lblNombre);
+		lblBastidor = new JLabel("Bastidor:");
+		GridBagConstraints gbc_lblBastidor = new GridBagConstraints();
+		gbc_lblBastidor.anchor = GridBagConstraints.EAST;
+		gbc_lblBastidor.insets = new Insets(0, 0, 5, 5);
+		gbc_lblBastidor.gridx = 0;
+		gbc_lblBastidor.gridy = 3;
+		this.add(lblBastidor, gbc_lblBastidor);
 
 		jtfNombre = new JTextField();
 		GridBagConstraints gbc_jtfNombre = new GridBagConstraints();
-		gbc_jtfNombre.insets = new Insets(0, 0, 5, 5);
+		gbc_jtfNombre.insets = new Insets(5, 0, 5, 5);
 		gbc_jtfNombre.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfNombre.gridx = 1;
 		gbc_jtfNombre.gridy = 3;
-		frmVentasDeCoches.getContentPane().add(jtfNombre, gbc_jtfNombre);
+		this.add(jtfNombre, gbc_jtfNombre);
 		jtfNombre.setColumns(10);
+
+		lblModelo = new JLabel("Modelo:");
+		GridBagConstraints gbc_lblModelo = new GridBagConstraints();
+		gbc_lblModelo.anchor = GridBagConstraints.EAST;
+		gbc_lblModelo.insets = new Insets(0, 0, 5, 5);
+		gbc_lblModelo.gridx = 0;
+		gbc_lblModelo.gridy = 4;
+		add(lblModelo, gbc_lblModelo);
+
+		jtfModelo = new JTextField();
+		GridBagConstraints gbc_jtfModelo = new GridBagConstraints();
+		gbc_jtfModelo.insets = new Insets(5, 0, 5, 5);
+		gbc_jtfModelo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_jtfModelo.gridx = 1;
+		gbc_jtfModelo.gridy = 4;
+		add(jtfModelo, gbc_jtfModelo);
+		jtfModelo.setColumns(10);
+
+		lblColor = new JLabel("Color:");
+		GridBagConstraints gbc_lblColor = new GridBagConstraints();
+		gbc_lblColor.anchor = GridBagConstraints.EAST;
+		gbc_lblColor.insets = new Insets(0, 0, 5, 5);
+		gbc_lblColor.gridx = 0;
+		gbc_lblColor.gridy = 5;
+		add(lblColor, gbc_lblColor);
+		
+		jtfColor = new JTextField();
+		GridBagConstraints gbc_jtfColor = new GridBagConstraints();
+		gbc_jtfColor.insets = new Insets(0, 0, 5, 5);
+		gbc_jtfColor.fill = GridBagConstraints.HORIZONTAL;
+		gbc_jtfColor.gridx = 1;
+		gbc_jtfColor.gridy = 5;
+		add(jtfColor, gbc_jtfColor);
+		jtfColor.setColumns(10);
 
 		panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(5, 0, 0, 0);
-		gbc_panel.gridwidth = 3;
+		gbc_panel.gridwidth = 5;
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 4;
-		frmVentasDeCoches.getContentPane().add(panel, gbc_panel);
+		gbc_panel.gridy = 6;
+		this.add(panel, gbc_panel);
 
 		button_1 = new JButton("<");
 		button_1.setToolTipText("Cargar anterior fabricante");
@@ -311,8 +321,6 @@ public class Ventana {
 		try {
 			Connection con = ConnectionManager.getConexion();
 			Statement s = con.createStatement();
-			// ResultSet rs = s.executeQuery("select id from fabricante order by id limit
-			// 1");
 			ResultSet rs = s.executeQuery("select max(id) from fabricante;");
 			if (rs.next()) {
 				id = (rs.getInt(1) + 1);
@@ -343,7 +351,7 @@ public class Ventana {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Actualización o inserción incorrecta", "Gestion de fabricantes", 2);
 		}
 	}
 
