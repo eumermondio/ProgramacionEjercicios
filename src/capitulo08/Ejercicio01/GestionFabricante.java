@@ -146,8 +146,7 @@ public class GestionFabricante extends JPanel {
 		button_1.setToolTipText("Cargar anterior fabricante");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listarAnteriorFabricante();
-				comprobarEstadoBotones();
+				mostrarFabricante(ControladorFabricante.findAnteriorFabricante(Integer.parseInt(jtfId.getText())));
 			}
 		});
 
@@ -155,8 +154,7 @@ public class GestionFabricante extends JPanel {
 		button.setToolTipText("Cargar primer fabricante");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listarPrimerFabricante();
-				comprobarEstadoBotones();
+				mostrarFabricante(ControladorFabricante.findPrimerFabricante());
 			}
 		});
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -167,8 +165,7 @@ public class GestionFabricante extends JPanel {
 		button_2.setToolTipText("Cargar siguiente fabricante");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listarSiguienteFabricante();
-				comprobarEstadoBotones();
+				mostrarFabricante(ControladorFabricante.findSiguienteFabricante(Integer.parseInt(jtfId.getText())));
 			}
 		});
 		panel.add(button_2);
@@ -177,8 +174,7 @@ public class GestionFabricante extends JPanel {
 		button_3.setToolTipText("Cargar último fabricante");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				listarUltimoFabricante();
-				comprobarEstadoBotones();
+				mostrarFabricante(ControladorFabricante.findUltimoFabricante());
 			}
 		});
 		panel.add(button_3);
@@ -195,234 +191,59 @@ public class GestionFabricante extends JPanel {
 		btnGuardar.setToolTipText("Guardar nuevo fabricante o actualizar fabricante");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				actualizarFabricantes();
-				listarUltimoFabricante();
+				Fabricante f = new Fabricante(Integer.parseInt(jtfId.getText()), jtfCif.getText(), jtfNombre.getText());
+				if (ControladorFabricante.actualizarFabricantes(f) == 1) {
+					ImageIcon icono = new ImageIcon("./src/capitulo08/Ejercicio01/res/check.png");
+					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de fabricantes",
+							JOptionPane.INFORMATION_MESSAGE, icono);
+				}
+				mostrarFabricante(ControladorFabricante.findUltimoFabricante());
 			}
 		});
-		listarPrimerFabricante();
-		comprobarEstadoBotones();
+		mostrarFabricante(ControladorFabricante.findPrimerFabricante());
 		panel.add(btnGuardar);
 
 		btnBorrar = new JButton("Borrar");
 		btnBorrar.setToolTipText("Eliminar fabricante");
 		btnBorrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Dialogo dialog = new Dialogo();
-					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					dialog.setVisible(true);
-				} catch (Exception ex) {
-					ex.printStackTrace();
+				// yes = 0 no = 1
+				if (JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro?", "Gestión de fabricantes",
+						JOptionPane.YES_NO_OPTION) == 0) {
+					if (ControladorFabricante.borrarFabricante(Integer.parseInt(jtfId.getText())) == 1) {
+						ImageIcon icono = new ImageIcon("./src/capitulo08/Ejercicio01/res/check.png");
+						JOptionPane.showMessageDialog(null, "Borrado correcto", "Gestion de fabricantes",
+								JOptionPane.INFORMATION_MESSAGE, icono);
+					}
 				}
 			}
-
 		});
 		panel.add(btnBorrar);
 	}
 
 	/**
 	 * 
+	 * @param f
 	 */
-	public void listarPrimerFabricante() {
-		try {
-			Connection con = ConnectionManager.getConexion();
-			Statement s = con.createStatement();
-			ResultSet rs = s.executeQuery("select * from fabricante order by id limit 1");
-			if (rs.next()) {
-				jtfId.setText(rs.getString(1));
-				jtfCif.setText(rs.getString(2));
-				jtfNombre.setText(rs.getString(3));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public void mostrarFabricante(Fabricante f) {
+		if (f != null) {
+			jtfId.setText("" + f.getId());
+			jtfCif.setText(f.getCif());
+			jtfNombre.setText(f.getNombre());
 		}
-
-	}
-
-	/**
-	 * 
-	 */
-	public void comprobarEstadoBotones() {
-		try {
-			Connection con = ConnectionManager.getConexion();
-			Statement s = con.createStatement();
-			ResultSet rs = s.executeQuery("select id from fabricante order by id limit 1");
-			// Menor id
-			if (rs.next()) {
-				if (jtfId.getText().equalsIgnoreCase(rs.getString(1))) {
-					button.setEnabled(false);
-					button_1.setEnabled(false);
-				} else {
-					button.setEnabled(true);
-					button_1.setEnabled(true);
-				}
-			}
-			ResultSet rs2 = s.executeQuery("select id from fabricante order by id desc limit 1");
-			// Mayor id
-			if (rs2.next()) {
-				if (jtfId.getText().equalsIgnoreCase(rs2.getString(1))) {
-					button_2.setEnabled(false);
-					button_3.setEnabled(false);
-				} else {
-					button_2.setEnabled(true);
-					button_3.setEnabled(true);
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		if (ControladorFabricante.findAnteriorFabricante(Integer.parseInt(jtfId.getText())) == null) {
+			button.setEnabled(false);
+			button_1.setEnabled(false);
+		} else {
+			button.setEnabled(true);
+			button_1.setEnabled(true);
 		}
-
-	}
-
-	/**
-	 * 
-	 */
-	public void actualizarFabricantes() {
-		int rowAffected;
-		int id = 0;
-		try {
-			Connection con = ConnectionManager.getConexion();
-			Statement s = con.createStatement();
-			ResultSet rs = s.executeQuery("select max(id) from fabricante;");
-			if (rs.next()) {
-				id = (rs.getInt(1) + 1);
-			}
-			// si entra en este if quiere decir k voy a insertar
-			if (jtfId.getText().equalsIgnoreCase("0")) {
-				rowAffected = s.executeUpdate("insert into fabricante values(" + id + "," + "'" + jtfCif.getText() + "'"
-						+ "," + "'" + jtfNombre.getText() + "'" + ");");
-				if (rowAffected >= 1) {
-					ImageIcon icono = new ImageIcon("./src/capitulo08/Ejercicio01/res/check.png");
-					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de fabricantes",
-							JOptionPane.INFORMATION_MESSAGE, icono);
-				} else {
-					JOptionPane.showMessageDialog(null, "Actualización o inserción incorrecta",
-							"Gestion de fabricantes", 2);
-				}
-			} else {
-				// si entra en este else quiere decir k voy a actualizar
-				rowAffected = s.executeUpdate("update fabricante set nombre = " + "'" + jtfNombre.getText() + "'" + ","
-						+ "cif = " + "'" + jtfCif.getText() + "'" + " where id = " + jtfId.getText() + ";");
-				if (rowAffected >= 1) {
-					ImageIcon icono = new ImageIcon("./src/capitulo08/Ejercicio01/res/check.png");
-					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de fabricantes",
-							JOptionPane.INFORMATION_MESSAGE, icono);
-				} else {
-					JOptionPane.showMessageDialog(null, "Actualización o inserción incorrecta",
-							"Gestion de fabricantes", 2);
-				}
-			}
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Actualización o inserción incorrecta", "Gestion de fabricantes", 2);
-		}
-	}
-
-	/**
-	 * 
-	 */
-	public void listarUltimoFabricante() {
-		try {
-			Connection con = ConnectionManager.getConexion();
-			Statement s = con.createStatement();
-			ResultSet rs = s.executeQuery("select * from fabricante order by id desc limit 1");
-			if (rs.next()) {
-				jtfId.setText(rs.getString(1));
-				jtfCif.setText(rs.getString(2));
-				jtfNombre.setText(rs.getString(3));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	/**
-	 * 
-	 */
-	public void listarSiguienteFabricante() {
-		String id = "";
-		id = jtfId.getText();
-		try {
-			Connection con = ConnectionManager.getConexion();
-			Statement s = con.createStatement();
-			ResultSet rs = s.executeQuery("select * from fabricante where id > " + id + " order by id asc limit 1");
-			if (rs.next()) {
-				jtfId.setText(rs.getString(1));
-				jtfCif.setText(rs.getString(2));
-				jtfNombre.setText(rs.getString(3));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	/**
-	 * 
-	 */
-	public void listarAnteriorFabricante() {
-		String id = "";
-		id = jtfId.getText();
-		try {
-			Connection con = ConnectionManager.getConexion();
-			Statement s = con.createStatement();
-			ResultSet rs = s.executeQuery("select * from fabricante where id < " + id + " order by id desc limit 1");
-			if (rs.next()) {
-				jtfId.setText(rs.getString(1));
-				jtfCif.setText(rs.getString(2));
-				jtfNombre.setText(rs.getString(3));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public static void borrarFabricante() {
-		String id = "";
-		int rowAffected;
-		try {
-			Connection con = ConnectionManager.getConexion();
-			Statement s = con.createStatement();
-			id = jtfId.getText();
-
-			ResultSet rs = s.executeQuery("select id from fabricante order by id limit 1");
-			// Menor id
-			if (rs.next()) {
-				if (jtfId.getText().equalsIgnoreCase(rs.getString(1))) {
-					ResultSet rs3 = s
-							.executeQuery("select * from fabricante where id > " + id + " order by id asc limit 1");
-					if (rs3.next()) {
-						jtfId.setText(rs3.getString(1));
-						jtfCif.setText(rs3.getString(2));
-						jtfNombre.setText(rs3.getString(3));
-					}
-				}
-			} else {
-				jtfId.setText("0");
-				jtfCif.setText("");
-				jtfNombre.setText("");
-			}
-			ResultSet rs2 = s.executeQuery("select id from fabricante order by id desc limit 1");
-			// Mayor id
-			if (rs2.next()) {
-				if (jtfId.getText().equalsIgnoreCase(rs2.getString(1))) {
-					ResultSet rs4 = s
-							.executeQuery("select * from fabricante where id < " + id + " order by id desc limit 1");
-					if (rs4.next()) {
-						jtfId.setText(rs4.getString(1));
-						jtfCif.setText(rs4.getString(2));
-						jtfNombre.setText(rs4.getString(3));
-					}
-				}
-			} else {
-				jtfId.setText("0");
-				jtfCif.setText("");
-				jtfNombre.setText("");
-			}
-			rowAffected = s.executeUpdate("delete from fabricante where id = " + id + ";");
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "No se pudo borrar el registro", "Gestion de fabricantes", 0);
+		if (ControladorFabricante.findSiguienteFabricante(Integer.parseInt(jtfId.getText())) == null) {
+			button_2.setEnabled(false);
+			button_3.setEnabled(false);
+		} else {
+			button_2.setEnabled(true);
+			button_3.setEnabled(true);
 		}
 	}
 

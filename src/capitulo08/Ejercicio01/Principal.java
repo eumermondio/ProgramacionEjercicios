@@ -13,7 +13,7 @@ public class Principal {
 		ventana.getContentPane().add(Tabs.getPanelesTabulados(), BorderLayout.CENTER);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		ventana.setBounds(0, 0, 850, 600);
+		ventana.setBounds(0, 0, 999, 600);
 		ventana.setVisible(true);
 
 	}
