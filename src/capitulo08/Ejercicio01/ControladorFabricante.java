@@ -127,7 +127,7 @@ public class ControladorFabricante {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null,
 					"Actualización o inserción incorrecta, código de error: " + e.getErrorCode(),
-					"Gestion de fabricantes", 2);
+					"Gestion de fabricantes", 0);
 		}
 		return rowAffected;
 	}

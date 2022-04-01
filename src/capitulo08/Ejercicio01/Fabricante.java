@@ -64,4 +64,9 @@ public class Fabricante {
 		this.nombre = nombre;
 	}
 
+	@Override
+	public String toString() {
+		return cif + " - " + nombre;
+	}
+
 }
