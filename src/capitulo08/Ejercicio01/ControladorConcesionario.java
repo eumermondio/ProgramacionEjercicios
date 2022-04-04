@@ -134,7 +134,7 @@ public class ControladorConcesionario {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null,
 					"Actualización o inserción incorrecta, código de error: " + e.getErrorCode(),
-					"Gestion de fabricantes", 0);
+					"Gestion de concesionarios", 0);
 		}
 		return rowAffected;
 	}
