@@ -22,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.JComboBox;
+import javax.swing.JToggleButton;
 
 public class GestionCoche extends JPanel {
 
@@ -48,8 +49,8 @@ public class GestionCoche extends JPanel {
 	private JLabel lblColor;
 	private JTextField jtfColor;
 	private JComboBox<Fabricante> comboBox;
-	private JButton btnNewButton;
 	private JButton btnNewButton_1;
+	private JToggleButton tglbtnNewToggleButton;
 
 	// Método que devuelve el singleton
 	public static GestionCoche getInstance() {
@@ -196,6 +197,7 @@ public class GestionCoche extends JPanel {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarCoche(ControladorCoche.findAnteriorCoche(Integer.parseInt(jtfId.getText())));
+				button_1.setFocusPainted(false);
 			}
 		});
 
@@ -204,6 +206,7 @@ public class GestionCoche extends JPanel {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarCoche(ControladorCoche.findPrimerCoche());
+				button.setFocusPainted(false);
 			}
 		});
 		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -215,6 +218,7 @@ public class GestionCoche extends JPanel {
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarCoche(ControladorCoche.findSiguienteCoche(Integer.parseInt(jtfId.getText())));
+				button_2.setFocusPainted(false);
 			}
 		});
 		panel.add(button_2);
@@ -224,6 +228,7 @@ public class GestionCoche extends JPanel {
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mostrarCoche(ControladorCoche.findUltimoCoche());
+				button_3.setFocusPainted(false);
 			}
 		});
 		panel.add(button_3);
@@ -235,6 +240,7 @@ public class GestionCoche extends JPanel {
 				nuevoCoche();
 				jtfFabricante.setEnabled(false);
 				comboBox.setEnabled(true);
+				btnNuevo.setFocusPainted(false);
 			}
 		});
 		panel.add(btnNuevo);
@@ -242,14 +248,16 @@ public class GestionCoche extends JPanel {
 		btnGuardar.setToolTipText("Guardar nuevo coche o actualizar coche");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Coche c = new Coche(Integer.parseInt(jtfId.getText()), ((Fabricante)comboBox.getSelectedItem()).getId(),
-						jtfBastidor.getText(), jtfModelo.getText(), jtfColor.getText());
+				Coche c = new Coche(Integer.parseInt(jtfId.getText()),
+						((Fabricante) comboBox.getSelectedItem()).getId(), jtfBastidor.getText(), jtfModelo.getText(),
+						jtfColor.getText());
 				if (ControladorCoche.actualizarCoche(c) == 1) {
 					ImageIcon icono = new ImageIcon("./src/capitulo08/Ejercicio01/res/check.png");
 					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de coches",
 							JOptionPane.INFORMATION_MESSAGE, icono);
 				}
 				mostrarCoche(ControladorCoche.findUltimoCoche());
+				btnGuardar.setFocusPainted(false);
 			}
 		});
 		mostrarCoche(ControladorCoche.findPrimerCoche());
@@ -268,25 +276,29 @@ public class GestionCoche extends JPanel {
 								JOptionPane.INFORMATION_MESSAGE, icono);
 					}
 				}
+				btnBorrar.setFocusPainted(false);
 			}
 		});
 		panel.add(btnBorrar);
-
-		btnNewButton = new JButton("Activar/Desactivar desplegable");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				comboBox.setEnabled(!comboBox.isEnabled());
-			}
-		});
-		panel.add(btnNewButton);
 
 		btnNewButton_1 = new JButton("Recargar lista de fabricantes");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comboBox.removeAllItems();
 				mostrarComboBox();
+				btnNewButton_1.setFocusPainted(false);
 			}
 		});
+
+		tglbtnNewToggleButton = new JToggleButton("Activar/Desactivar desplegable");
+		tglbtnNewToggleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboBox.setEnabled(!comboBox.isEnabled());
+				tglbtnNewToggleButton.setFocusPainted(false);
+			}
+		});
+		tglbtnNewToggleButton.setSelected(true);
+		panel.add(tglbtnNewToggleButton);
 		panel.add(btnNewButton_1);
 		mostrarCoche(ControladorCoche.findPrimerCoche());
 		mostrarComboBox();

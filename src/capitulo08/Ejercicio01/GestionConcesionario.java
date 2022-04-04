@@ -27,6 +27,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import javax.swing.JProgressBar;
+import javax.swing.JToolBar;
+import javax.swing.JDesktopPane;
 
 public class GestionConcesionario extends JPanel {
 
