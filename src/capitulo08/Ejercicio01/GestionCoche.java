@@ -242,7 +242,7 @@ public class GestionCoche extends JPanel {
 		btnGuardar.setToolTipText("Guardar nuevo coche o actualizar coche");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Coche c = new Coche(Integer.parseInt(jtfId.getText()), (comboBox.getSelectedIndex() + 1),
+				Coche c = new Coche(Integer.parseInt(jtfId.getText()), ((Fabricante)comboBox.getSelectedItem()).getId(),
 						jtfBastidor.getText(), jtfModelo.getText(), jtfColor.getText());
 				if (ControladorCoche.actualizarCoche(c) == 1) {
 					ImageIcon icono = new ImageIcon("./src/capitulo08/Ejercicio01/res/check.png");
