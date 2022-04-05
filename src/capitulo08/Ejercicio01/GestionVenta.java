@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 
 import capitulo07.EjercicioCRUDCompleto.ConnectionManager;
 
@@ -52,6 +53,8 @@ public class GestionVenta extends JPanel {
 	private JButton btnNuevo;
 	private JButton btnGuardar;
 	private JButton btnBorrar;
+	private JButton btnNewButton_1;
+	private JToggleButton tglbtnNewToggleButton;
 
 	// Variable que actúa como Singleton
 	private static GestionVenta instance = null;
@@ -331,6 +334,34 @@ public class GestionVenta extends JPanel {
 			}
 		});
 		panel.add(btnBorrar);
+		btnNewButton_1 = new JButton("Recargar listas");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboBoxCoche.removeAllItems();
+				comboBoxCliente.removeAllItems();
+				comboBoxConce.removeAllItems();
+				mostrarComboBox();
+				btnNewButton_1.setFocusPainted(false);
+			}
+		});
+		tglbtnNewToggleButton = new JToggleButton("Desactivar listas");
+		tglbtnNewToggleButton.setSelected(true);
+		tglbtnNewToggleButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comboBoxCoche.setEnabled(!comboBoxCoche.isEnabled());
+				comboBoxCliente.setEnabled(!comboBoxCliente.isEnabled());
+				comboBoxConce.setEnabled(!comboBoxConce.isEnabled());
+				tglbtnNewToggleButton.setFocusPainted(false);
+				if (tglbtnNewToggleButton.getText().equalsIgnoreCase("Desactivar listas")) {
+					tglbtnNewToggleButton.setText("Activar listas");
+				} else {
+					tglbtnNewToggleButton.setText("Desactivar listas");
+
+				}
+			}
+		});
+		panel.add(tglbtnNewToggleButton);
+		panel.add(btnNewButton_1);
 		mostrarComboBox();
 	}
 
