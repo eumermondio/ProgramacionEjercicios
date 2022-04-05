@@ -290,11 +290,17 @@ public class GestionCoche extends JPanel {
 			}
 		});
 
-		tglbtnNewToggleButton = new JToggleButton("Activar/Desactivar desplegable");
+		tglbtnNewToggleButton = new JToggleButton("Desactivar desplegable");
 		tglbtnNewToggleButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				comboBox.setEnabled(!comboBox.isEnabled());
 				tglbtnNewToggleButton.setFocusPainted(false);
+				if (tglbtnNewToggleButton.getText().equalsIgnoreCase("Desactivar desplegable")) {
+					tglbtnNewToggleButton.setText("Activar desplegable");
+				} else {
+					tglbtnNewToggleButton.setText("Desactivar desplegable");
+
+				}
 			}
 		});
 		tglbtnNewToggleButton.setSelected(true);
