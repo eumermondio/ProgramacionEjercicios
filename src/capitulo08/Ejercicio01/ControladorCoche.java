@@ -8,7 +8,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-public class ControladorCoche {
+public class ControladorCoche extends ControladorGeneral {
+
 	/**
 	 * 
 	 */

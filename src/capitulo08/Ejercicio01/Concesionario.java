@@ -82,4 +82,8 @@ public class Concesionario {
 		this.localidad = localidad;
 	}
 
+	@Override
+	public String toString() {
+		return cif + " - " + nombre;
+	}
 }

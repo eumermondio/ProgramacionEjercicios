@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
-public class ControladorCliente {
+public class ControladorCliente extends ControladorGeneral {
 	/**
 	 * 
 	 */
@@ -18,7 +18,7 @@ public class ControladorCliente {
 			ResultSet rs = s.executeQuery("select * from cliente order by id limit 1");
 			if (rs.next()) {
 				c = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getDate(6), rs.getBoolean(7));
+						rs.getString(6), rs.getBoolean(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -38,7 +38,7 @@ public class ControladorCliente {
 					.executeQuery("select * from cliente where id > " + idAnterior + " order by id asc limit 1");
 			if (rs.next()) {
 				c = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getDate(6), rs.getBoolean(7));
+						rs.getString(6), rs.getBoolean(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,7 +69,7 @@ public class ControladorCliente {
 						c.setApellidos(rs3.getString(3));
 						c.setLocalidad(rs3.getString(4));
 						c.setDni(rs3.getString(5));
-						c.setFechaNac(rs3.getDate(6));
+						c.setFechaNac(rs3.getString(6));
 						c.setActivo(rs3.getBoolean(7));
 						GestionCliente.getInstance().mostrarCliente(c);
 					}
@@ -96,7 +96,7 @@ public class ControladorCliente {
 						c.setApellidos(rs4.getString(3));
 						c.setLocalidad(rs4.getString(4));
 						c.setDni(rs4.getString(5));
-						c.setFechaNac(rs4.getDate(6));
+						c.setFechaNac(rs4.getString(6));
 						c.setActivo(rs4.getBoolean(7));
 						GestionCliente.getInstance().mostrarCliente(c);
 					}
@@ -165,7 +165,7 @@ public class ControladorCliente {
 					.executeQuery("select * from cliente where id < " + idSiguiente + " order by id desc limit 1");
 			if (rs.next()) {
 				c = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getDate(6), rs.getBoolean(7));
+						rs.getString(6), rs.getBoolean(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -185,7 +185,7 @@ public class ControladorCliente {
 			ResultSet rs = s.executeQuery("select * from cliente order by id desc limit 1");
 			if (rs.next()) {
 				c = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getDate(6), rs.getBoolean(7));
+						rs.getString(6), rs.getBoolean(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

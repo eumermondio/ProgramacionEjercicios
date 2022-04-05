@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
-public class ControladorConcesionario {
+public class ControladorConcesionario extends ControladorGeneral {
 	/**
 	 * 
 	 */

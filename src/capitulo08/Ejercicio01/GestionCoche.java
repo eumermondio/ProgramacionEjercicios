@@ -355,7 +355,7 @@ public class GestionCoche extends JPanel {
 	 * 
 	 */
 	public void mostrarNombreFabricante(Coche c) {
-		jtfFabricante.setText(ControladorCoche.findNombreFabricante(Integer.parseInt(jtfId.getText())));
+		jtfFabricante.setText(ControladorCoche.findNombreFabricante(c.getIdFab()));
 	}
 
 	/**

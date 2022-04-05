@@ -24,7 +24,7 @@ public class Tabs {
 		tabPanel.addTab("Gestión de Concesionarios", conce, GestionConcesionario.getInstance(),
 				"Gestión de Concesionarios");
 		tabPanel.addTab("Gestión de Clientes", cli, GestionCliente.getInstance(), "Gestión de Clientes");
-		tabPanel.addTab("Gestión de Ventas", venta, new JPanel(), "Gestión de Ventas");
+		tabPanel.addTab("Gestión de Ventas", venta, GestionVenta.getInstance(), "Gestión de Ventas");
 		tabPanel.setSelectedIndex(0);
 
 		return tabPanel;

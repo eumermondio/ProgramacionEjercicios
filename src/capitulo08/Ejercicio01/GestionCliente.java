@@ -270,18 +270,20 @@ public class GestionCliente extends JPanel {
 		btnGuardar.setToolTipText("Guardar nuevo cliente o actualizar cliente");
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//////////////////////////
 				SimpleDateFormat sdfEntrada = new SimpleDateFormat("yyyy-MM-dd");
 				Date date = new Date();
 				try {
-					System.out.println(jtfFechaNac.getText());
 					date = sdfEntrada.parse(jtfFechaNac.getText());
-					System.out.println(date);
 				} catch (ParseException ex) {
 					ex.printStackTrace();
 				}
 
+				SimpleDateFormat sdfSalida = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				//////////////////
 				Cliente c = new Cliente(Integer.parseInt(jtfId.getText()), jtfNombre.getText(), jtfApellidos.getText(),
-						jtfLocalidad.getText(), jtfDni.getText(), date, chckbxNewCheckBox.isSelected());
+						jtfLocalidad.getText(), jtfDni.getText(), sdfSalida.format(date),
+						chckbxNewCheckBox.isSelected());
 				if (ControladorCliente.actualizarCliente(c) == 1) {
 					ImageIcon icono = new ImageIcon("./src/capitulo08/Ejercicio01/res/check.png");
 					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de cliente",
