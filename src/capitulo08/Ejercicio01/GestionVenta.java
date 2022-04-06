@@ -305,8 +305,7 @@ public class GestionVenta extends JPanel {
 				Venta v = new Venta(Integer.parseInt(jtfId.getText()),
 						((Cliente) comboBoxCliente.getSelectedItem()).getId(),
 						((Concesionario) comboBoxConce.getSelectedItem()).getId(),
-						((Coche) comboBoxCoche.getSelectedItem()).getId(), sdfSalida.format(date),
-						Float.parseFloat(jtfPrecio.getText()));
+						((Coche) comboBoxCoche.getSelectedItem()).getId(), date, Float.parseFloat(jtfPrecio.getText()));
 				if (ControladorVenta.actualizarVenta(v) == 1) {
 					ImageIcon icono = new ImageIcon("./src/capitulo08/Ejercicio01/res/check.png");
 					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de venta",
@@ -375,7 +374,7 @@ public class GestionVenta extends JPanel {
 			mostrarNombreCliente(v);
 			mostrarNombreConce(v);
 			mostrarNombreCoche(v);
-			jtfFecha.setText(v.getFecha());
+			jtfFecha.setText("" + v.getFecha());
 			jtfPrecio.setText("" + v.getPrecio());
 		}
 		if (ControladorVenta.findAnteriorVenta(Integer.parseInt(jtfId.getText())) == null) {
