@@ -1,11 +1,13 @@
 package capitulo08.Ejercicio01;
 
+import java.util.Date;
+
 public class Venta {
 	private int id;
 	private int idCli;
 	private int idConce;
 	private int idCoche;
-	private String fecha;
+	private Date fecha;
 	private float precio;
 
 	/**
@@ -23,7 +25,7 @@ public class Venta {
 	 * @param fecha
 	 * @param precio
 	 */
-	public Venta(int id, int idCli, int idConce, int idCoche, String fecha, float precio) {
+	public Venta(int id, int idCli, int idConce, int idCoche, Date fecha, float precio) {
 		super();
 		this.id = id;
 		this.idCli = idCli;
@@ -92,14 +94,14 @@ public class Venta {
 	/**
 	 * @return the fecha
 	 */
-	public String getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
 	/**
 	 * @param fecha the fecha to set
 	 */
-	public void setFecha(String fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -19,7 +21,7 @@ public class ControladorVenta extends ControladorGeneral {
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery("select * from venta order by id limit 1");
 			if (rs.next()) {
-				v = new Venta(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getFloat(6));
+				v = new Venta(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDate(5), rs.getFloat(6));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -37,7 +39,7 @@ public class ControladorVenta extends ControladorGeneral {
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery("select * from venta where id > " + idAnterior + " order by id asc limit 1");
 			if (rs.next()) {
-				v = new Venta(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getFloat(6));
+				v = new Venta(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDate(5), rs.getFloat(6));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -66,7 +68,7 @@ public class ControladorVenta extends ControladorGeneral {
 						v.setIdCli(rs3.getInt(2));
 						v.setIdConce(rs3.getInt(3));
 						v.setIdCoche(rs3.getInt(4));
-						v.setFecha(rs3.getString(5));
+						v.setFecha(rs3.getDate(5));
 						v.setPrecio(rs3.getFloat(6));
 						GestionVenta.getInstance().mostrarVenta(v);
 					}
@@ -76,7 +78,7 @@ public class ControladorVenta extends ControladorGeneral {
 				v.setIdCli(0);
 				v.setIdConce(0);
 				v.setIdCoche(0);
-				v.setFecha("");
+				v.setFecha(null);
 				v.setPrecio(0);
 				GestionVenta.getInstance().mostrarVenta(v);
 			}
@@ -91,7 +93,7 @@ public class ControladorVenta extends ControladorGeneral {
 						v.setIdCli(rs4.getInt(2));
 						v.setIdConce(rs4.getInt(3));
 						v.setIdCoche(rs4.getInt(4));
-						v.setFecha(rs4.getString(5));
+						v.setFecha(rs4.getDate(5));
 						v.setPrecio(rs4.getFloat(6));
 						GestionVenta.getInstance().mostrarVenta(v);
 					}
@@ -101,7 +103,7 @@ public class ControladorVenta extends ControladorGeneral {
 				v.setIdCli(0);
 				v.setIdConce(0);
 				v.setIdCoche(0);
-				v.setFecha("");
+				v.setFecha(null);
 				v.setPrecio(0);
 				GestionVenta.getInstance().mostrarVenta(v);
 			}
@@ -121,6 +123,8 @@ public class ControladorVenta extends ControladorGeneral {
 		int rowAffected = 0;
 		int idMax = 0;
 		try {
+			Date date = v.getFecha();
+			SimpleDateFormat sdfSalida = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Connection con = ConnectionManager.getConexion();
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery("select max(id) from venta;");
@@ -129,13 +133,15 @@ public class ControladorVenta extends ControladorGeneral {
 			}
 			// si entra en este if quiere decir k voy a insertar
 			if (v.getId() == 0) {
-				rowAffected = s.executeUpdate("insert into venta values(" + idMax + "," + v.getIdCli() + ","
-						+ v.getIdConce() + "," + v.getIdCoche() + ",'" + v.getFecha() + "'," + v.getPrecio() + ");");
+				rowAffected = s
+						.executeUpdate("insert into venta values(" + idMax + "," + v.getIdCli() + "," + v.getIdConce()
+								+ "," + v.getIdCoche() + ",'" + sdfSalida.format(date) + "'," + v.getPrecio() + ");");
 			} else {
 				// si entra en este else quiere decir k voy a actualizar
-				rowAffected = s.executeUpdate("update venta set idCliente = " + v.getIdCli() + ","
-						+ "idConcesionario = " + v.getIdConce() + ", idCoche = " + v.getIdCoche() + ",fecha = '"
-						+ v.getFecha() + "',precioVenta = " + v.getPrecio() + " where id = " + v.getId() + ";");
+				rowAffected = s.executeUpdate(
+						"update venta set idCliente = " + v.getIdCli() + "," + "idConcesionario = " + v.getIdConce()
+								+ ", idCoche = " + v.getIdCoche() + ",fecha = '" + sdfSalida.format(date)
+								+ "',precioVenta = " + v.getPrecio() + " where id = " + v.getId() + ";");
 			}
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null,
@@ -156,7 +162,7 @@ public class ControladorVenta extends ControladorGeneral {
 			ResultSet rs = s
 					.executeQuery("select * from venta where id < " + idSiguiente + " order by id desc limit 1");
 			if (rs.next()) {
-				v = new Venta(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getFloat(6));
+				v = new Venta(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDate(5), rs.getFloat(6));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -293,7 +299,7 @@ public class ControladorVenta extends ControladorGeneral {
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery("select * from venta order by id desc limit 1");
 			if (rs.next()) {
-				v = new Venta(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getFloat(6));
+				v = new Venta(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getDate(5), rs.getFloat(6));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
