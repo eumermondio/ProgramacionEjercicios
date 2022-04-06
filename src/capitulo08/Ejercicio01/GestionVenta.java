@@ -86,7 +86,7 @@ public class GestionVenta extends JPanel {
 
 		lblGestionDeVentas = new JLabel("GESTION DE VENTAS");
 		GridBagConstraints gbc_lblGestionDeVentas = new GridBagConstraints();
-		gbc_lblGestionDeVentas.gridwidth = 2;
+		gbc_lblGestionDeVentas.gridwidth = 3;
 		gbc_lblGestionDeVentas.insets = new Insets(0, 0, 5, 5);
 		gbc_lblGestionDeVentas.gridx = 0;
 		gbc_lblGestionDeVentas.gridy = 0;
