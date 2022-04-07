@@ -1,4 +1,4 @@
-package kk;
+package pruebaVentanas;
 
 import java.awt.EventQueue;
 
