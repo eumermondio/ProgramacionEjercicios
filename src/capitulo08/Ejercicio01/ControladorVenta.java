@@ -228,21 +228,21 @@ public class ControladorVenta extends ControladorGeneral {
 	 * @param id
 	 * @return
 	 */
-	public static String findApllNomCliente(int id) {
-		String str = "";
+	public static Cliente findApllNomCliente(int id) {
+		Cliente c = null;
 		try {
 			Connection con = ConnectionManager.getConexion();
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery(
-					"select CONCAT(cliente.nombre, ' ' ,cliente.apellidos) from cliente,venta where cliente.id = venta.idCliente and cliente.id = "
-							+ id);
+					"select cliente.* from cliente,venta where cliente.id = venta.idCliente and cliente.id = " + id);
 			if (rs.next()) {
-				str = rs.getString(1);
+				c = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+						rs.getString(6), rs.getBoolean(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return str;
+		return c;
 	}
 
 	/**

@@ -31,7 +31,6 @@ public class GestionCoche extends JPanel {
 	private JLabel lblNewLabel;
 	private JLabel lblFabricante;
 	private JLabel lblBastidor;
-	private static JTextField jtfFabricante;
 	private static JTextField jtfBastidor;
 	private JPanel panel;
 	private JButton button;
@@ -110,21 +109,12 @@ public class GestionCoche extends JPanel {
 		gbc_lblFabricante.gridy = 2;
 		this.add(lblFabricante, gbc_lblFabricante);
 
-		jtfFabricante = new JTextField();
-		GridBagConstraints gbc_jtfFabricante = new GridBagConstraints();
-		gbc_jtfFabricante.insets = new Insets(5, 0, 5, 5);
-		gbc_jtfFabricante.fill = GridBagConstraints.HORIZONTAL;
-		gbc_jtfFabricante.gridx = 1;
-		gbc_jtfFabricante.gridy = 2;
-		jtfFabricante.setEnabled(false);
-		this.add(jtfFabricante, gbc_jtfFabricante);
-		jtfFabricante.setColumns(10);
-
 		comboBox = new JComboBox<Fabricante>();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
+		gbc_comboBox.gridwidth = 2;
 		gbc_comboBox.insets = new Insets(5, 0, 5, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox.gridx = 2;
+		gbc_comboBox.gridx = 1;
 		gbc_comboBox.gridy = 2;
 		add(comboBox, gbc_comboBox);
 
@@ -238,7 +228,6 @@ public class GestionCoche extends JPanel {
 		btnNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				nuevoCoche();
-				jtfFabricante.setEnabled(false);
 				comboBox.setEnabled(true);
 				btnNuevo.setFocusPainted(false);
 			}
@@ -355,7 +344,11 @@ public class GestionCoche extends JPanel {
 	 * 
 	 */
 	public void mostrarNombreFabricante(Coche c) {
-		jtfFabricante.setText(ControladorCoche.findNombreFabricante(c.getIdFab()));
+		for (int i = 0; i < this.comboBox.getItemCount(); i++) {
+			if (this.comboBox.getItemAt(i).getId() == c.getIdFab()) {
+				this.comboBox.setSelectedIndex(i);
+			}
+		}
 	}
 
 	/**
@@ -363,7 +356,6 @@ public class GestionCoche extends JPanel {
 	 */
 	public void nuevoCoche() {
 		jtfId.setText("0");
-		jtfFabricante.setText("");
 		jtfBastidor.setText("");
 		jtfModelo.setText("");
 		jtfColor.setText("");

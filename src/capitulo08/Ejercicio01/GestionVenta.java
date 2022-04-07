@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -43,8 +44,6 @@ public class GestionVenta extends JPanel {
 	private JLabel lblNewLabel;
 	private JLabel lblCliente;
 	private JLabel lblConce;
-	private static JTextField jtfCliente;
-	private static JTextField jtfConce;
 	private JPanel panel;
 	private JButton button;
 	private JButton button_1;
@@ -59,7 +58,6 @@ public class GestionVenta extends JPanel {
 	// Variable que actúa como Singleton
 	private static GestionVenta instance = null;
 	private JLabel lblCoche;
-	private JTextField jtfCoche;
 	private JLabel lblFecha;
 	private JTextField jtfFecha;
 	private JLabel lblPrecio;
@@ -126,21 +124,12 @@ public class GestionVenta extends JPanel {
 		gbc_lblCliente.gridy = 2;
 		this.add(lblCliente, gbc_lblCliente);
 
-		jtfCliente = new JTextField();
-		jtfCliente.setEnabled(false);
-		GridBagConstraints gbc_jtfCliente = new GridBagConstraints();
-		gbc_jtfCliente.insets = new Insets(5, 0, 5, 5);
-		gbc_jtfCliente.fill = GridBagConstraints.HORIZONTAL;
-		gbc_jtfCliente.gridx = 1;
-		gbc_jtfCliente.gridy = 2;
-		this.add(jtfCliente, gbc_jtfCliente);
-		jtfCliente.setColumns(10);
-
 		comboBoxCliente = new JComboBox();
 		GridBagConstraints gbc_comboBoxCliente = new GridBagConstraints();
+		gbc_comboBoxCliente.gridwidth = 2;
 		gbc_comboBoxCliente.insets = new Insets(5, 0, 5, 5);
 		gbc_comboBoxCliente.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxCliente.gridx = 2;
+		gbc_comboBoxCliente.gridx = 1;
 		gbc_comboBoxCliente.gridy = 2;
 		add(comboBoxCliente, gbc_comboBoxCliente);
 
@@ -152,21 +141,12 @@ public class GestionVenta extends JPanel {
 		gbc_lblConce.gridy = 3;
 		this.add(lblConce, gbc_lblConce);
 
-		jtfConce = new JTextField();
-		jtfConce.setEnabled(false);
-		GridBagConstraints gbc_jtfConce = new GridBagConstraints();
-		gbc_jtfConce.insets = new Insets(5, 0, 5, 5);
-		gbc_jtfConce.fill = GridBagConstraints.HORIZONTAL;
-		gbc_jtfConce.gridx = 1;
-		gbc_jtfConce.gridy = 3;
-		this.add(jtfConce, gbc_jtfConce);
-		jtfConce.setColumns(10);
-
 		comboBoxConce = new JComboBox();
 		GridBagConstraints gbc_comboBoxConce = new GridBagConstraints();
+		gbc_comboBoxConce.gridwidth = 2;
 		gbc_comboBoxConce.insets = new Insets(5, 0, 5, 5);
 		gbc_comboBoxConce.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxConce.gridx = 2;
+		gbc_comboBoxConce.gridx = 1;
 		gbc_comboBoxConce.gridy = 3;
 		add(comboBoxConce, gbc_comboBoxConce);
 
@@ -178,21 +158,12 @@ public class GestionVenta extends JPanel {
 		gbc_lblCoche.gridy = 4;
 		add(lblCoche, gbc_lblCoche);
 
-		jtfCoche = new JTextField();
-		jtfCoche.setEnabled(false);
-		GridBagConstraints gbc_jtfCoche = new GridBagConstraints();
-		gbc_jtfCoche.insets = new Insets(5, 0, 5, 5);
-		gbc_jtfCoche.fill = GridBagConstraints.HORIZONTAL;
-		gbc_jtfCoche.gridx = 1;
-		gbc_jtfCoche.gridy = 4;
-		add(jtfCoche, gbc_jtfCoche);
-		jtfCoche.setColumns(10);
-
 		comboBoxCoche = new JComboBox();
 		GridBagConstraints gbc_comboBoxCoche = new GridBagConstraints();
+		gbc_comboBoxCoche.gridwidth = 2;
 		gbc_comboBoxCoche.insets = new Insets(5, 0, 5, 5);
 		gbc_comboBoxCoche.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBoxCoche.gridx = 2;
+		gbc_comboBoxCoche.gridx = 1;
 		gbc_comboBoxCoche.gridy = 4;
 		add(comboBoxCoche, gbc_comboBoxCoche);
 
@@ -339,7 +310,7 @@ public class GestionVenta extends JPanel {
 				comboBoxCoche.removeAllItems();
 				comboBoxCliente.removeAllItems();
 				comboBoxConce.removeAllItems();
-				mostrarComboBox();
+				cargarValoresInicialesEnComboBox();
 				btnNewButton_1.setFocusPainted(false);
 			}
 		});
@@ -361,7 +332,7 @@ public class GestionVenta extends JPanel {
 		});
 		panel.add(tglbtnNewToggleButton);
 		panel.add(btnNewButton_1);
-		mostrarComboBox();
+		cargarValoresInicialesEnComboBox();
 	}
 
 	/**
@@ -371,9 +342,25 @@ public class GestionVenta extends JPanel {
 	public void mostrarVenta(Venta v) {
 		if (v != null) {
 			jtfId.setText("" + v.getId());
-			mostrarNombreCliente(v);
-			mostrarNombreConce(v);
-			mostrarNombreCoche(v);
+
+			// Selecciono el cliente de esta venta
+			for (int i = 0; i < this.comboBoxCliente.getItemCount(); i++) {
+				if (this.comboBoxCliente.getItemAt(i).getId() == v.getIdCli()) {
+					this.comboBoxCliente.setSelectedIndex(i);
+				}
+			}
+			// Selecciono el concesionario de esta venta
+			for (int i = 0; i < this.comboBoxConce.getItemCount(); i++) {
+				if (this.comboBoxConce.getItemAt(i).getId() == v.getIdConce()) {
+					this.comboBoxConce.setSelectedIndex(i);
+				}
+			}
+			// Selecciono el coche de esta venta
+			for (int i = 0; i < this.comboBoxCoche.getItemCount(); i++) {
+				if (this.comboBoxCoche.getItemAt(i).getId() == v.getIdCoche()) {
+					this.comboBoxCoche.setSelectedIndex(i);
+				}
+			}
 			jtfFecha.setText("" + v.getFecha());
 			jtfPrecio.setText("" + v.getPrecio());
 		}
@@ -397,7 +384,7 @@ public class GestionVenta extends JPanel {
 	 * 
 	 * @param c
 	 */
-	public void mostrarComboBox() {
+	public void cargarValoresInicialesEnComboBox() {
 		List<Cliente> clientes = new ArrayList<Cliente>();
 		ControladorVenta.listadoClientes(clientes);
 		for (Cliente c : clientes) {
@@ -418,32 +405,8 @@ public class GestionVenta extends JPanel {
 	/**
 	 * 
 	 */
-	public void mostrarNombreCliente(Venta v) {
-		jtfCliente.setText(ControladorVenta.findApllNomCliente(v.getIdCli()));
-	}
-
-	/**
-	 * 
-	 */
-	public void mostrarNombreCoche(Venta v) {
-		jtfCoche.setText(ControladorVenta.findNombreCoche(v.getIdCoche()));
-	}
-
-	/**
-	 * 
-	 */
-	public void mostrarNombreConce(Venta v) {
-		jtfConce.setText(ControladorVenta.findNombreConce(v.getIdConce()));
-	}
-
-	/**
-	 * 
-	 */
 	public void nuevaVenta() {
 		jtfId.setText("0");
-		jtfCliente.setText("");
-		jtfConce.setText("");
-		jtfCoche.setText("");
 		jtfFecha.setText("");
 		jtfPrecio.setText("");
 	}
