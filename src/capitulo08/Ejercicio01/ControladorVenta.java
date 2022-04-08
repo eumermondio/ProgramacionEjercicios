@@ -182,7 +182,7 @@ public class ControladorVenta extends ControladorGeneral {
 			ResultSet rs = s.executeQuery("select * from cliente;");
 			while (rs.next()) {
 				l.add(new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getBoolean(7)));
+						rs.getDate(6), rs.getBoolean(7)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -237,7 +237,7 @@ public class ControladorVenta extends ControladorGeneral {
 					"select cliente.* from cliente,venta where cliente.id = venta.idCliente and cliente.id = " + id);
 			if (rs.next()) {
 				c = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getBoolean(7));
+						rs.getDate(6), rs.getBoolean(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

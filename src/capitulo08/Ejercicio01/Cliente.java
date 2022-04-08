@@ -8,7 +8,7 @@ public class Cliente {
 	private String apellidos;
 	private String localidad;
 	private String dni;
-	private String fechaNac;
+	private Date fechaNac;
 	private boolean activo;
 
 	/**
@@ -26,7 +26,7 @@ public class Cliente {
 	 * @param fechaNac
 	 * @param activo
 	 */
-	public Cliente(int id, String nombre, String apellidos, String localidad, String dni, String fechaNac,
+	public Cliente(int id, String nombre, String apellidos, String localidad, String dni, Date fechaNac,
 			boolean activo) {
 		this.id = id;
 		this.nombre = nombre;
@@ -110,14 +110,14 @@ public class Cliente {
 	/**
 	 * @return the fechaNac
 	 */
-	public String getFechaNac() {
+	public Date getFechaNac() {
 		return fechaNac;
 	}
 
 	/**
 	 * @param fechaNac the fechaNac to set
 	 */
-	public void setFechaNac(String fechaNac) {
+	public void setFechaNac(Date fechaNac) {
 		this.fechaNac = fechaNac;
 	}
 

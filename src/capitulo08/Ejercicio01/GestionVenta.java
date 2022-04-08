@@ -361,7 +361,8 @@ public class GestionVenta extends JPanel {
 					this.comboBoxCoche.setSelectedIndex(i);
 				}
 			}
-			jtfFecha.setText("" + v.getFecha());
+			SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+			jtfFecha.setText("" + s.format(v.getFecha()));
 			jtfPrecio.setText("" + v.getPrecio());
 		}
 		if (ControladorVenta.findAnteriorVenta(Integer.parseInt(jtfId.getText())) == null) {

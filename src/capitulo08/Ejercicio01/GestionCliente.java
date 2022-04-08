@@ -282,8 +282,7 @@ public class GestionCliente extends JPanel {
 				SimpleDateFormat sdfSalida = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				//////////////////
 				Cliente c = new Cliente(Integer.parseInt(jtfId.getText()), jtfNombre.getText(), jtfApellidos.getText(),
-						jtfLocalidad.getText(), jtfDni.getText(), sdfSalida.format(date),
-						chckbxNewCheckBox.isSelected());
+						jtfLocalidad.getText(), jtfDni.getText(), date, chckbxNewCheckBox.isSelected());
 				if (ControladorCliente.actualizarCliente(c) == 1) {
 					ImageIcon icono = new ImageIcon("./src/capitulo08/Ejercicio01/res/check.png");
 					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de cliente",
@@ -324,7 +323,8 @@ public class GestionCliente extends JPanel {
 			jtfApellidos.setText(c.getApellidos());
 			jtfLocalidad.setText(c.getLocalidad());
 			jtfDni.setText(c.getDni());
-			jtfFechaNac.setText("" + c.getFechaNac());
+			SimpleDateFormat s = new SimpleDateFormat("dd/MM/yyyy");
+			jtfFechaNac.setText("" + s.format(c.getFechaNac()));
 			chckbxNewCheckBox.setSelected(c.isActivo());
 		}
 		if (ControladorCliente.findAnteriorCliente(Integer.parseInt(jtfId.getText())) == null) {

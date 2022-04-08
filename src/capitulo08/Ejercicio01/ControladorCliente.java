@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+
 import javax.swing.JOptionPane;
 
 public class ControladorCliente extends ControladorGeneral {
@@ -18,7 +20,7 @@ public class ControladorCliente extends ControladorGeneral {
 			ResultSet rs = s.executeQuery("select * from cliente order by id limit 1");
 			if (rs.next()) {
 				c = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getBoolean(7));
+						rs.getDate(6), rs.getBoolean(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -38,7 +40,7 @@ public class ControladorCliente extends ControladorGeneral {
 					.executeQuery("select * from cliente where id > " + idAnterior + " order by id asc limit 1");
 			if (rs.next()) {
 				c = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getBoolean(7));
+						rs.getDate(6), rs.getBoolean(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,7 +71,7 @@ public class ControladorCliente extends ControladorGeneral {
 						c.setApellidos(rs3.getString(3));
 						c.setLocalidad(rs3.getString(4));
 						c.setDni(rs3.getString(5));
-						c.setFechaNac(rs3.getString(6));
+						c.setFechaNac(rs3.getDate(6));
 						c.setActivo(rs3.getBoolean(7));
 						GestionCliente.getInstance().mostrarCliente(c);
 					}
@@ -96,7 +98,7 @@ public class ControladorCliente extends ControladorGeneral {
 						c.setApellidos(rs4.getString(3));
 						c.setLocalidad(rs4.getString(4));
 						c.setDni(rs4.getString(5));
-						c.setFechaNac(rs4.getString(6));
+						c.setFechaNac(rs4.getDate(6));
 						c.setActivo(rs4.getBoolean(7));
 						GestionCliente.getInstance().mostrarCliente(c);
 					}
@@ -127,6 +129,7 @@ public class ControladorCliente extends ControladorGeneral {
 		int rowAffected = 0;
 		int idMax = 0;
 		try {
+			SimpleDateFormat sdfSalida = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			Connection con = ConnectionManager.getConexion();
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery("select max(id) from cliente;");
@@ -137,13 +140,13 @@ public class ControladorCliente extends ControladorGeneral {
 			if (c.getId() == 0) {
 				rowAffected = s.executeUpdate("insert into cliente values(" + idMax + "," + "'" + c.getNombre() + "'"
 						+ "," + "'" + c.getApellidos() + "','" + c.getLocalidad() + "','" + c.getDni() + "','"
-						+ c.getFechaNac() + "'," + c.isActivo() + ");");
+						+ sdfSalida.format(c.getFechaNac()) + "'," + c.isActivo() + ");");
 			} else {
 				// si entra en este else quiere decir k voy a actualizar
 				rowAffected = s.executeUpdate("update cliente set nombre = " + "'" + c.getNombre() + "'" + ","
 						+ "apellidos = " + "'" + c.getApellidos() + "', localidad = '" + c.getLocalidad()
-						+ "',dniNie = '" + c.getDni() + "',fechaNac = '" + c.getFechaNac() + "',activo = "
-						+ c.isActivo() + " where id = " + c.getId() + ";");
+						+ "',dniNie = '" + c.getDni() + "',fechaNac = '" + sdfSalida.format(c.getFechaNac())
+						+ "',activo = " + c.isActivo() + " where id = " + c.getId() + ";");
 			}
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null,
@@ -165,7 +168,7 @@ public class ControladorCliente extends ControladorGeneral {
 					.executeQuery("select * from cliente where id < " + idSiguiente + " order by id desc limit 1");
 			if (rs.next()) {
 				c = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getBoolean(7));
+						rs.getDate(6), rs.getBoolean(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -185,7 +188,7 @@ public class ControladorCliente extends ControladorGeneral {
 			ResultSet rs = s.executeQuery("select * from cliente order by id desc limit 1");
 			if (rs.next()) {
 				c = new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getBoolean(7));
+						rs.getDate(6), rs.getBoolean(7));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
