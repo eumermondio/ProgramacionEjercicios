@@ -1,6 +1,7 @@
 package capitulo08.Ejercicio02;
 
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -10,6 +11,10 @@ import javax.swing.JToolBar;
 
 import java.awt.BorderLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Principal {
 
@@ -55,12 +60,39 @@ public class Principal {
 
 		JMenuItem mntmNewMenuItem = new JMenuItem("Cursos");
 		mnNewMenu.add(mntmNewMenuItem);
-		
+
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Materias");
+		mnNewMenu.add(mntmNewMenuItem_1);
+
 		JToolBar toolBar = new JToolBar();
 		frmGestinDeCentros.getContentPane().add(toolBar, BorderLayout.NORTH);
-		
+
 		JButton btnCursos = new JButton("Cursos");
+		btnCursos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JDialog dialogo = new JDialog();
+				// El usuario no puede redimensionar el diálogo
+				dialogo.setResizable(true);
+				// título del díalogo
+				dialogo.setTitle("Cursos");
+				// Introducimos el panel creado sobre el diálogo
+				dialogo.setContentPane(new PanelAInsertarEnJDialog());
+				// Empaquetar el di�logo hace que todos los componentes ocupen el espacio que
+				// deben y el lugar adecuado
+				dialogo.pack();
+				// El usuario no puede hacer clic sobre la ventana padre, si el Di�logo es modal
+				dialogo.setModal(true);
+				// Centro el di�logo en pantalla
+				dialogo.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - dialogo.getWidth() / 2,
+						(Toolkit.getDefaultToolkit().getScreenSize().height) / 2 - dialogo.getHeight() / 2);
+				// Muestro el di�logo en pantalla
+				dialogo.setVisible(true);
+			}
+		});
 		toolBar.add(btnCursos);
+
+		JButton btnNewButton = new JButton("Materias");
+		toolBar.add(btnNewButton);
 
 	}
 
