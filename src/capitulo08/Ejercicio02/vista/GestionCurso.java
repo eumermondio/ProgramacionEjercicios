@@ -1,4 +1,4 @@
-package capitulo08.Ejercicio02;
+package capitulo08.Ejercicio02.vista;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -8,6 +8,8 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
 import capitulo07.EjercicioCRUDCompleto.ConnectionManager;
+import capitulo08.Ejercicio02.controladores.ControladorCurso;
+import capitulo08.Ejercicio02.entidades.Curso;
 
 import java.awt.Insets;
 import java.sql.Connection;
@@ -34,7 +36,7 @@ public class GestionCurso extends JPanel {
 	private JLabel lblGestionDeFabricantes;
 	private JLabel lblNewLabel;
 	private JLabel lblCif;
-	public static JTextField jtfCif;
+	public static JTextField jtfDesc;
 
 	// Variable que actúa como Singleton
 	private static GestionCurso instance = null;
@@ -96,14 +98,14 @@ public class GestionCurso extends JPanel {
 		gbc_lblCif.gridy = 2;
 		this.add(lblCif, gbc_lblCif);
 
-		jtfCif = new JTextField();
-		GridBagConstraints gbc_jtfCif = new GridBagConstraints();
-		gbc_jtfCif.insets = new Insets(5, 0, 5, 5);
-		gbc_jtfCif.fill = GridBagConstraints.HORIZONTAL;
-		gbc_jtfCif.gridx = 1;
-		gbc_jtfCif.gridy = 2;
-		this.add(jtfCif, gbc_jtfCif);
-		jtfCif.setColumns(10);
+		jtfDesc = new JTextField();
+		GridBagConstraints gbc_jtfDesc = new GridBagConstraints();
+		gbc_jtfDesc.insets = new Insets(5, 0, 5, 5);
+		gbc_jtfDesc.fill = GridBagConstraints.HORIZONTAL;
+		gbc_jtfDesc.gridx = 1;
+		gbc_jtfDesc.gridy = 2;
+		this.add(jtfDesc, gbc_jtfDesc);
+		jtfDesc.setColumns(10);
 		mostrarCurso(ControladorCurso.findPrimerCurso());
 	}
 
@@ -114,7 +116,7 @@ public class GestionCurso extends JPanel {
 	public static void mostrarCurso(Curso c) {
 		if (c != null) {
 			jtfId.setText("" + c.getId());
-			jtfCif.setText(c.getDescripcion());
+			jtfDesc.setText(c.getDescripcion());
 		}
 		if (ControladorCurso.findAnteriorCurso(Integer.parseInt(jtfId.getText())) == null) {
 			PanelAInsertarEnJDialog.btnNewButton.setEnabled(false);

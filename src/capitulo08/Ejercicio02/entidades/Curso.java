@@ -1,4 +1,4 @@
-package capitulo08.Ejercicio02;
+package capitulo08.Ejercicio02.entidades;
 
 public class Curso {
 	private int id;

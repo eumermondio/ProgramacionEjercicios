@@ -1,10 +1,12 @@
-package capitulo08.Ejercicio02;
+package capitulo08.Ejercicio02.controladores;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+
+import capitulo08.Ejercicio02.ConnectionManager;
 
 public class ControladorGeneral {
 	/**
