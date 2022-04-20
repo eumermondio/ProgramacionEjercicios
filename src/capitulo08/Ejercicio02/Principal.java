@@ -69,7 +69,7 @@ public class Principal {
 				// título del díalogo
 				dialogo.setTitle("Cursos");
 				// Introducimos el panel creado sobre el diálogo
-				dialogo.setContentPane(new PanelAInsertarEnJDialog());
+				dialogo.setContentPane(new PanelAInsertarEnJDialog(0));
 				// Empaquetar el di�logo hace que todos los componentes ocupen el espacio que
 				// deben y el lugar adecuado
 				dialogo.pack();
@@ -85,6 +85,27 @@ public class Principal {
 		mnNewMenu.add(mntmNewMenuItem);
 
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Materias");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JDialog dialogo = new JDialog();
+				// El usuario no puede redimensionar el diálogo
+				dialogo.setResizable(true);
+				// título del díalogo
+				dialogo.setTitle("Materias");
+				// Introducimos el panel creado sobre el diálogo
+				dialogo.setContentPane(new PanelAInsertarEnJDialog(1));
+				// Empaquetar el di�logo hace que todos los componentes ocupen el espacio que
+				// deben y el lugar adecuado
+				dialogo.pack();
+				// El usuario no puede hacer clic sobre la ventana padre, si el Di�logo es modal
+				dialogo.setModal(true);
+				// Centro el di�logo en pantalla
+				dialogo.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - dialogo.getWidth() / 2,
+						(Toolkit.getDefaultToolkit().getScreenSize().height) / 2 - dialogo.getHeight() / 2);
+				// Muestro el di�logo en pantalla
+				dialogo.setVisible(true);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_1);
 
 		JToolBar toolBar = new JToolBar();
@@ -99,7 +120,7 @@ public class Principal {
 				// título del díalogo
 				dialogo.setTitle("Cursos");
 				// Introducimos el panel creado sobre el diálogo
-				dialogo.setContentPane(new PanelAInsertarEnJDialog());
+				dialogo.setContentPane(new PanelAInsertarEnJDialog(0));
 				// Empaquetar el di�logo hace que todos los componentes ocupen el espacio que
 				// deben y el lugar adecuado
 				dialogo.pack();
@@ -115,6 +136,27 @@ public class Principal {
 		toolBar.add(btnCursos);
 
 		JButton btnNewButton = new JButton("Materias");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JDialog dialogo = new JDialog();
+				// El usuario no puede redimensionar el diálogo
+				dialogo.setResizable(true);
+				// título del díalogo
+				dialogo.setTitle("Materias");
+				// Introducimos el panel creado sobre el diálogo
+				dialogo.setContentPane(new PanelAInsertarEnJDialog(1));
+				// Empaquetar el di�logo hace que todos los componentes ocupen el espacio que
+				// deben y el lugar adecuado
+				dialogo.pack();
+				// El usuario no puede hacer clic sobre la ventana padre, si el Di�logo es modal
+				dialogo.setModal(true);
+				// Centro el di�logo en pantalla
+				dialogo.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width) / 2 - dialogo.getWidth() / 2,
+						(Toolkit.getDefaultToolkit().getScreenSize().height) / 2 - dialogo.getHeight() / 2);
+				// Muestro el di�logo en pantalla
+				dialogo.setVisible(true);
+			}
+		});
 		toolBar.add(btnNewButton);
 
 	}
