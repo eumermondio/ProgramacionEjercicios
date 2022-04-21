@@ -8,6 +8,9 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
 import capitulo07.EjercicioCRUDCompleto.ConnectionManager;
+import capitulo08.Ejercicio01.Coche;
+import capitulo08.Ejercicio01.ControladorCoche;
+import capitulo08.Ejercicio01.Fabricante;
 import capitulo08.Ejercicio02.controladores.ControladorCurso;
 import capitulo08.Ejercicio02.controladores.ControladorMateria;
 import capitulo08.Ejercicio02.entidades.Curso;
@@ -19,6 +22,8 @@ import java.sql.ResultSet;
 
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -44,9 +49,9 @@ public class GestionMateria extends JPanel {
 	// Variable que actúa como Singleton
 	private static GestionMateria instance = null;
 	private JLabel lblNewLabel_1;
-	private static JTextField jtfAcronimo;
+	public static JTextField jtfAcronimo;
 	private JLabel lblNewLabel_2;
-	private JComboBox comboBox;
+	public static JComboBox<Curso> comboBox;
 
 	// Método que devuelve el singleton
 	public static GestionMateria getInstance() {
@@ -112,7 +117,7 @@ public class GestionMateria extends JPanel {
 		gbc_jtfNombre.gridx = 1;
 		gbc_jtfNombre.gridy = 2;
 		this.add(jtfNombre, gbc_jtfNombre);
-		jtfNombre.setColumns(10);
+		jtfNombre.setColumns(40);
 
 		lblNewLabel_1 = new JLabel("Acrónimo:");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -139,14 +144,38 @@ public class GestionMateria extends JPanel {
 		gbc_lblNewLabel_2.gridy = 4;
 		add(lblNewLabel_2, gbc_lblNewLabel_2);
 
-		comboBox = new JComboBox();
+		comboBox = new JComboBox<Curso>();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 0, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.gridx = 1;
 		gbc_comboBox.gridy = 4;
 		add(comboBox, gbc_comboBox);
+		mostrarComboBox();
 		mostrarMateria(ControladorMateria.findPrimerMateria());
+	}
+
+	/**
+	 * 
+	 * @param c
+	 */
+	public void mostrarComboBox() {
+		List<Curso> cursos = new ArrayList<Curso>();
+		ControladorMateria.listadoCursos(cursos);
+		for (Curso c : cursos) {
+			comboBox.addItem(c);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public static void mostrarNombreCurso(Materia m) {
+		for (int i = 0; i < comboBox.getItemCount(); i++) {
+			if (comboBox.getItemAt(i).getId() == m.getIdCurso()) {
+				comboBox.setSelectedIndex(i);
+			}
+		}
 	}
 
 	/**
@@ -158,6 +187,7 @@ public class GestionMateria extends JPanel {
 			jtfId.setText("" + m.getId());
 			jtfNombre.setText(m.getNombre());
 			jtfAcronimo.setText(m.getAcronimo());
+			mostrarNombreCurso(m);
 		}
 		if (ControladorMateria.findAnteriorMateria(Integer.parseInt(jtfId.getText())) == null) {
 			PanelAInsertarEnJDialog.btnNewButton.setEnabled(false);

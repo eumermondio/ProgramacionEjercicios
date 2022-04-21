@@ -4,12 +4,14 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JToolBar;
 
+import capitulo08.Ejercicio01.Coche;
 import capitulo08.Ejercicio01.ControladorCoche;
 import capitulo08.Ejercicio01.ControladorFabricante;
 import capitulo08.Ejercicio01.Fabricante;
 import capitulo08.Ejercicio02.controladores.ControladorCurso;
 import capitulo08.Ejercicio02.controladores.ControladorMateria;
 import capitulo08.Ejercicio02.entidades.Curso;
+import capitulo08.Ejercicio02.entidades.Materia;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -114,6 +116,11 @@ public class PanelAInsertarEnJDialog extends JPanel {
 					GestionCurso.jtfId.setText("0");
 					GestionCurso.jtfDesc.setText("");
 				}
+				if (ent == 1) {
+					GestionMateria.jtfId.setText("0");
+					GestionMateria.jtfNombre.setText("");
+					GestionMateria.jtfAcronimo.setText("");
+				}
 			}
 		});
 		// btnNewButton_4.setIcon(new
@@ -133,6 +140,16 @@ public class PanelAInsertarEnJDialog extends JPanel {
 					}
 					GestionCurso.mostrarCurso(ControladorCurso.findUltimoCurso());
 				}
+				if (ent == 1) {
+					Materia m = new Materia(Integer.parseInt(GestionMateria.jtfId.getText()),
+							GestionMateria.jtfNombre.getText(), GestionMateria.jtfAcronimo.getText(),
+							((Curso) GestionMateria.comboBox.getSelectedItem()).getId());
+					if (ControladorMateria.actualizarMateria(m) == 1) {
+						JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de materias",
+								JOptionPane.INFORMATION_MESSAGE);
+					}
+					GestionMateria.mostrarMateria(ControladorMateria.findUltimoMateria());
+				}
 			}
 		});
 		// btnNewButton_5.setIcon(new
@@ -143,6 +160,7 @@ public class PanelAInsertarEnJDialog extends JPanel {
 		btnNewButton_6.setIcon(
 				new ImageIcon(PanelAInsertarEnJDialog.class.getResource("/capitulo08/Ejercicio02/res/eliminar.png")));
 		btnNewButton_6.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				// yes = 0 no = 1
 				if (ent == 0) {
@@ -155,10 +173,21 @@ public class PanelAInsertarEnJDialog extends JPanel {
 					}
 
 				}
+
+				if (ent == 1) {
+					// yes = 0 no = 1
+					if (JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro?", "Gestión de materias",
+							JOptionPane.YES_NO_OPTION) == 0) {
+						if (ControladorMateria.borrarMateria(Integer.parseInt(GestionMateria.jtfId.getText())) == 1) {
+							JOptionPane.showMessageDialog(null, "Borrado correcto", "Gestion de materias",
+									JOptionPane.INFORMATION_MESSAGE);
+						}
+					}
+				}
 			}
 		});
-		// btnNewButton_6.setIcon(new
-		// ImageIcon(PanelAInsertarEnJDialog.class.getResource("/tutorialJava/capitulo8_AWT_SWING/res/eliminar.png")));
+// btnNewButton_6.setIcon(new
+// ImageIcon(PanelAInsertarEnJDialog.class.getResource("/tutorialJava/capitulo8_AWT_SWING/res/eliminar.png")));
 		toolBar.add(btnNewButton_6);
 
 		if (ent == 0) {

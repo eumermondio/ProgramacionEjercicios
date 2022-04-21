@@ -119,7 +119,8 @@ public class ControladorCurso extends ControladorGeneral {
 						.executeUpdate("insert into curso values(" + idMax + "," + "'" + c.getDescripcion() + "');");
 			} else {
 				// si entra en este else quiere decir k voy a actualizar
-				rowAffected = s.executeUpdate("update curso set descripcion = " + "'" + c.getDescripcion() + "'" + ";");
+				rowAffected = s.executeUpdate("update curso set descripcion = " + "'" + c.getDescripcion() + "'"
+						+ " where id = " + c.getId() + ";");
 			}
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null,
