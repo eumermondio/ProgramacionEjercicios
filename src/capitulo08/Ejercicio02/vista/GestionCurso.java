@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
-import capitulo07.EjercicioCRUDCompleto.ConnectionManager;
+import capitulo07.ejercicioCRUDCompleto.ConnectionManager;
 import capitulo08.Ejercicio02.controladores.ControladorCurso;
 import capitulo08.Ejercicio02.entidades.Curso;
 

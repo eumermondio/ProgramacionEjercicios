@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
-import capitulo08.Ejercicio02.ConnectionManager;
 import capitulo08.Ejercicio02.entidades.Curso;
 import capitulo08.Ejercicio02.vista.GestionCurso;
+import capitulo08.ejercicio02.ConnectionManager;
 
 public class ControladorCurso extends ControladorGeneral {
 	/**
