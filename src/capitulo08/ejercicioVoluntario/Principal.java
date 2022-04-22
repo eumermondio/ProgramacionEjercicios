@@ -33,6 +33,8 @@ import java.awt.Insets;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Principal {
 
@@ -85,6 +87,13 @@ public class Principal {
 		frmGestinDeCentros.getContentPane().setLayout(gridBagLayout);
 
 		jtfFiltro = new JTextField();
+		jtfFiltro.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				cargarListaFiltrada();
+				comboBoxMunicipio.showPopup();
+			}
+		});
 		GridBagConstraints gbc_jtfFiltro = new GridBagConstraints();
 		gbc_jtfFiltro.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfFiltro.fill = GridBagConstraints.HORIZONTAL;
