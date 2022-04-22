@@ -97,6 +97,7 @@ public class Principal {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cargarListaFiltrada();
+				comboBoxMunicipio.showPopup();
 			}
 		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -105,7 +106,7 @@ public class Principal {
 		gbc_btnNewButton.gridy = 0;
 		frmGestinDeCentros.getContentPane().add(btnNewButton, gbc_btnNewButton);
 
-		comboBoxMunicipio = new JComboBox();
+		comboBoxMunicipio = new JComboBox<Municipio>();
 		GridBagConstraints gbc_comboBoxMunicipio = new GridBagConstraints();
 		gbc_comboBoxMunicipio.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxMunicipio.fill = GridBagConstraints.HORIZONTAL;
@@ -183,7 +184,7 @@ public class Principal {
 		gbc_lblProvinciaDelMunicipio.gridy = 1;
 		panel.add(lblProvinciaDelMunicipio, gbc_lblProvinciaDelMunicipio);
 
-		comboBoxProvincia = new JComboBox();
+		comboBoxProvincia = new JComboBox<Provincia>();
 		GridBagConstraints gbc_comboBoxProvincia = new GridBagConstraints();
 		gbc_comboBoxProvincia.insets = new Insets(0, 0, 5, 0);
 		gbc_comboBoxProvincia.fill = GridBagConstraints.HORIZONTAL;
