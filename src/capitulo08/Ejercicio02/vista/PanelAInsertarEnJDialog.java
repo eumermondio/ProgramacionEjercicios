@@ -4,14 +4,14 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JToolBar;
 
+import capitulo08.Ejercicio01.Coche;
+import capitulo08.Ejercicio01.ControladorCoche;
+import capitulo08.Ejercicio01.ControladorFabricante;
+import capitulo08.Ejercicio01.Fabricante;
 import capitulo08.Ejercicio02.controladores.ControladorCurso;
 import capitulo08.Ejercicio02.controladores.ControladorMateria;
 import capitulo08.Ejercicio02.entidades.Curso;
 import capitulo08.Ejercicio02.entidades.Materia;
-import capitulo08.ejercicio01.Coche;
-import capitulo08.ejercicio01.ControladorCoche;
-import capitulo08.ejercicio01.ControladorFabricante;
-import capitulo08.ejercicio01.Fabricante;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;

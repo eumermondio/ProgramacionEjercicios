@@ -8,12 +8,12 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import capitulo08.Ejercicio01.Fabricante;
+import capitulo08.Ejercicio02.ConnectionManager;
 import capitulo08.Ejercicio02.entidades.Curso;
 import capitulo08.Ejercicio02.entidades.Materia;
 import capitulo08.Ejercicio02.vista.GestionCurso;
 import capitulo08.Ejercicio02.vista.GestionMateria;
-import capitulo08.ejercicio01.Fabricante;
-import capitulo08.ejercicio02.ConnectionManager;
 
 public class ControladorMateria extends ControladorGeneral {
 	/**
