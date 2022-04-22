@@ -2,40 +2,21 @@ package capitulo08.Ejercicio02.vista;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
-import capitulo07.EjercicioCRUDCompleto.ConnectionManager;
-import capitulo08.Ejercicio01.Coche;
-import capitulo08.Ejercicio01.ControladorCoche;
-import capitulo08.Ejercicio01.Fabricante;
-import capitulo08.Ejercicio02.controladores.ControladorCurso;
 import capitulo08.Ejercicio02.controladores.ControladorMateria;
 import capitulo08.Ejercicio02.entidades.Curso;
 import capitulo08.Ejercicio02.entidades.Materia;
 
 import java.awt.Insets;
-import java.sql.Connection;
-import java.sql.ResultSet;
 
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JPanel;
-import java.awt.Color;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
-import javax.swing.JProgressBar;
 import javax.swing.JComboBox;
 
 public class GestionMateria extends JPanel {
