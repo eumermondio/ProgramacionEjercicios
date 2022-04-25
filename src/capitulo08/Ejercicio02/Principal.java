@@ -9,6 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
 
+import capitulo08.Ejercicio02.vista.GestionEstudiante;
 import capitulo08.Ejercicio02.vista.PanelAInsertarEnJDialog;
 
 import java.awt.BorderLayout;
@@ -117,7 +118,7 @@ public class Principal {
 				// título del díalogo
 				dialogo.setTitle("Estudiantes");
 				// Introducimos el panel creado sobre el diálogo
-				dialogo.setContentPane(null);
+				dialogo.setContentPane(new GestionEstudiante());
 				// Empaquetar el di�logo hace que todos los componentes ocupen el espacio que
 				// deben y el lugar adecuado
 				dialogo.pack();
@@ -216,7 +217,7 @@ public class Principal {
 				// título del díalogo
 				dialogo.setTitle("Estudiantes");
 				// Introducimos el panel creado sobre el diálogo
-				dialogo.setContentPane(null);
+				dialogo.setContentPane((new GestionEstudiante()));
 				// Empaquetar el di�logo hace que todos los componentes ocupen el espacio que
 				// deben y el lugar adecuado
 				dialogo.pack();
