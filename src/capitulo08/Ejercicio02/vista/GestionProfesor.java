@@ -139,7 +139,7 @@ public class GestionProfesor extends JPanel {
 		panel = new PanelCompartido();
 		add(panel, BorderLayout.CENTER);
 
-		lblNewLabel = new JLabel("GESTIÓN DE ESTUDIANTES");
+		lblNewLabel = new JLabel("GESTIÓN DE PROFESORES");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 1;
