@@ -5,9 +5,11 @@ import java.awt.BorderLayout;
 import javax.swing.JToolBar;
 
 import capitulo08.Ejercicio02.controladores.ControladorCurso;
-import capitulo08.Ejercicio02.controladores.ControladorEstudiante;
+import capitulo08.Ejercicio02.controladores.ControladorProfesor;
+import capitulo08.Ejercicio02.controladores.ControladorProfesor;
 import capitulo08.Ejercicio02.entidades.Curso;
-import capitulo08.Ejercicio02.entidades.Estudiante;
+import capitulo08.Ejercicio02.entidades.Profesor;
+import capitulo08.Ejercicio02.entidades.Profesor;
 
 import javax.swing.JButton;
 
@@ -21,7 +23,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
-public class GestionEstudiante extends JPanel {
+public class GestionProfesor extends JPanel {
 	public JButton btnPrimer;
 	public JButton btnAnt;
 	public JButton btnSig;
@@ -31,11 +33,11 @@ public class GestionEstudiante extends JPanel {
 	public JButton btnBorrar;
 	public PanelCompartido panel;
 	private JLabel lblNewLabel;
-	private static GestionEstudiante instance = null;
+	private static GestionProfesor instance = null;
 
-	public static GestionEstudiante getInstance() {
+	public static GestionProfesor getInstance() {
 		if (instance == null) {
-			instance = new GestionEstudiante();
+			instance = new GestionProfesor();
 		}
 		return instance;
 	}
@@ -43,54 +45,54 @@ public class GestionEstudiante extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public GestionEstudiante() {
+	public GestionProfesor() {
 		setLayout(new BorderLayout(0, 0));
 
 		JToolBar toolBar = new JToolBar();
 		add(toolBar, BorderLayout.NORTH);
 
 		btnPrimer = new JButton("");
-		btnPrimer.setIcon(
-				new ImageIcon(GestionEstudiante.class.getResource("/capitulo08/Ejercicio02/res/gotostart.png")));
+		btnPrimer
+				.setIcon(new ImageIcon(GestionProfesor.class.getResource("/capitulo08/Ejercicio02/res/gotostart.png")));
 		btnPrimer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mostrarEstudiante(ControladorEstudiante.findPrimer());
+				mostrarProfesor(ControladorProfesor.findPrimer());
 			}
 		});
 		toolBar.add(btnPrimer);
 
 		btnAnt = new JButton("");
-		btnAnt.setIcon(new ImageIcon(GestionEstudiante.class.getResource("/capitulo08/Ejercicio02/res/previous.png")));
+		btnAnt.setIcon(new ImageIcon(GestionProfesor.class.getResource("/capitulo08/Ejercicio02/res/previous.png")));
 		btnAnt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mostrarEstudiante(ControladorEstudiante.findAnterior(Integer.parseInt(panel.getJtfId())));
+				mostrarProfesor(ControladorProfesor.findAnterior(Integer.parseInt(panel.getJtfId())));
 			}
 		});
 
 		toolBar.add(btnAnt);
 
 		btnSig = new JButton("");
-		btnSig.setIcon(new ImageIcon(GestionEstudiante.class.getResource("/capitulo08/Ejercicio02/res/next.png")));
+		btnSig.setIcon(new ImageIcon(GestionProfesor.class.getResource("/capitulo08/Ejercicio02/res/next.png")));
 		btnSig.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mostrarEstudiante(ControladorEstudiante.findSiguiente(Integer.parseInt(panel.getJtfId())));
+				mostrarProfesor(ControladorProfesor.findSiguiente(Integer.parseInt(panel.getJtfId())));
 			}
 		});
 
 		toolBar.add(btnSig);
 
 		btnUlt = new JButton("");
-		btnUlt.setIcon(new ImageIcon(GestionEstudiante.class.getResource("/capitulo08/Ejercicio02/res/gotoend.png")));
+		btnUlt.setIcon(new ImageIcon(GestionProfesor.class.getResource("/capitulo08/Ejercicio02/res/gotoend.png")));
 		btnUlt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mostrarEstudiante(ControladorEstudiante.findUltimo());
+				mostrarProfesor(ControladorProfesor.findUltimo());
 			}
 		});
 
 		toolBar.add(btnUlt);
 
 		btnNuevo = new JButton("");
-		btnNuevo.setIcon(new ImageIcon(GestionEstudiante.class.getResource("/capitulo08/Ejercicio02/res/nuevo.png")));
+		btnNuevo.setIcon(new ImageIcon(GestionProfesor.class.getResource("/capitulo08/Ejercicio02/res/nuevo.png")));
 		btnNuevo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				nuevo();
@@ -100,34 +102,32 @@ public class GestionEstudiante extends JPanel {
 		toolBar.add(btnNuevo);
 
 		btnGuardar = new JButton("");
-		btnGuardar
-				.setIcon(new ImageIcon(GestionEstudiante.class.getResource("/capitulo08/Ejercicio02/res/guardar.png")));
+		btnGuardar.setIcon(new ImageIcon(GestionProfesor.class.getResource("/capitulo08/Ejercicio02/res/guardar.png")));
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Estudiante es = new Estudiante(Integer.parseInt(panel.getJtfId()), panel.getJtfNombre(),
+				Profesor es = new Profesor(Integer.parseInt(panel.getJtfId()), panel.getJtfNombre(),
 						panel.getJtfApellido1(), panel.getJtfApellido2(), panel.getJtfDni(), panel.getJtfDireccion(),
 						panel.getJtfEmail(), panel.getJtfTlf());
-				if (ControladorEstudiante.actualizar(es) == 1) {
-					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de estudiantes",
+				if (ControladorProfesor.actualizar(es) == 1) {
+					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de profesores",
 							JOptionPane.INFORMATION_MESSAGE);
 				}
-				mostrarEstudiante(ControladorEstudiante.findUltimo());
+				mostrarProfesor(ControladorProfesor.findUltimo());
 			}
 		});
 
 		toolBar.add(btnGuardar);
 
 		btnBorrar = new JButton("");
-		btnBorrar.setIcon(
-				new ImageIcon(GestionEstudiante.class.getResource("/capitulo08/Ejercicio02/res/eliminar.png")));
+		btnBorrar.setIcon(new ImageIcon(GestionProfesor.class.getResource("/capitulo08/Ejercicio02/res/eliminar.png")));
 		btnBorrar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				// yes = 0 no = 1
-				if (JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro?", "Gestión de estudiantes",
+				if (JOptionPane.showConfirmDialog(null, "¿Desea eliminar el registro?", "Gestión de profesores",
 						JOptionPane.YES_NO_OPTION) == 0) {
-					if (ControladorEstudiante.borrar(Integer.parseInt(panel.getJtfId())) == 1) {
-						JOptionPane.showMessageDialog(null, "Borrado correcto", "Gestion de estudiantes",
+					if (ControladorProfesor.borrar(Integer.parseInt(panel.getJtfId())) == 1) {
+						JOptionPane.showMessageDialog(null, "Borrado correcto", "Gestion de profesores",
 								JOptionPane.INFORMATION_MESSAGE);
 					}
 				}
@@ -146,7 +146,7 @@ public class GestionEstudiante extends JPanel {
 		gbc_lblNewLabel.gridy = 8;
 		panel.add(lblNewLabel, gbc_lblNewLabel);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		mostrarEstudiante(ControladorEstudiante.findPrimer());
+		mostrarProfesor(ControladorProfesor.findPrimer());
 	}
 
 	/**
@@ -167,25 +167,25 @@ public class GestionEstudiante extends JPanel {
 	 * 
 	 * @param f
 	 */
-	public void mostrarEstudiante(Estudiante e) {
-		if (e != null) {
-			panel.setJtfId("" + e.getId());
-			panel.setJtfNombre(e.getNombre());
-			panel.setJtfApellido1(e.getApellido1());
-			panel.setJtfApellido2(e.getApellido2());
-			panel.setJtfDni(e.getDni());
-			panel.setJtfDireccion(e.getDireccion());
-			panel.setJtfEmail(e.getEmail());
-			panel.setJtfTlf(e.getTlf());
+	public void mostrarProfesor(Profesor p) {
+		if (p != null) {
+			panel.setJtfId("" + p.getId());
+			panel.setJtfNombre(p.getNombre());
+			panel.setJtfApellido1(p.getApellido1());
+			panel.setJtfApellido2(p.getApellido2());
+			panel.setJtfDni(p.getDni());
+			panel.setJtfDireccion(p.getDireccion());
+			panel.setJtfEmail(p.getEmail());
+			panel.setJtfTlf(p.getTlf());
 		}
-		if (ControladorEstudiante.findAnterior(Integer.parseInt(panel.getJtfId())) == null) {
+		if (ControladorProfesor.findAnterior(Integer.parseInt(panel.getJtfId())) == null) {
 			btnPrimer.setEnabled(false);
 			btnAnt.setEnabled(false);
 		} else {
 			btnPrimer.setEnabled(true);
 			btnAnt.setEnabled(true);
 		}
-		if (ControladorEstudiante.findSiguiente(Integer.parseInt(panel.getJtfId())) == null) {
+		if (ControladorProfesor.findSiguiente(Integer.parseInt(panel.getJtfId())) == null) {
 			btnSig.setEnabled(false);
 			btnUlt.setEnabled(false);
 		} else {
