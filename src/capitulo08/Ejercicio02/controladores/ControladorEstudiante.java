@@ -13,6 +13,7 @@ import capitulo08.Ejercicio02.ConnectionManager;
 import capitulo08.Ejercicio02.entidades.Curso;
 import capitulo08.Ejercicio02.entidades.Estudiante;
 import capitulo08.Ejercicio02.entidades.Materia;
+import capitulo08.Ejercicio02.entidades.Sexo;
 import capitulo08.Ejercicio02.vista.GestionCurso;
 import capitulo08.Ejercicio02.vista.GestionEstudiante;
 import capitulo08.Ejercicio02.vista.GestionMateria;
@@ -154,13 +155,14 @@ public class ControladorEstudiante extends ControladorGeneral {
 			if (e.getId() == 0) {
 				rowAffected = s.executeUpdate("insert into estudiante values(" + idMax + "," + "'" + e.getNombre()
 						+ "','" + e.getApellido1() + "','" + e.getApellido2() + "','" + e.getDni() + "','"
-						+ e.getDireccion() + "','" + e.getEmail() + "','" + e.getTlf() + "');");
+						+ e.getDireccion() + "','" + e.getEmail() + "','" + e.getTlf() + "'," + e.getSexo() + ");");
 			} else {
 				// si entra en este else quiere decir k voy a actualizar
-				rowAffected = s.executeUpdate("update estudiante set nombre = " + "'" + e.getNombre()
-						+ "', apellido1 = '" + e.getApellido1() + "', apellido2 = '" + e.getApellido2() + "', dni = '"
-						+ e.getDni() + "', direccion = '" + e.getDireccion() + "', email = '" + e.getEmail()
-						+ "', telefono = '" + e.getTlf() + "' where id = " + e.getId() + " ;");
+				rowAffected = s.executeUpdate(
+						"update estudiante set nombre = " + "'" + e.getNombre() + "', apellido1 = '" + e.getApellido1()
+								+ "', apellido2 = '" + e.getApellido2() + "', dni = '" + e.getDni() + "', direccion = '"
+								+ e.getDireccion() + "', email = '" + e.getEmail() + "', telefono = '" + e.getTlf()
+								+ "', idSexo = " + e.getSexo() + " where id = " + e.getId() + " ;");
 			}
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null,

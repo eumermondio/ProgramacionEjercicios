@@ -177,6 +177,7 @@ public class GestionProfesor extends JPanel {
 			panel.setJtfDireccion(p.getDireccion());
 			panel.setJtfEmail(p.getEmail());
 			panel.setJtfTlf(p.getTlf());
+			panel.mostrarSexoProfesor(p);
 		}
 		if (ControladorProfesor.findAnterior(Integer.parseInt(panel.getJtfId())) == null) {
 			btnPrimer.setEnabled(false);

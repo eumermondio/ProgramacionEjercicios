@@ -148,13 +148,13 @@ public class ControladorProfesor extends ControladorGeneral {
 			if (e.getId() == 0) {
 				rowAffected = s.executeUpdate("insert into profesor values(" + idMax + "," + "'" + e.getNombre() + "','"
 						+ e.getApellido1() + "','" + e.getApellido2() + "','" + e.getDni() + "','" + e.getDireccion()
-						+ "','" + e.getEmail() + "','" + e.getTlf() + "');");
+						+ "','" + e.getEmail() + "','" + e.getTlf() + "'," + e.getSexo() + ");");
 			} else {
 				// si entra en este else quiere decir k voy a actualizar
 				rowAffected = s.executeUpdate("update profesor set nombre = " + "'" + e.getNombre() + "', apellido1 = '"
 						+ e.getApellido1() + "', apellido2 = '" + e.getApellido2() + "', dni = '" + e.getDni()
 						+ "', direccion = '" + e.getDireccion() + "', email = '" + e.getEmail() + "', telefono = '"
-						+ e.getTlf() + "' where id = " + e.getId() + " ;");
+						+ e.getTlf() + "', idSexo = " + e.getSexo() + " where id = " + e.getId() + " ;");
 			}
 		} catch (SQLException ex) {
 			JOptionPane.showMessageDialog(null,

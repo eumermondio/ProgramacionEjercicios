@@ -6,9 +6,15 @@ import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
+import capitulo08.Ejercicio02.controladores.ControladorGeneral;
+import capitulo08.Ejercicio02.entidades.Estudiante;
+import capitulo08.Ejercicio02.entidades.Profesor;
 import capitulo08.Ejercicio02.entidades.Sexo;
 
 import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JComboBox;
 
 public class PanelCompartido extends JPanel {
@@ -190,7 +196,7 @@ public class PanelCompartido extends JPanel {
 		gbc_lblNewLabel_8.gridx = 2;
 		gbc_lblNewLabel_8.gridy = 8;
 		add(lblNewLabel_8, gbc_lblNewLabel_8);
-
+		mostrarComboBox();
 	}
 
 	/**
@@ -317,6 +323,40 @@ public class PanelCompartido extends JPanel {
 	 */
 	public void setSexo(Sexo comboBox) {
 		this.comboBox.setSelectedItem(comboBox);
+	}
+
+	/**
+	 * 
+	 * @param c
+	 */
+	public void mostrarComboBox() {
+		List<Sexo> sexos = new ArrayList<Sexo>();
+		ControladorGeneral.listadoSexos(sexos);
+		for (Sexo s : sexos) {
+			comboBox.addItem(s);
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void mostrarSexoEstudiante(Estudiante e) {
+		for (int i = 0; i < comboBox.getItemCount(); i++) {
+			if (comboBox.getItemAt(i).getId() == e.getSexo()) {
+				comboBox.setSelectedIndex(i);
+			}
+		}
+	}
+
+	/**
+	 * 
+	 */
+	public void mostrarSexoProfesor(Profesor p) {
+		for (int i = 0; i < comboBox.getItemCount(); i++) {
+			if (comboBox.getItemAt(i).getId() == p.getSexo()) {
+				comboBox.setSelectedIndex(i);
+			}
+		}
 	}
 
 }
