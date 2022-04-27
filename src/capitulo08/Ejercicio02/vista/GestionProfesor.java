@@ -107,7 +107,7 @@ public class GestionProfesor extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Profesor es = new Profesor(Integer.parseInt(panel.getJtfId()), panel.getJtfNombre(),
 						panel.getJtfApellido1(), panel.getJtfApellido2(), panel.getJtfDni(), panel.getJtfDireccion(),
-						panel.getJtfEmail(), panel.getJtfTlf());
+						panel.getJtfEmail(), panel.getJtfTlf(), panel.getSexo().getId());
 				if (ControladorProfesor.actualizar(es) == 1) {
 					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de profesores",
 							JOptionPane.INFORMATION_MESSAGE);

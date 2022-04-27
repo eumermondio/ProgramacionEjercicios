@@ -5,7 +5,11 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
+
+import capitulo08.Ejercicio02.entidades.Sexo;
+
 import java.awt.Insets;
+import javax.swing.JComboBox;
 
 public class PanelCompartido extends JPanel {
 	private JTextField jtfId;
@@ -16,6 +20,7 @@ public class PanelCompartido extends JPanel {
 	private JTextField jtfDireccion;
 	private JTextField jtfEmail;
 	private JTextField jtfTlf;
+	private JComboBox<Sexo> comboBox;
 
 	/**
 	 * Create the panel.
@@ -38,7 +43,7 @@ public class PanelCompartido extends JPanel {
 
 		jtfId = new JTextField();
 		GridBagConstraints gbc_jtfId = new GridBagConstraints();
-		gbc_jtfId.insets = new Insets(0, 0, 5, 0);
+		gbc_jtfId.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfId.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfId.gridx = 1;
 		gbc_jtfId.gridy = 0;
@@ -55,7 +60,7 @@ public class PanelCompartido extends JPanel {
 
 		jtfNombre = new JTextField();
 		GridBagConstraints gbc_jtfNombre = new GridBagConstraints();
-		gbc_jtfNombre.insets = new Insets(0, 0, 5, 0);
+		gbc_jtfNombre.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfNombre.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfNombre.gridx = 1;
 		gbc_jtfNombre.gridy = 1;
@@ -72,7 +77,7 @@ public class PanelCompartido extends JPanel {
 
 		jtfApellido1 = new JTextField();
 		GridBagConstraints gbc_jtfApellido1 = new GridBagConstraints();
-		gbc_jtfApellido1.insets = new Insets(0, 0, 5, 0);
+		gbc_jtfApellido1.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfApellido1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfApellido1.gridx = 1;
 		gbc_jtfApellido1.gridy = 2;
@@ -89,7 +94,7 @@ public class PanelCompartido extends JPanel {
 
 		jtfApellido2 = new JTextField();
 		GridBagConstraints gbc_jtfApellido2 = new GridBagConstraints();
-		gbc_jtfApellido2.insets = new Insets(0, 0, 5, 0);
+		gbc_jtfApellido2.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfApellido2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfApellido2.gridx = 1;
 		gbc_jtfApellido2.gridy = 3;
@@ -106,7 +111,7 @@ public class PanelCompartido extends JPanel {
 
 		jtfDni = new JTextField();
 		GridBagConstraints gbc_jtfDni = new GridBagConstraints();
-		gbc_jtfDni.insets = new Insets(0, 0, 5, 0);
+		gbc_jtfDni.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfDni.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfDni.gridx = 1;
 		gbc_jtfDni.gridy = 4;
@@ -123,7 +128,7 @@ public class PanelCompartido extends JPanel {
 
 		jtfDireccion = new JTextField();
 		GridBagConstraints gbc_jtfDireccion = new GridBagConstraints();
-		gbc_jtfDireccion.insets = new Insets(0, 0, 5, 0);
+		gbc_jtfDireccion.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfDireccion.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfDireccion.gridx = 1;
 		gbc_jtfDireccion.gridy = 5;
@@ -140,7 +145,7 @@ public class PanelCompartido extends JPanel {
 
 		jtfEmail = new JTextField();
 		GridBagConstraints gbc_jtfEmail = new GridBagConstraints();
-		gbc_jtfEmail.insets = new Insets(0, 0, 5, 0);
+		gbc_jtfEmail.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfEmail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfEmail.gridx = 1;
 		gbc_jtfEmail.gridy = 6;
@@ -157,12 +162,28 @@ public class PanelCompartido extends JPanel {
 
 		jtfTlf = new JTextField();
 		GridBagConstraints gbc_jtfTlf = new GridBagConstraints();
-		gbc_jtfTlf.insets = new Insets(0, 0, 5, 0);
+		gbc_jtfTlf.insets = new Insets(0, 0, 5, 5);
 		gbc_jtfTlf.fill = GridBagConstraints.HORIZONTAL;
 		gbc_jtfTlf.gridx = 1;
 		gbc_jtfTlf.gridy = 7;
 		add(jtfTlf, gbc_jtfTlf);
 		jtfTlf.setColumns(10);
+
+		JLabel lblNewLabel_9 = new JLabel("Sexo:");
+		GridBagConstraints gbc_lblNewLabel_9 = new GridBagConstraints();
+		gbc_lblNewLabel_9.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNewLabel_9.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_9.gridx = 0;
+		gbc_lblNewLabel_9.gridy = 8;
+		add(lblNewLabel_9, gbc_lblNewLabel_9);
+
+		comboBox = new JComboBox<Sexo>();
+		GridBagConstraints gbc_comboBox = new GridBagConstraints();
+		gbc_comboBox.insets = new Insets(0, 0, 0, 5);
+		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox.gridx = 1;
+		gbc_comboBox.gridy = 8;
+		add(comboBox, gbc_comboBox);
 
 		JLabel lblNewLabel_8 = new JLabel("         ");
 		GridBagConstraints gbc_lblNewLabel_8 = new GridBagConstraints();
@@ -282,6 +303,20 @@ public class PanelCompartido extends JPanel {
 	 */
 	public void setJtfTlf(String jtfTlf) {
 		this.jtfTlf.setText(jtfTlf);
+	}
+
+	/**
+	 * @return the comboBox
+	 */
+	public Sexo getSexo() {
+		return (Sexo) comboBox.getSelectedItem();
+	}
+
+	/**
+	 * @param comboBox the comboBox to set
+	 */
+	public void setSexo(Sexo comboBox) {
+		this.comboBox.setSelectedItem(comboBox);
 	}
 
 }

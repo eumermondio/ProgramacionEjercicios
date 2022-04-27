@@ -30,7 +30,7 @@ public class ControladorEstudiante extends ControladorGeneral {
 			if (rs.next()) {
 				e = new Estudiante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
 						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),
-						rs.getString("email"), rs.getString("telefono"));
+						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -51,7 +51,7 @@ public class ControladorEstudiante extends ControladorGeneral {
 			if (rs.next()) {
 				e = new Estudiante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
 						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),
-						rs.getString("email"), rs.getString("telefono"));
+						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -183,7 +183,7 @@ public class ControladorEstudiante extends ControladorGeneral {
 			if (rs.next()) {
 				e = new Estudiante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
 						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),
-						rs.getString("email"), rs.getString("telefono"));
+						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -204,7 +204,7 @@ public class ControladorEstudiante extends ControladorGeneral {
 			if (rs.next()) {
 				e = new Estudiante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
 						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),
-						rs.getString("email"), rs.getString("telefono"));
+						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();

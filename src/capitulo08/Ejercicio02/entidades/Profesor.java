@@ -9,6 +9,7 @@ public class Profesor {
 	protected String direccion;
 	protected String email;
 	protected String tlf;
+	protected int sexo;
 
 	/**
 	 * 
@@ -26,10 +27,10 @@ public class Profesor {
 	 * @param direccion
 	 * @param email
 	 * @param tlf
+	 * @param sexo
 	 */
 	public Profesor(int id, String nombre, String apellido1, String apellido2, String dni, String direccion,
-			String email, String tlf) {
-		super();
+			String email, String tlf, int sexo) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
@@ -38,6 +39,7 @@ public class Profesor {
 		this.direccion = direccion;
 		this.email = email;
 		this.tlf = tlf;
+		this.sexo = sexo;
 	}
 
 	/**
@@ -150,6 +152,20 @@ public class Profesor {
 	 */
 	public void setTlf(String tlf) {
 		this.tlf = tlf;
+	}
+
+	/**
+	 * @return the sexo
+	 */
+	public int getSexo() {
+		return sexo;
+	}
+
+	/**
+	 * @param sexo the sexo to set
+	 */
+	public void setSexo(int sexo) {
+		this.sexo = sexo;
 	}
 
 }

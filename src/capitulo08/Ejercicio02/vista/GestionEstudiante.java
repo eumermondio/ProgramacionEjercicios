@@ -6,13 +6,18 @@ import javax.swing.JToolBar;
 
 import capitulo08.Ejercicio02.controladores.ControladorCurso;
 import capitulo08.Ejercicio02.controladores.ControladorEstudiante;
+import capitulo08.Ejercicio02.controladores.ControladorMateria;
 import capitulo08.Ejercicio02.entidades.Curso;
 import capitulo08.Ejercicio02.entidades.Estudiante;
+import capitulo08.Ejercicio02.entidades.Materia;
+import capitulo08.Ejercicio02.entidades.Sexo;
 
 import javax.swing.JButton;
 
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -106,7 +111,7 @@ public class GestionEstudiante extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Estudiante es = new Estudiante(Integer.parseInt(panel.getJtfId()), panel.getJtfNombre(),
 						panel.getJtfApellido1(), panel.getJtfApellido2(), panel.getJtfDni(), panel.getJtfDireccion(),
-						panel.getJtfEmail(), panel.getJtfTlf());
+						panel.getJtfEmail(), panel.getJtfTlf(), panel.getSexo().getId());
 				if (ControladorEstudiante.actualizar(es) == 1) {
 					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de estudiantes",
 							JOptionPane.INFORMATION_MESSAGE);
