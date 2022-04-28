@@ -131,8 +131,13 @@ public class PanelJFileChooserFicheroImagen extends JPanel {
 	private void mostrarImagen() {
 		if (imagenEnArrayDeBytes != null && imagenEnArrayDeBytes.length > 0) {
 			ImageIcon icono = new ImageIcon(imagenEnArrayDeBytes);
-			JLabel lblIcono = new JLabel(icono);
-			scrollPane.setViewportView(lblIcono);
+			if (icono.getIconHeight() <= 100 && icono.getIconWidth() <= 100) {
+				JLabel lblIcono = new JLabel(icono);
+				scrollPane.setViewportView(lblIcono);
+			} else {
+				JOptionPane.showMessageDialog(null, "La imagen mide más de 100x100 px", "Error de imagen",
+						JOptionPane.ERROR_MESSAGE);
+			}
 		} else {
 			JLabel lblIcono = new JLabel("Sin imagen");
 			scrollPane.setViewportView(lblIcono);
