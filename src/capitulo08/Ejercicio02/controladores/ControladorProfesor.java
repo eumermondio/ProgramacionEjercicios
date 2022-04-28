@@ -143,25 +143,43 @@ public class ControladorProfesor extends ControladorGeneral {
 
 			Connection conexion = (Connection) DriverManager
 					.getConnection("jdbc:mysql://localhost/centroeducativo?serverTimezone=UTC", "java", "Abcdefgh.1");
+			if (e.getId() != 0) {
+				PreparedStatement ps = (PreparedStatement) conexion.prepareStatement(
+						"UPDATE centroeducativo.profesor set nombre = ?, apellido1 = ?, apellido2 = ?, dni = ?, direccion = ?, email = ?, telefono = ?, idSexo = ?, imagen = ? where id = ?");
 
-			PreparedStatement ps = (PreparedStatement) conexion.prepareStatement(
-					"UPDATE centroeducativo.profesor set nombre = ?, apellido1 = ?, apellido2 = ?, dni = ?, direccion = ?, email = ?, telefono = ?, idSexo = ?, imagen = ? where id = ?");
+				ps.setString(1, e.getNombre());
+				ps.setString(2, e.getApellido1());
+				ps.setString(3, e.getApellido2());
+				ps.setString(4, e.getDni());
+				ps.setString(5, e.getDireccion());
+				ps.setString(6, e.getEmail());
+				ps.setString(7, e.getTlf());
+				ps.setInt(8, e.getSexo());
+				ps.setBytes(9, e.getImagen());
+				ps.setInt(10, e.getId());
 
-			ps.setString(1, e.getNombre());
-			ps.setString(2, e.getApellido1());
-			ps.setString(3, e.getApellido2());
-			ps.setString(4, e.getDni());
-			ps.setString(5, e.getDireccion());
-			ps.setString(6, e.getEmail());
-			ps.setString(7, e.getTlf());
-			ps.setInt(8, e.getSexo());
-			ps.setBytes(9, e.getImagen());
-			ps.setInt(10, e.getId());
+				registrosAfectados = ps.executeUpdate();
+				ps.close();
+			} else {
+				PreparedStatement ps = (PreparedStatement) conexion
+						.prepareStatement("insert into profesor values(?,?,?,?,?,?,?,?,?,?)");
 
-			registrosAfectados = ps.executeUpdate();
+				ps.setInt(1, ControladorGeneral.maxId("profesor"));
+				ps.setString(2, e.getNombre());
+				ps.setString(3, e.getApellido1());
+				ps.setString(4, e.getApellido2());
+				ps.setString(5, e.getDni());
+				ps.setString(6, e.getDireccion());
+				ps.setString(7, e.getEmail());
+				ps.setString(8, e.getTlf());
+				ps.setInt(9, e.getSexo());
+				ps.setBytes(10, e.getImagen());
+
+				registrosAfectados = ps.executeUpdate();
+				ps.close();
+			}
 
 			// Cierre de los elementos
-			ps.close();
 			conexion.close();
 		} catch (ClassNotFoundException ex) {
 			System.out.println("Imposible acceder al driver Mysql");

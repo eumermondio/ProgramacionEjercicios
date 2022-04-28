@@ -122,6 +122,7 @@ public class PanelJFileChooserFicheroImagen extends JPanel {
 	 */
 	public void setImagenEnArrayDeBytes(byte[] imagenEnArrayDeBytes) {
 		this.imagenEnArrayDeBytes = imagenEnArrayDeBytes;
+		mostrarImagen();
 	}
 
 	/**

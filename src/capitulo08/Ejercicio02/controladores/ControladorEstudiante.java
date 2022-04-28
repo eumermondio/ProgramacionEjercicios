@@ -1,6 +1,8 @@
 package capitulo08.Ejercicio02.controladores;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,6 +15,7 @@ import capitulo08.Ejercicio02.ConnectionManager;
 import capitulo08.Ejercicio02.entidades.Curso;
 import capitulo08.Ejercicio02.entidades.Estudiante;
 import capitulo08.Ejercicio02.entidades.Materia;
+import capitulo08.Ejercicio02.entidades.Profesor;
 import capitulo08.Ejercicio02.entidades.Sexo;
 import capitulo08.Ejercicio02.vista.GestionCurso;
 import capitulo08.Ejercicio02.vista.GestionEstudiante;
@@ -142,6 +145,64 @@ public class ControladorEstudiante extends ControladorGeneral {
 	 * 
 	 */
 	public static int actualizar(Estudiante e) {
+		int registrosAfectados = 0;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			Connection conexion = (Connection) DriverManager
+					.getConnection("jdbc:mysql://localhost/centroeducativo?serverTimezone=UTC", "java", "Abcdefgh.1");
+			if (e.getId() != 0) {
+				PreparedStatement ps = (PreparedStatement) conexion.prepareStatement(
+						"UPDATE centroeducativo.estudiante set nombre = ?, apellido1 = ?, apellido2 = ?, dni = ?, direccion = ?, email = ?, telefono = ?, idSexo = ?, imagen = ? where id = ?");
+
+				ps.setString(1, e.getNombre());
+				ps.setString(2, e.getApellido1());
+				ps.setString(3, e.getApellido2());
+				ps.setString(4, e.getDni());
+				ps.setString(5, e.getDireccion());
+				ps.setString(6, e.getEmail());
+				ps.setString(7, e.getTlf());
+				ps.setInt(8, e.getSexo());
+				ps.setBytes(9, e.getImagen());
+				ps.setInt(10, e.getId());
+
+				registrosAfectados = ps.executeUpdate();
+				ps.close();
+			} else {
+				PreparedStatement ps = (PreparedStatement) conexion
+						.prepareStatement("insert into estudiante values(?,?,?,?,?,?,?,?,?,?)");
+
+				ps.setInt(1, ControladorGeneral.maxId("estudiante"));
+				ps.setString(2, e.getNombre());
+				ps.setString(3, e.getApellido1());
+				ps.setString(4, e.getApellido2());
+				ps.setString(5, e.getDni());
+				ps.setString(6, e.getDireccion());
+				ps.setString(7, e.getEmail());
+				ps.setString(8, e.getTlf());
+				ps.setInt(9, e.getSexo());
+				ps.setBytes(10, e.getImagen());
+
+				registrosAfectados = ps.executeUpdate();
+				ps.close();
+			}
+
+			// Cierre de los elementos
+			conexion.close();
+		} catch (ClassNotFoundException ex) {
+			System.out.println("Imposible acceder al driver Mysql");
+			ex.printStackTrace();
+		} catch (SQLException ex) {
+			System.out.println("Error en la ejecuci�n SQL: " + ex.getMessage());
+			ex.printStackTrace();
+		}
+		return registrosAfectados;
+	}
+
+	/**
+	 * 
+	 */
+	public static int actualizarkk(Estudiante e) {
 		int rowAffected = 0;
 		int idMax = 0;
 		try {

@@ -365,6 +365,22 @@ public class PanelCompartido extends JPanel {
 
 	/**
 	 * 
+	 * @param c
+	 */
+	public void mostrarImagen(Profesor p) {
+		getPanel().setImagenEnArrayDeBytes(p.getImagen());
+	}
+
+	/**
+	 * 
+	 * @param c
+	 */
+	public void mostrarImagen(Estudiante e) {
+		getPanel().setImagenEnArrayDeBytes(e.getImagen());
+	}
+
+	/**
+	 * 
 	 */
 	public void mostrarSexoEstudiante(Estudiante e) {
 		for (int i = 0; i < comboBox.getItemCount(); i++) {

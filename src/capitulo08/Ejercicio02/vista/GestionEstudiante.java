@@ -184,6 +184,8 @@ public class GestionEstudiante extends JPanel {
 			panel.setJtfEmail(e.getEmail());
 			panel.setJtfTlf(e.getTlf());
 			panel.mostrarSexoEstudiante(e);
+			panel.mostrarImagen(e);
+
 		}
 		if (ControladorEstudiante.findAnterior(Integer.parseInt(panel.getJtfId())) == null) {
 			btnPrimer.setEnabled(false);
