@@ -1,6 +1,8 @@
 package capitulo08.Ejercicio02.controladores;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,7 +26,7 @@ public class ControladorProfesor extends ControladorGeneral {
 			if (rs.next()) {
 				e = new Profesor(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
 						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),
-						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"));
+						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"), rs.getBytes("imagen"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -45,7 +47,7 @@ public class ControladorProfesor extends ControladorGeneral {
 			if (rs.next()) {
 				e = new Profesor(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
 						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),
-						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"));
+						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"), rs.getBytes("imagen"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -135,6 +137,46 @@ public class ControladorProfesor extends ControladorGeneral {
 	 * 
 	 */
 	public static int actualizar(Profesor e) {
+		int registrosAfectados = 0;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+
+			Connection conexion = (Connection) DriverManager
+					.getConnection("jdbc:mysql://localhost/centroeducativo?serverTimezone=UTC", "java", "Abcdefgh.1");
+
+			PreparedStatement ps = (PreparedStatement) conexion.prepareStatement(
+					"UPDATE centroeducativo.profesor set nombre = ?, apellido1 = ?, apellido2 = ?, dni = ?, direccion = ?, email = ?, telefono = ?, idSexo = ?, imagen = ? where id = ?");
+
+			ps.setString(1, e.getNombre());
+			ps.setString(2, e.getApellido1());
+			ps.setString(3, e.getApellido2());
+			ps.setString(4, e.getDni());
+			ps.setString(5, e.getDireccion());
+			ps.setString(6, e.getEmail());
+			ps.setString(7, e.getTlf());
+			ps.setInt(8, e.getSexo());
+			ps.setBytes(9, e.getImagen());
+			ps.setInt(10, e.getId());
+
+			registrosAfectados = ps.executeUpdate();
+
+			// Cierre de los elementos
+			ps.close();
+			conexion.close();
+		} catch (ClassNotFoundException ex) {
+			System.out.println("Imposible acceder al driver Mysql");
+			ex.printStackTrace();
+		} catch (SQLException ex) {
+			System.out.println("Error en la ejecuci�n SQL: " + ex.getMessage());
+			ex.printStackTrace();
+		}
+		return registrosAfectados;
+	}
+
+	/**
+	 * 
+	 */
+	public static int actualizarkk(Profesor e) {
 		int rowAffected = 0;
 		int idMax = 0;
 		try {
@@ -177,7 +219,7 @@ public class ControladorProfesor extends ControladorGeneral {
 			if (rs.next()) {
 				e = new Profesor(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
 						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),
-						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"));
+						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"), rs.getBytes("imagen"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -198,7 +240,7 @@ public class ControladorProfesor extends ControladorGeneral {
 			if (rs.next()) {
 				e = new Profesor(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
 						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),
-						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"));
+						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"), rs.getBytes("imagen"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();

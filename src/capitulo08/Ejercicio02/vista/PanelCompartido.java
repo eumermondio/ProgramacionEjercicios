@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
+import javax.swing.JScrollPane;
 
 public class PanelCompartido extends JPanel {
 	private JTextField jtfId;
@@ -27,6 +28,7 @@ public class PanelCompartido extends JPanel {
 	private JTextField jtfEmail;
 	private JTextField jtfTlf;
 	private JComboBox<Sexo> comboBox;
+	private PanelJFileChooserFicheroImagen panel;
 
 	/**
 	 * Create the panel.
@@ -35,7 +37,7 @@ public class PanelCompartido extends JPanel {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
@@ -55,6 +57,16 @@ public class PanelCompartido extends JPanel {
 		gbc_jtfId.gridy = 0;
 		add(jtfId, gbc_jtfId);
 		jtfId.setColumns(10);
+
+		panel = new PanelJFileChooserFicheroImagen();
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.weighty = 1.0;
+		gbc_panel.gridheight = 10;
+		gbc_panel.insets = new Insets(0, 0, 5, 0);
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 2;
+		gbc_panel.gridy = 0;
+		add(panel, gbc_panel);
 
 		JLabel lblNewLabel_1 = new JLabel("Nombre:");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -323,6 +335,20 @@ public class PanelCompartido extends JPanel {
 	 */
 	public void setSexo(Sexo comboBox) {
 		this.comboBox.setSelectedItem(comboBox);
+	}
+
+	/**
+	 * @return the panel
+	 */
+	public PanelJFileChooserFicheroImagen getPanel() {
+		return panel;
+	}
+
+	/**
+	 * @param panel the panel to set
+	 */
+	public void setPanel(PanelJFileChooserFicheroImagen panel) {
+		this.panel = panel;
 	}
 
 	/**

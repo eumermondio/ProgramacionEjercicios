@@ -111,7 +111,8 @@ public class GestionEstudiante extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				Estudiante es = new Estudiante(Integer.parseInt(panel.getJtfId()), panel.getJtfNombre(),
 						panel.getJtfApellido1(), panel.getJtfApellido2(), panel.getJtfDni(), panel.getJtfDireccion(),
-						panel.getJtfEmail(), panel.getJtfTlf(), panel.getSexo().getId());
+						panel.getJtfEmail(), panel.getJtfTlf(), panel.getSexo().getId(),
+						panel.getPanel().getImagenEnArrayDeBytes());
 				if (ControladorEstudiante.actualizar(es) == 1) {
 					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de estudiantes",
 							JOptionPane.INFORMATION_MESSAGE);

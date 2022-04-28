@@ -10,6 +10,7 @@ public class Estudiante {
 	protected String email;
 	protected String tlf;
 	protected int sexo;
+	protected byte[] imagen;
 
 	/**
 	 * 
@@ -28,9 +29,10 @@ public class Estudiante {
 	 * @param email
 	 * @param tlf
 	 * @param sexo
+	 * @param imagen
 	 */
 	public Estudiante(int id, String nombre, String apellido1, String apellido2, String dni, String direccion,
-			String email, String tlf, int sexo) {
+			String email, String tlf, int sexo, byte[] imagen) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
@@ -40,6 +42,7 @@ public class Estudiante {
 		this.email = email;
 		this.tlf = tlf;
 		this.sexo = sexo;
+		this.imagen = imagen;
 	}
 
 	/**
@@ -166,6 +169,20 @@ public class Estudiante {
 	 */
 	public void setSexo(int sexo) {
 		this.sexo = sexo;
+	}
+
+	/**
+	 * @return the imagen
+	 */
+	public byte[] getImagen() {
+		return imagen;
+	}
+
+	/**
+	 * @param imagen the imagen to set
+	 */
+	public void setImagen(byte[] imagen) {
+		this.imagen = imagen;
 	}
 
 }
