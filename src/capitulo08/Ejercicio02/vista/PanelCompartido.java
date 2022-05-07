@@ -1,8 +1,12 @@
 package capitulo08.Ejercicio02.vista;
 
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
@@ -12,6 +16,10 @@ import capitulo08.Ejercicio02.entidades.Profesor;
 import capitulo08.Ejercicio02.entidades.Sexo;
 
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +37,7 @@ public class PanelCompartido extends JPanel {
 	private JTextField jtfTlf;
 	private JComboBox<Sexo> comboBox;
 	private PanelJFileChooserFicheroImagen panel;
+	JPopupMenu popup;
 
 	/**
 	 * Create the panel.
@@ -208,7 +217,67 @@ public class PanelCompartido extends JPanel {
 		gbc_lblNewLabel_8.gridx = 2;
 		gbc_lblNewLabel_8.gridy = 8;
 		add(lblNewLabel_8, gbc_lblNewLabel_8);
+
+		popup = getPopUpMenu();
+
+		// Evento para mostrar el men� en las coordenadas que correspondan
+		panel.getScrollPane().addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				showPopup(e);
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				showPopup(e);
+			}
+
+			/**
+			 * M�todo llamado cuando se detecta el evento de rat�n, mostrar� el men�
+			 * 
+			 * @param e
+			 */
+			private void showPopup(MouseEvent e) {
+				popup = getPopUpMenu();
+				if (e.isPopupTrigger()) {
+					popup.show(e.getComponent(), e.getX(), e.getY());
+				}
+			}
+		});
+
 		mostrarComboBox();
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private JPopupMenu getPopUpMenu() {
+		JPopupMenu menu = new JPopupMenu();
+
+		menu.add(crearNuevoMenuItem("Dimensiones de la imagen: " + panel.getAlto() + " x " + panel.getAncho()));
+		menu.addSeparator();
+		menu.add(crearNuevoMenuItem("Segunda opción"));
+
+		return menu;
+	}
+
+	/**
+	 * Menú Item para salir de la aplicación
+	 * 
+	 * @return
+	 */
+	private JMenuItem crearNuevoMenuItem(String titulo) {
+		JMenuItem item = new JMenuItem(titulo);
+		item.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Han hecho clic en: " + titulo);
+			}
+		});
+
+		return item;
 	}
 
 	/**

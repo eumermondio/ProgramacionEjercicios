@@ -29,6 +29,8 @@ import java.awt.event.ActionEvent;
 public class PanelJFileChooserFicheroImagen extends JPanel {
 	private JScrollPane scrollPane;
 	byte[] imagenEnArrayDeBytes;
+	private int ancho;
+	private int alto;
 
 	/**
 	 * Create the panel.
@@ -111,6 +113,20 @@ public class PanelJFileChooserFicheroImagen extends JPanel {
 	}
 
 	/**
+	 * @return the scrollPane
+	 */
+	public JScrollPane getScrollPane() {
+		return scrollPane;
+	}
+
+	/**
+	 * @param scrollPane the scrollPane to set
+	 */
+	public void setScrollPane(JScrollPane scrollPane) {
+		this.scrollPane = scrollPane;
+	}
+
+	/**
 	 * @return the imagenEnArrayDeBytes
 	 */
 	public byte[] getImagenEnArrayDeBytes() {
@@ -126,11 +142,41 @@ public class PanelJFileChooserFicheroImagen extends JPanel {
 	}
 
 	/**
+	 * @return the ancho
+	 */
+	public int getAncho() {
+		return ancho;
+	}
+
+	/**
+	 * @param ancho the ancho to set
+	 */
+	public void setAncho(int ancho) {
+		this.ancho = ancho;
+	}
+
+	/**
+	 * @return the alto
+	 */
+	public int getAlto() {
+		return alto;
+	}
+
+	/**
+	 * @param alto the alto to set
+	 */
+	public void setAlto(int alto) {
+		this.alto = alto;
+	}
+
+	/**
 	 * 
 	 */
 	private void mostrarImagen() {
 		if (imagenEnArrayDeBytes != null && imagenEnArrayDeBytes.length > 0) {
 			ImageIcon icono = new ImageIcon(imagenEnArrayDeBytes);
+			setAlto(icono.getIconHeight());
+			setAncho(icono.getIconWidth());
 			if (icono.getIconHeight() <= 100 && icono.getIconWidth() <= 100) {
 				JLabel lblIcono = new JLabel(icono);
 				scrollPane.setViewportView(lblIcono);
