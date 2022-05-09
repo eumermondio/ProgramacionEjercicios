@@ -69,7 +69,7 @@ public class PanelJFileChooserFicheroImagen extends JPanel {
 	/**
 	 * 
 	 */
-	private void seleccionaImagen() {
+	public void seleccionaImagen() {
 		JFileChooser jfileChooser = new JFileChooser();
 
 		// Configurando el componente

@@ -258,7 +258,7 @@ public class PanelCompartido extends JPanel {
 
 		menu.add(crearNuevoMenuItem("Dimensiones de la imagen: " + panel.getAlto() + " x " + panel.getAncho()));
 		menu.addSeparator();
-		menu.add(crearNuevoMenuItem("Segunda opción"));
+		menu.add(crearNuevoMenuItem("Cambiar imagen"));
 
 		return menu;
 	}
@@ -270,12 +270,14 @@ public class PanelCompartido extends JPanel {
 	 */
 	private JMenuItem crearNuevoMenuItem(String titulo) {
 		JMenuItem item = new JMenuItem(titulo);
-		item.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Han hecho clic en: " + titulo);
-			}
-		});
+		if (titulo.equalsIgnoreCase("Cambiar imagen")) {
+			item.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					panel.seleccionaImagen();
+				}
+			});
+		}
 
 		return item;
 	}
