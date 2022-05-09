@@ -2,6 +2,8 @@ package capitulo08.Ejercicio02.vista;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JToolBar;
 
 import capitulo08.Ejercicio02.controladores.ControladorCurso;
@@ -112,7 +114,7 @@ public class GestionEstudiante extends JPanel {
 				Estudiante es = new Estudiante(Integer.parseInt(panel.getJtfId()), panel.getJtfNombre(),
 						panel.getJtfApellido1(), panel.getJtfApellido2(), panel.getJtfDni(), panel.getJtfDireccion(),
 						panel.getJtfEmail(), panel.getJtfTlf(), panel.getSexo().getId(),
-						panel.getPanel().getImagenEnArrayDeBytes());
+						panel.getPanel().getImagenEnArrayDeBytes(), panel.getJtfColor());
 				if (ControladorEstudiante.actualizar(es) == 1) {
 					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de estudiantes",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -185,6 +187,12 @@ public class GestionEstudiante extends JPanel {
 			panel.setJtfTlf(e.getTlf());
 			panel.mostrarSexoEstudiante(e);
 			panel.mostrarImagen(e);
+			panel.setJtfColor(e.getColor());
+			if (!panel.getJtfColor().equalsIgnoreCase("")) {
+				panel.setBackground(Color.decode(panel.getJtfColor()));
+			} else {
+				panel.setBackground(Color.WHITE);
+			}
 
 		}
 		if (ControladorEstudiante.findAnterior(Integer.parseInt(panel.getJtfId())) == null) {

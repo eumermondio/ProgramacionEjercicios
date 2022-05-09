@@ -2,6 +2,8 @@ package capitulo08.Ejercicio02.vista;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JToolBar;
 
 import capitulo08.Ejercicio02.controladores.ControladorCurso;
@@ -108,7 +110,7 @@ public class GestionProfesor extends JPanel {
 				Profesor es = new Profesor(Integer.parseInt(panel.getJtfId()), panel.getJtfNombre(),
 						panel.getJtfApellido1(), panel.getJtfApellido2(), panel.getJtfDni(), panel.getJtfDireccion(),
 						panel.getJtfEmail(), panel.getJtfTlf(), panel.getSexo().getId(),
-						panel.getPanel().getImagenEnArrayDeBytes());
+						panel.getPanel().getImagenEnArrayDeBytes(), panel.getJtfColor());
 				if (ControladorProfesor.actualizar(es) == 1) {
 					JOptionPane.showMessageDialog(null, "Actualización o inserción correcta", "Gestion de profesores",
 							JOptionPane.INFORMATION_MESSAGE);
@@ -180,6 +182,12 @@ public class GestionProfesor extends JPanel {
 			panel.setJtfTlf(p.getTlf());
 			panel.mostrarSexoProfesor(p);
 			panel.mostrarImagen(p);
+			panel.setJtfColor(p.getColor());
+			if (!panel.getJtfColor().equalsIgnoreCase("")) {
+				panel.setBackground(Color.decode(panel.getJtfColor()));
+			} else {
+				panel.setBackground(Color.WHITE);
+			}
 		}
 		if (ControladorProfesor.findAnterior(Integer.parseInt(panel.getJtfId())) == null) {
 			btnPrimer.setEnabled(false);

@@ -11,6 +11,7 @@ public class Profesor {
 	protected String tlf;
 	protected int sexo;
 	protected byte[] imagen;
+	protected String color;
 
 	/**
 	 * 
@@ -30,9 +31,11 @@ public class Profesor {
 	 * @param tlf
 	 * @param sexo
 	 * @param imagen
+	 * @param color
 	 */
 	public Profesor(int id, String nombre, String apellido1, String apellido2, String dni, String direccion,
-			String email, String tlf, int sexo, byte[] imagen) {
+			String email, String tlf, int sexo, byte[] imagen, String color) {
+		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
@@ -43,6 +46,7 @@ public class Profesor {
 		this.tlf = tlf;
 		this.sexo = sexo;
 		this.imagen = imagen;
+		this.color = color;
 	}
 
 	/**
@@ -183,6 +187,20 @@ public class Profesor {
 	 */
 	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
+	}
+
+	/**
+	 * @return the color
+	 */
+	public String getColor() {
+		return color;
+	}
+
+	/**
+	 * @param color the color to set
+	 */
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 }

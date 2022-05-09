@@ -34,7 +34,8 @@ public class ControladorEstudiante extends ControladorGeneral {
 			if (rs.next()) {
 				e = new Estudiante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
 						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),
-						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"), rs.getBytes("imagen"));
+						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"), rs.getBytes("imagen"),
+						rs.getString("color"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -55,7 +56,8 @@ public class ControladorEstudiante extends ControladorGeneral {
 			if (rs.next()) {
 				e = new Estudiante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
 						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),
-						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"), rs.getBytes("imagen"));
+						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"), rs.getBytes("imagen"),
+						rs.getString("color"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -153,7 +155,7 @@ public class ControladorEstudiante extends ControladorGeneral {
 					.getConnection("jdbc:mysql://localhost/centroeducativo?serverTimezone=UTC", "java", "Abcdefgh.1");
 			if (e.getId() != 0) {
 				PreparedStatement ps = (PreparedStatement) conexion.prepareStatement(
-						"UPDATE centroeducativo.estudiante set nombre = ?, apellido1 = ?, apellido2 = ?, dni = ?, direccion = ?, email = ?, telefono = ?, idSexo = ?, imagen = ? where id = ?");
+						"UPDATE centroeducativo.estudiante set nombre = ?, apellido1 = ?, apellido2 = ?, dni = ?, direccion = ?, email = ?, telefono = ?, idSexo = ?, imagen = ?,color = ? where id = ?");
 
 				ps.setString(1, e.getNombre());
 				ps.setString(2, e.getApellido1());
@@ -164,7 +166,8 @@ public class ControladorEstudiante extends ControladorGeneral {
 				ps.setString(7, e.getTlf());
 				ps.setInt(8, e.getSexo());
 				ps.setBytes(9, e.getImagen());
-				ps.setInt(10, e.getId());
+				ps.setString(10, e.getColor());
+				ps.setInt(11, e.getId());
 
 				registrosAfectados = ps.executeUpdate();
 				ps.close();
@@ -246,7 +249,8 @@ public class ControladorEstudiante extends ControladorGeneral {
 			if (rs.next()) {
 				e = new Estudiante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
 						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),
-						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"), rs.getBytes("imagen"));
+						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"), rs.getBytes("imagen"),
+						rs.getString("color"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -267,7 +271,8 @@ public class ControladorEstudiante extends ControladorGeneral {
 			if (rs.next()) {
 				e = new Estudiante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
 						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),
-						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"), rs.getBytes("imagen"));
+						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"), rs.getBytes("imagen"),
+						rs.getString("color"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();

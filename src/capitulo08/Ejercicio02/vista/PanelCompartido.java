@@ -7,6 +7,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
@@ -25,6 +26,8 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
 
 public class PanelCompartido extends JPanel {
 	private JTextField jtfId;
@@ -38,6 +41,8 @@ public class PanelCompartido extends JPanel {
 	private JComboBox<Sexo> comboBox;
 	private PanelJFileChooserFicheroImagen panel;
 	JPopupMenu popup;
+	private JTextField jtfColor;
+	JColorChooser jColorChooser;
 
 	/**
 	 * Create the panel.
@@ -45,9 +50,10 @@ public class PanelCompartido extends JPanel {
 	public PanelCompartido() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 1.0, 1.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		JLabel lblNewLabel = new JLabel("Id:");
@@ -70,8 +76,7 @@ public class PanelCompartido extends JPanel {
 		panel = new PanelJFileChooserFicheroImagen();
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.weighty = 1.0;
-		gbc_panel.gridheight = 10;
-		gbc_panel.insets = new Insets(0, 0, 5, 0);
+		gbc_panel.gridheight = 11;
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 2;
 		gbc_panel.gridy = 0;
@@ -198,7 +203,7 @@ public class PanelCompartido extends JPanel {
 
 		JLabel lblNewLabel_9 = new JLabel("Sexo:");
 		GridBagConstraints gbc_lblNewLabel_9 = new GridBagConstraints();
-		gbc_lblNewLabel_9.insets = new Insets(0, 0, 0, 5);
+		gbc_lblNewLabel_9.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_9.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel_9.gridx = 0;
 		gbc_lblNewLabel_9.gridy = 8;
@@ -206,7 +211,7 @@ public class PanelCompartido extends JPanel {
 
 		comboBox = new JComboBox<Sexo>();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
-		gbc_comboBox.insets = new Insets(0, 0, 0, 5);
+		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.gridx = 1;
 		gbc_comboBox.gridy = 8;
@@ -214,9 +219,39 @@ public class PanelCompartido extends JPanel {
 
 		JLabel lblNewLabel_8 = new JLabel("         ");
 		GridBagConstraints gbc_lblNewLabel_8 = new GridBagConstraints();
+		gbc_lblNewLabel_8.insets = new Insets(0, 0, 5, 0);
 		gbc_lblNewLabel_8.gridx = 2;
 		gbc_lblNewLabel_8.gridy = 8;
 		add(lblNewLabel_8, gbc_lblNewLabel_8);
+
+		JLabel lblNewLabel_10 = new JLabel("Color:");
+		GridBagConstraints gbc_lblNewLabel_10 = new GridBagConstraints();
+		gbc_lblNewLabel_10.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_10.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_10.gridx = 0;
+		gbc_lblNewLabel_10.gridy = 9;
+		add(lblNewLabel_10, gbc_lblNewLabel_10);
+
+		jtfColor = new JTextField();
+		jtfColor.setColumns(10);
+		GridBagConstraints gbc_jtfColor = new GridBagConstraints();
+		gbc_jtfColor.insets = new Insets(0, 0, 5, 5);
+		gbc_jtfColor.fill = GridBagConstraints.HORIZONTAL;
+		gbc_jtfColor.gridx = 1;
+		gbc_jtfColor.gridy = 9;
+		add(jtfColor, gbc_jtfColor);
+
+		JButton btnColor = new JButton("Cambiar color");
+		btnColor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				seleccionaColor();
+			}
+		});
+		GridBagConstraints gbc_btnColor = new GridBagConstraints();
+		gbc_btnColor.insets = new Insets(0, 0, 0, 5);
+		gbc_btnColor.gridx = 1;
+		gbc_btnColor.gridy = 10;
+		add(btnColor, gbc_btnColor);
 
 		popup = getPopUpMenu();
 
@@ -247,6 +282,19 @@ public class PanelCompartido extends JPanel {
 		});
 
 		mostrarComboBox();
+	}
+
+	/**
+	 * 
+	 */
+	private void seleccionaColor() {
+		Color color = jColorChooser.showDialog(null, "Seleccione un Color", Color.GRAY);
+		// Si el usuario pulsa sobre aceptar, el color elegido no será nulo
+		if (color != null) {
+			String strColor = "#" + Integer.toHexString(color.getRGB()).substring(2);
+			jtfColor.setText(strColor);
+			setBackground(color);
+		}
 	}
 
 	/**
@@ -420,6 +468,20 @@ public class PanelCompartido extends JPanel {
 	 */
 	public void setPanel(PanelJFileChooserFicheroImagen panel) {
 		this.panel = panel;
+	}
+
+	/**
+	 * @return the jtfColor
+	 */
+	public String getJtfColor() {
+		return jtfColor.getText();
+	}
+
+	/**
+	 * @param jtfColor the jtfColor to set
+	 */
+	public void setJtfColor(String jtfColor) {
+		this.jtfColor.setText(jtfColor);
 	}
 
 	/**

@@ -11,12 +11,20 @@ public class Estudiante {
 	protected String tlf;
 	protected int sexo;
 	protected byte[] imagen;
+	protected String color;
 
 	/**
 	 * 
 	 */
 	public Estudiante() {
 		super();
+	}
+
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
 	}
 
 	/**
@@ -30,9 +38,11 @@ public class Estudiante {
 	 * @param tlf
 	 * @param sexo
 	 * @param imagen
+	 * @param color
 	 */
 	public Estudiante(int id, String nombre, String apellido1, String apellido2, String dni, String direccion,
-			String email, String tlf, int sexo, byte[] imagen) {
+			String email, String tlf, int sexo, byte[] imagen, String color) {
+		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido1 = apellido1;
@@ -43,13 +53,7 @@ public class Estudiante {
 		this.tlf = tlf;
 		this.sexo = sexo;
 		this.imagen = imagen;
-	}
-
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
+		this.color = color;
 	}
 
 	/**
@@ -85,6 +89,20 @@ public class Estudiante {
 	 */
 	public void setApellido1(String apellido1) {
 		this.apellido1 = apellido1;
+	}
+
+	/**
+	 * @return the color
+	 */
+	public String getColor() {
+		return color;
+	}
+
+	/**
+	 * @param color the color to set
+	 */
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	/**
