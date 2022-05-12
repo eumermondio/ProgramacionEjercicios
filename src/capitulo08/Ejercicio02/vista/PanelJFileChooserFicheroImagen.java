@@ -104,7 +104,7 @@ public class PanelJFileChooserFicheroImagen extends JPanel {
 			if (fichero.isFile()) {
 				try {
 					this.imagenEnArrayDeBytes = Files.readAllBytes(fichero.toPath());
-					mostrarImagen();
+					setImagenEnArrayDeBytes(imagenEnArrayDeBytes);
 				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
@@ -138,7 +138,21 @@ public class PanelJFileChooserFicheroImagen extends JPanel {
 	 */
 	public void setImagenEnArrayDeBytes(byte[] imagenEnArrayDeBytes) {
 		this.imagenEnArrayDeBytes = imagenEnArrayDeBytes;
-		mostrarImagen();
+		if (imagenEnArrayDeBytes != null && imagenEnArrayDeBytes.length > 0) {
+			ImageIcon icono = new ImageIcon(imagenEnArrayDeBytes);
+			setAlto(icono.getIconHeight());
+			setAncho(icono.getIconWidth());
+			if (icono.getIconHeight() <= 100 && icono.getIconWidth() <= 100) {
+				JLabel lblIcono = new JLabel(icono);
+				scrollPane.setViewportView(lblIcono);
+			} else {
+				JOptionPane.showMessageDialog(null, "La imagen mide más de 100x100 px", "Error de imagen",
+						JOptionPane.ERROR_MESSAGE);
+			}
+		} else {
+			JLabel lblIcono = new JLabel("Sin imagen");
+			scrollPane.setViewportView(lblIcono);
+		}
 	}
 
 	/**
@@ -169,25 +183,4 @@ public class PanelJFileChooserFicheroImagen extends JPanel {
 		this.alto = alto;
 	}
 
-	/**
-	 * 
-	 */
-	private void mostrarImagen() {
-		if (imagenEnArrayDeBytes != null && imagenEnArrayDeBytes.length > 0) {
-			ImageIcon icono = new ImageIcon(imagenEnArrayDeBytes);
-			setAlto(icono.getIconHeight());
-			setAncho(icono.getIconWidth());
-			if (icono.getIconHeight() <= 100 && icono.getIconWidth() <= 100) {
-				JLabel lblIcono = new JLabel(icono);
-				scrollPane.setViewportView(lblIcono);
-			} else {
-				JOptionPane.showMessageDialog(null, "La imagen mide más de 100x100 px", "Error de imagen",
-						JOptionPane.ERROR_MESSAGE);
-			}
-		} else {
-			JLabel lblIcono = new JLabel("Sin imagen");
-			scrollPane.setViewportView(lblIcono);
-		}
-
-	}
 }
