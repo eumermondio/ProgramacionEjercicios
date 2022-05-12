@@ -203,4 +203,9 @@ public class Profesor {
 		this.color = color;
 	}
 
+	@Override
+	public String toString() {
+		return nombre + " " + apellido1 + " " + apellido2;
+	}
+
 }

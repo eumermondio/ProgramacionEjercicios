@@ -81,4 +81,9 @@ public class Materia {
 		this.idCurso = idCurso;
 	}
 
+	@Override
+	public String toString() {
+		return acronimo;
+	}
+
 }

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -41,6 +42,27 @@ public class ControladorEstudiante extends ControladorGeneral {
 			ex.printStackTrace();
 		}
 		return e;
+	}
+
+	/**
+	 * 
+	 */
+	public static void findEstudianteMateriasProfes() {
+		List<Estudiante> l = new ArrayList<Estudiante>();
+		try {
+			Connection con = ConnectionManager.getConexion();
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(
+					"SELECT distinct e.nombre,e.apellido1,e.apellido2 FROM estudiante e,profesor p,materia m,valoracionmateria v where v.idProfesor=p.id and v.idEstudiante=e.id and v.idMateria=m.id;");
+			if (rs.next()) {
+				l.add(new Estudiante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
+						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),
+						rs.getString("email"), rs.getString("telefono"), rs.getInt("idSexo"), rs.getBytes("imagen"),
+						rs.getString("color")));
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	/**
