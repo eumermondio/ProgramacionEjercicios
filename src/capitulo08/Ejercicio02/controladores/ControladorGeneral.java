@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import capitulo08.Ejercicio02.ConnectionManager;
+import capitulo08.Ejercicio02.entidades.Estudiante;
 import capitulo08.Ejercicio02.entidades.Materia;
 import capitulo08.Ejercicio02.entidades.Profesor;
 import capitulo08.Ejercicio02.entidades.Sexo;

@@ -14,11 +14,13 @@ import javax.swing.JLabel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
 import capitulo08.Ejercicio02.controladores.ControladorEstudiante;
 import capitulo08.Ejercicio02.controladores.ControladorGeneral;
+import capitulo08.Ejercicio02.entidades.Estudiante;
 import capitulo08.Ejercicio02.entidades.Materia;
 import capitulo08.Ejercicio02.entidades.Profesor;
 import java.awt.Font;
@@ -36,6 +38,7 @@ public class Principal {
 	private JButton btnGuardarLasNotas;
 	private JScrollPane scrollPane;
 	private JPanel panel_1;
+	List<Estudiante> estudiantes;
 
 	/**
 	 * Launch the application.
@@ -144,6 +147,7 @@ public class Principal {
 		gbl_panel_1.columnWeights = new double[] { Double.MIN_VALUE };
 		gbl_panel_1.rowWeights = new double[] { Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
+		panel_1.setBackground(Color.YELLOW);
 		mostrarComboBoxMateria();
 		mostrarComboBoxProfesor();
 	}
@@ -165,8 +169,30 @@ public class Principal {
 	 * @param c
 	 */
 	public void cargarEstudiantes() {
-//		((Materia) comboBoxMateria.getSelectedItem()).getId()
-		ControladorEstudiante.findEstudianteMateriasProfes();
+		estudiantes = new ArrayList<Estudiante>();
+		ControladorEstudiante.findEstudianteMateriasProfes(estudiantes, ((Profesor) comboBoxProfesor.getSelectedItem()),
+				((Materia) comboBoxMateria.getSelectedItem()));
+		panel_1.removeAll();
+		panel_1.repaint();
+		if (estudiantes.size() < 1) {
+			JLabel lblNewLabel = new JLabel("No hay estudiantes asociados");
+			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+			gbc_lblNewLabel.insets = new Insets(0, 0, 0, 10);
+			gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
+			gbc_lblNewLabel.gridx = 0;
+			gbc_lblNewLabel.gridy = 0;
+			panel_1.add(lblNewLabel, gbc_lblNewLabel);
+		}
+		for (int i = 0; i < estudiantes.size(); i++) {
+			PanelNotas p = new PanelNotas(estudiantes.get(i));
+			p.setBackground(Color.YELLOW);
+			GridBagConstraints gbc_panelesDinamicosNotas = new GridBagConstraints();
+			gbc_panelesDinamicosNotas.insets = new Insets(0, 0, 0, 0);
+			gbc_panelesDinamicosNotas.gridx = 0;
+			gbc_panelesDinamicosNotas.gridy = i;
+			panel_1.add(p, gbc_panelesDinamicosNotas);
+		}
+		frmGestionDeNotas.revalidate();
 	}
 
 	/**
