@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
@@ -22,11 +23,14 @@ import capitulo08.Ejercicio02.controladores.ControladorEstudiante;
 import capitulo08.Ejercicio02.controladores.ControladorGeneral;
 import capitulo08.Ejercicio02.entidades.Estudiante;
 import capitulo08.Ejercicio02.entidades.Materia;
+import capitulo08.Ejercicio02.entidades.Nota;
 import capitulo08.Ejercicio02.entidades.Profesor;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
+import javax.swing.border.Border;
 
 public class Principal {
 
@@ -39,6 +43,7 @@ public class Principal {
 	private JScrollPane scrollPane;
 	private JPanel panel_1;
 	List<Estudiante> estudiantes;
+	private List<PanelNotas> paneles = new ArrayList<PanelNotas>();
 
 	/**
 	 * Launch the application.
@@ -130,6 +135,13 @@ public class Principal {
 		frmGestionDeNotas.getContentPane().add(panel, BorderLayout.NORTH);
 
 		btnGuardarLasNotas = new JButton("Guardar las notas de los alumnos");
+		btnGuardarLasNotas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				for (PanelNotas p : paneles) {
+					ControladorGeneral.guardarNota(new Nota(ControladorGeneral.maxId("valoracionmateria"), 0, 0, 0, 0));
+				}
+			}
+		});
 		GridBagConstraints gbc_btnGuardarLasNotas = new GridBagConstraints();
 		gbc_btnGuardarLasNotas.insets = new Insets(0, 0, 0, 5);
 		gbc_btnGuardarLasNotas.gridx = 6;
@@ -170,26 +182,30 @@ public class Principal {
 	 */
 	public void cargarEstudiantes() {
 		estudiantes = new ArrayList<Estudiante>();
-		ControladorEstudiante.findEstudianteMateriasProfes(estudiantes, ((Profesor) comboBoxProfesor.getSelectedItem()),
-				((Materia) comboBoxMateria.getSelectedItem()));
+		ControladorEstudiante.findAllEstudiantes(estudiantes);
 		panel_1.removeAll();
 		panel_1.repaint();
-		if (estudiantes.size() < 1) {
-			JLabel lblNewLabel = new JLabel("No hay estudiantes asociados");
-			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-			gbc_lblNewLabel.insets = new Insets(0, 0, 0, 10);
-			gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
-			gbc_lblNewLabel.gridx = 0;
-			gbc_lblNewLabel.gridy = 0;
-			panel_1.add(lblNewLabel, gbc_lblNewLabel);
-		}
+//		if (estudiantes.size() < 1) {
+//			JLabel lblNewLabel = new JLabel("No hay estudiantes asociados");
+//			GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+//			gbc_lblNewLabel.insets = new Insets(0, 0, 0, 10);
+//			gbc_lblNewLabel.anchor = GridBagConstraints.CENTER;
+//			gbc_lblNewLabel.gridx = 0;
+//			gbc_lblNewLabel.gridy = 0;
+//			panel_1.add(lblNewLabel, gbc_lblNewLabel);
+//		}
 		for (int i = 0; i < estudiantes.size(); i++) {
 			PanelNotas p = new PanelNotas(estudiantes.get(i));
+			paneles.add(p);
 			p.setBackground(Color.YELLOW);
 			GridBagConstraints gbc_panelesDinamicosNotas = new GridBagConstraints();
-			gbc_panelesDinamicosNotas.insets = new Insets(0, 0, 0, 0);
+			gbc_panelesDinamicosNotas.insets = new Insets(0, 5, 0, 0);
+			gbc_panelesDinamicosNotas.anchor = GridBagConstraints.NORTHWEST;
 			gbc_panelesDinamicosNotas.gridx = 0;
 			gbc_panelesDinamicosNotas.gridy = i;
+			if (i == (estudiantes.size() - 1)) {
+				gbc_panelesDinamicosNotas.weighty = 1;
+			}
 			panel_1.add(p, gbc_panelesDinamicosNotas);
 		}
 		frmGestionDeNotas.revalidate();

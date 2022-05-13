@@ -15,7 +15,7 @@ import java.awt.Insets;
 public class PanelNotas extends JPanel {
 	private JLabel lblNewLabel;
 	private JTextField textField;
-	private int nota;
+	// private int nota;
 
 	/**
 	 * Create the panel.
@@ -38,12 +38,28 @@ public class PanelNotas extends JPanel {
 
 		textField = new JTextField();
 		GridBagConstraints gbc_textField = new GridBagConstraints();
+		gbc_textField.anchor = GridBagConstraints.WEST;
+		gbc_textField.insets = new Insets(5, 0, 5, 0);
 		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField.gridx = 1;
 		gbc_textField.gridy = 0;
 		add(textField, gbc_textField);
 		textField.setColumns(10);
 		lblNewLabel.setText(e.getNombre() + " " + e.getApellido1() + " " + e.getApellido2() + ": ");
+	}
+
+	/**
+	 * @return the textField
+	 */
+	public int getNota() {
+		return Integer.parseInt(textField.getText());
+	}
+
+	/**
+	 * @param textField the textField to set
+	 */
+	public void setNota(String textField) {
+		this.textField.setText(textField);
 	}
 
 }

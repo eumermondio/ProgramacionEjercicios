@@ -47,13 +47,11 @@ public class ControladorEstudiante extends ControladorGeneral {
 	/**
 	 * 
 	 */
-	public static void findEstudianteMateriasProfes(List<Estudiante> l, Profesor p, Materia m) {
+	public static void findAllEstudiantes(List<Estudiante> l) {
 		try {
 			Connection con = ConnectionManager.getConexion();
 			Statement s = con.createStatement();
-			ResultSet rs = s.executeQuery(
-					"SELECT distinct e.* FROM estudiante e,profesor p,materia m,valoracionmateria v where v.idProfesor= "
-							+ p.getId() + " and v.idMateria= " + m.getId() + " and v.idEstudiante=e.id;");
+			ResultSet rs = s.executeQuery("SELECT * FROM estudiante;");
 			while (rs.next()) {
 				l.add(new Estudiante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"),
 						rs.getString("apellido2"), rs.getString("dni"), rs.getString("direccion"),

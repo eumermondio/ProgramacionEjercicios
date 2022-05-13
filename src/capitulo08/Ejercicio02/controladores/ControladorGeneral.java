@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import capitulo08.Ejercicio02.ConnectionManager;
 import capitulo08.Ejercicio02.entidades.Estudiante;
 import capitulo08.Ejercicio02.entidades.Materia;
+import capitulo08.Ejercicio02.entidades.Nota;
 import capitulo08.Ejercicio02.entidades.Profesor;
 import capitulo08.Ejercicio02.entidades.Sexo;
 
@@ -31,6 +32,14 @@ public class ControladorGeneral {
 			e.printStackTrace();
 		}
 		return (id + 1);
+	}
+
+	/**
+	 * 
+	 */
+	public static int guardarNota(Nota n) {
+		return 0;
+
 	}
 
 	/**
