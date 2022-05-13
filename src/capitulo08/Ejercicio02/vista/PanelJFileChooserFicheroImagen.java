@@ -28,7 +28,7 @@ import java.awt.event.ActionEvent;
 
 public class PanelJFileChooserFicheroImagen extends JPanel {
 	private JScrollPane scrollPane;
-	byte[] imagenEnArrayDeBytes;
+	public static byte[] imagenEnArrayDeBytes;
 	private int ancho;
 	private int alto;
 

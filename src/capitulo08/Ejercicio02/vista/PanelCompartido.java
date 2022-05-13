@@ -303,7 +303,7 @@ public class PanelCompartido extends JPanel {
 	 */
 	private JPopupMenu getPopUpMenu() {
 		JPopupMenu menu = new JPopupMenu();
-
+		panel.setImagenEnArrayDeBytes(PanelJFileChooserFicheroImagen.imagenEnArrayDeBytes);
 		menu.add(crearNuevoMenuItem("Dimensiones de la imagen: " + panel.getAlto() + " x " + panel.getAncho()));
 		menu.addSeparator();
 		menu.add(crearNuevoMenuItem("Cambiar imagen"));
