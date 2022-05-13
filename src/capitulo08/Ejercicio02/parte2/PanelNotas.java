@@ -15,12 +15,13 @@ import java.awt.Insets;
 public class PanelNotas extends JPanel {
 	private JLabel lblNewLabel;
 	private JTextField textField;
-	// private int nota;
+	private int idEstudiante;
 
 	/**
 	 * Create the panel.
 	 */
 	public PanelNotas(Estudiante e) {
+		this.idEstudiante = e.getId();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0 };
@@ -51,8 +52,8 @@ public class PanelNotas extends JPanel {
 	/**
 	 * @return the textField
 	 */
-	public int getNota() {
-		return Integer.parseInt(textField.getText());
+	public String getNota() {
+		return textField.getText();
 	}
 
 	/**
@@ -60,6 +61,20 @@ public class PanelNotas extends JPanel {
 	 */
 	public void setNota(String textField) {
 		this.textField.setText(textField);
+	}
+
+	/**
+	 * @return the idEstudiante
+	 */
+	public int getIdEstudiante() {
+		return idEstudiante;
+	}
+
+	/**
+	 * @param idEstudiante the idEstudiante to set
+	 */
+	public void setIdEstudiante(int idEstudiante) {
+		this.idEstudiante = idEstudiante;
 	}
 
 }

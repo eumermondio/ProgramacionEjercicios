@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -138,7 +139,12 @@ public class Principal {
 		btnGuardarLasNotas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				for (PanelNotas p : paneles) {
-					ControladorGeneral.guardarNota(new Nota(ControladorGeneral.maxId("valoracionmateria"), 0, 0, 0, 0));
+					if (ControladorGeneral.guardarNota(new Nota(ControladorGeneral.maxId("valoracionmateria"),
+							((Profesor) comboBoxProfesor.getSelectedItem()).getId(), p.getIdEstudiante(),
+							((Materia) comboBoxMateria.getSelectedItem()).getId(),
+							Integer.parseInt(p.getNota()))) != 0) {
+						JOptionPane.showMessageDialog(null, "Guardado correcto");
+					}
 				}
 			}
 		});
@@ -207,6 +213,8 @@ public class Principal {
 				gbc_panelesDinamicosNotas.weighty = 1;
 			}
 			panel_1.add(p, gbc_panelesDinamicosNotas);
+			p.setNota(ControladorGeneral.findNota(((Profesor) comboBoxProfesor.getSelectedItem()).getId(),
+					estudiantes.get(i).getId(), ((Materia) comboBoxMateria.getSelectedItem()).getId()));
 		}
 		frmGestionDeNotas.revalidate();
 	}

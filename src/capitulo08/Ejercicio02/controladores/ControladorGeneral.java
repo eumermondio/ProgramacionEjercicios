@@ -1,6 +1,8 @@
 package capitulo08.Ejercicio02.controladores;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -38,8 +40,84 @@ public class ControladorGeneral {
 	 * 
 	 */
 	public static int guardarNota(Nota n) {
-		return 0;
+		int registrosAfectados = 0;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
 
+			Connection conexion = (Connection) DriverManager
+					.getConnection("jdbc:mysql://localhost/centroeducativo?serverTimezone=UTC", "java", "Abcdefgh.1");
+			if (existeRegistro(n)) {
+				PreparedStatement ps = (PreparedStatement) conexion.prepareStatement(
+						"UPDATE centroeducativo.valoracionmateria set valoracion = ? where idProfesor = ? and idEstudiante = ? and idMateria = ?");
+
+				ps.setInt(1, n.getValoracion());
+				ps.setInt(2, n.getIdProfesor());
+				ps.setInt(3, n.getIdEstudiante());
+				ps.setInt(4, n.getIdMateria());
+
+				registrosAfectados = ps.executeUpdate();
+				ps.close();
+			} else {
+				PreparedStatement ps = (PreparedStatement) conexion
+						.prepareStatement("insert into valoracionmateria values(?,?,?,?,?)");
+
+				ps.setInt(1, n.getId());
+				ps.setInt(2, n.getIdProfesor());
+				ps.setInt(3, n.getIdEstudiante());
+				ps.setInt(4, n.getIdMateria());
+				ps.setInt(5, n.getValoracion());
+
+				registrosAfectados = ps.executeUpdate();
+				ps.close();
+			}
+
+			// Cierre de los elementos
+			conexion.close();
+		} catch (ClassNotFoundException ex) {
+			System.out.println("Imposible acceder al driver Mysql");
+			ex.printStackTrace();
+		} catch (SQLException ex) {
+			System.out.println("Error en la ejecuci�n SQL: " + ex.getMessage());
+			ex.printStackTrace();
+		}
+		return registrosAfectados;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public static String findNota(int idProf, int idEst, int idMat) {
+		try {
+			Connection con = ConnectionManager.getConexion();
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery("select valoracion from valoracionmateria where idProfesor = " + idProf
+					+ " and idEstudiante = " + idEst + " and idMateria = " + idMat + ";");
+			if (rs.next()) {
+				return "" + rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private static boolean existeRegistro(Nota n) {
+		try {
+			Connection con = ConnectionManager.getConexion();
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery("select * from valoracionmateria where id = " + n.getId() + ";");
+			if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	/**
