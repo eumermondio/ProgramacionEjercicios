@@ -7,6 +7,7 @@ import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -26,12 +27,15 @@ import capitulo08.Ejercicio02.entidades.Estudiante;
 import capitulo08.Ejercicio02.entidades.Materia;
 import capitulo08.Ejercicio02.entidades.Nota;
 import capitulo08.Ejercicio02.entidades.Profesor;
+import capitulo08.Ejercicio02.entidades.Sexo;
+
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
+import javax.swing.JRadioButton;
 
 public class Principal {
 
@@ -45,6 +49,7 @@ public class Principal {
 	private JPanel panel_1;
 	List<Estudiante> estudiantes;
 	private List<PanelNotas> paneles = new ArrayList<PanelNotas>();
+	private JRadioButton rdbtnNewRadioButton;
 
 	/**
 	 * Launch the application.
@@ -160,12 +165,13 @@ public class Principal {
 		panel_1 = new JPanel();
 		scrollPane.setViewportView(panel_1);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
-		gbl_panel_1.columnWidths = new int[] { 0 };
-		gbl_panel_1.rowHeights = new int[] { 0 };
-		gbl_panel_1.columnWeights = new double[] { Double.MIN_VALUE };
-		gbl_panel_1.rowWeights = new double[] { Double.MIN_VALUE };
+		gbl_panel_1.columnWidths = new int[] { 0, 0 };
+		gbl_panel_1.rowHeights = new int[] { 0, 0, 0 };
+		gbl_panel_1.columnWeights = new double[] { 0.0, Double.MIN_VALUE };
+		gbl_panel_1.rowWeights = new double[] { 0.0, 0.0, Double.MIN_VALUE };
 		panel_1.setLayout(gbl_panel_1);
 		panel_1.setBackground(Color.YELLOW);
+
 		mostrarComboBoxMateria();
 		mostrarComboBoxProfesor();
 	}
@@ -188,6 +194,8 @@ public class Principal {
 	 */
 	public void cargarEstudiantes() {
 		estudiantes = new ArrayList<Estudiante>();
+		List<Sexo> sexos = new ArrayList<Sexo>();
+		ControladorGeneral.listadoSexos(sexos);
 		ControladorEstudiante.findAllEstudiantes(estudiantes);
 		panel_1.removeAll();
 		panel_1.repaint();
@@ -201,7 +209,11 @@ public class Principal {
 //			panel_1.add(lblNewLabel, gbc_lblNewLabel);
 //		}
 		for (int i = 0; i < estudiantes.size(); i++) {
+			int c = 0;
 			PanelNotas p = new PanelNotas(estudiantes.get(i));
+
+			estudiantes.get(i).getSexo();
+
 			paneles.add(p);
 			p.setBackground(Color.YELLOW);
 			GridBagConstraints gbc_panelesDinamicosNotas = new GridBagConstraints();
@@ -209,6 +221,25 @@ public class Principal {
 			gbc_panelesDinamicosNotas.anchor = GridBagConstraints.NORTHWEST;
 			gbc_panelesDinamicosNotas.gridx = 0;
 			gbc_panelesDinamicosNotas.gridy = i;
+
+			// Ver sexo del estudiante
+			c = 1;
+			ButtonGroup buttonGroup = new ButtonGroup();
+			for (Sexo s : sexos) {
+				rdbtnNewRadioButton = new JRadioButton(s.getDescripcion());
+				if (s.getId() == estudiantes.get(i).getSexo()) {
+					rdbtnNewRadioButton.setSelected(true);
+				}
+				buttonGroup.add(rdbtnNewRadioButton);
+				GridBagConstraints gbc_rdbtnNewRadioButton = new GridBagConstraints();
+				gbc_rdbtnNewRadioButton.anchor = GridBagConstraints.CENTER;
+				gbc_rdbtnNewRadioButton.insets = new Insets(5, 5, 5, 5);
+				gbc_rdbtnNewRadioButton.gridx = 1 + c;
+				gbc_rdbtnNewRadioButton.gridy = i;
+				panel_1.add(rdbtnNewRadioButton, gbc_rdbtnNewRadioButton);
+				c++;
+			}
+
 			if (i == (estudiantes.size() - 1)) {
 				gbc_panelesDinamicosNotas.weighty = 1;
 			}
