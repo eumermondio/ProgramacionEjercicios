@@ -50,6 +50,22 @@ public class Controlador {
 	/**
 	 * 
 	 */
+	public static void buscarImagen(Artista a) {
+		try {
+			Connection con = ConnectionManager.getConexion();
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery("select * from artista where id = " + a.getId() + ";");
+			if (rs.next()) {
+				a.setImagen(rs.getBytes("imagen"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 
+	 */
 	public static void cargarMunicipiosDeProvincia(int idProv, List<Municipio> l) {
 		try {
 			Connection con = ConnectionManager.getConexion();

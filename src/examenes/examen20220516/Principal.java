@@ -320,6 +320,7 @@ public class Principal extends JFrame {
 	 * 
 	 */
 	public void mostrarArtista(Artista a) {
+		Controlador.buscarImagen(a);
 		mostrarImagen(a);
 		rdbtnCantante.setSelected(false);
 		rdbtnMagia.setSelected(false);
